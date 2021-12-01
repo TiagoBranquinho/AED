@@ -4,13 +4,10 @@
 
 #ifndef PROJETOAEROPORTO_DATE_H
 #define PROJETOAEROPORTO_DATE_H
-#include <string>;
+#include <string>
 
 
 class Date {
-
-
-}
 
 };
 
