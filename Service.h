@@ -1,0 +1,10 @@
+#ifndef PROJETOAEROPORTO_SERVICE_H
+#define PROJETOAEROPORTO_SERVICE_H
+
+
+class Service {
+
+};
+
+
+#endif //PROJETOAEROPORTO_SERVICE_H
