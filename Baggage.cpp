@@ -4,10 +4,7 @@
 
 #include "Baggage.h"
 
-Baggage::Baggage() {
-    weight = 0;
-    special = false;
-}
+Baggage::Baggage() = default;
 
 Baggage::Baggage(double weight, bool special) {
     this->weight = weight;
@@ -35,11 +32,11 @@ void Baggage::setSpecial(bool special) {
 }
 
 bool Baggage::isOverweight() {
-    return(weight <= maxWeight ? false:true);
+    return overweight;
 }
 
 void Baggage::checkWeight() {
-    if(weight <= maxWeight)
+    if(weight <= MAXWEIGHT)
         overweight = false;
     else
         overweight = true;

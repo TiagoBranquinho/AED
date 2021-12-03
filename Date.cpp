@@ -4,10 +4,7 @@
 
 #include "Date.h"
 
-Date::Date() {
-    day = month = year = 0;
-
-}
+Date::Date() = default;
 
 Date::Date(unsigned int day, unsigned int month, unsigned int year) {
     this->day = day;
