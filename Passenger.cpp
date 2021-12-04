@@ -4,6 +4,9 @@
 
 #include "Passenger.h"
 
+using namespace std;
+
+
 Passenger::Passenger() = default;
 
 Passenger::Passenger(string name) {

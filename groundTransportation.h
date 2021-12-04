@@ -7,22 +7,20 @@
 
 #include <string>
 
-using namespace std;
-
 
 class groundTransportation {
 
 private:
-    string type;
+    std::string type;
     unsigned int distance;
     //Schedule schedule; Class schedule should be implemented?
 
 public:
     groundTransportation();
-    groundTransportation(string type, unsigned int distance);
-    void setType(string type);
+    groundTransportation(std::string type, unsigned int distance);
+    void setType(std::string type);
     void setDistance(unsigned int distance);
-    string getType();
+    std::string getType();
     unsigned int getDistance();
 
 

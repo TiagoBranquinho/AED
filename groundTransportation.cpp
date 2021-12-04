@@ -4,6 +4,9 @@
 
 #include "groundTransportation.h"
 
+using namespace std;
+
+
 groundTransportation::groundTransportation() = default;
 
 groundTransportation::groundTransportation(string type, unsigned int distance) {

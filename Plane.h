@@ -8,23 +8,22 @@
 #include "Flight.h"
 #include "Service.h"
 
-using namespace std;
 
 class Plane {
 
 private:
-    string plate;
+    std::string plate;
     unsigned int capacity{};
-    list<Flight> flightPlan;
-    queue<Service> servicesTODO;
-    vector<Service> servicesDONE;
+    std::list<Flight> flightPlan;
+    std::queue<Service> servicesTODO;
+    std::vector<Service> servicesDONE;
 
 public:
     Plane();
-    Plane(string plate, unsigned int capacity);
-    string getPlate();
+    Plane(std::string plate, unsigned int capacity);
+    std::string getPlate();
     unsigned int getCapacity();
-    void setPlate(string plate);
+    void setPlate(std::string plate);
     void setCapacity(unsigned int capacity);
     void addFlight(const Flight &flight);
     void addService(const Service &service);

@@ -5,18 +5,18 @@
 #ifndef PROJETOAEROPORTO_EMPLOYEE_H
 #define PROJETOAEROPORTO_EMPLOYEE_H
 
-
 #include "Person.h"
+
 
 class Employee: public Person {
 private:
-    string type;  // pilot, cleaner or maintenance
+    std::string type;  // pilot, cleaner or maintenance
 
 public:
     Employee();
-    Employee(string name, string type);
-    void setType(string type);
-    string getType();
+    Employee(std::string name, std::string type);
+    void setType(std::string type);
+    std::string getType();
 };
 
 

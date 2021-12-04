@@ -4,6 +4,9 @@
 
 #include "Baggage.h"
 
+using namespace std;
+
+
 Baggage::Baggage() = default;
 
 Baggage::Baggage(double weight, bool special) {

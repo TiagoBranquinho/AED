@@ -6,7 +6,6 @@
 #define PROJETOAEROPORTO_BAGGAGE_H
 #include <string>
 
-using namespace std;
 
 class Baggage {
 private:

@@ -5,20 +5,19 @@
 #include "Date.h"
 #include "Employee.h"
 
-using namespace std;
 
 class Service {
 private:
-    string type;
+    std::string type;
     Date date;
     Employee employee;
 public:
     Service();
-    Service(string type, Date date, Employee employee);
-    string getType();
+    Service(std::string type, Date date, Employee employee);
+    std::string getType();
     Date getDate();
     Employee getEmployee();
-    void setType(string type);
+    void setType(std::string type);
     void setDate(Date date);
     void setEmployee(Employee employee);
 };

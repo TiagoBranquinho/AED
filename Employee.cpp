@@ -4,6 +4,9 @@
 
 #include "Employee.h"
 
+using namespace std;
+
+
 Employee::Employee() = default;
 
 Employee::Employee(string name, string type) {

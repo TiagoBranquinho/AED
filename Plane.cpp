@@ -1,5 +1,8 @@
 #include "Plane.h"
 
+using namespace std;
+
+
 Plane::Plane() = default;
 
 Plane::Plane(string plate, unsigned int capacity) {

@@ -7,16 +7,15 @@
 
 #include <string>
 
-using namespace std;
 
 class Person {
 protected:
-    string name;
+    std::string name;
 public:
     Person();
-    Person(string name);
-    void setName(string name);
-    string getName();
+    Person(std::string name);
+    void setName(std::string name);
+    std::string getName();
 };
 
 

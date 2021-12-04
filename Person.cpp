@@ -4,6 +4,9 @@
 
 #include "Person.h"
 
+using namespace std;
+
+
 Person::Person() = default;
 
 Person::Person(string name) {

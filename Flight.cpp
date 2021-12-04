@@ -4,6 +4,9 @@
 
 #include "Flight.h"
 
+using namespace std;
+
+
 Flight::Flight() = default;
 
 Flight::Flight(unsigned int number, Date date, unsigned int duration, string origin, string destiny) {
