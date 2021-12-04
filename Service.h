@@ -13,10 +13,9 @@ private:
     string type;
     Date date;
     Employee employee;
-    Plane plane;
 public:
     Service();
-    Service(string type, Date date, Employee employee, Plane plane);
+    Service(string type, Date date, Employee employee);
     string getType();
     Date getDate();
     Employee getEmployee();

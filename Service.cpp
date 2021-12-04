@@ -3,11 +3,10 @@
 
 Service::Service() = default;
 
-Service::Service(string type, Date date, Employee employee, Plane plane) {
+Service::Service(string type, Date date, Employee employee) {
     this->type = type;
     this->date = date;
     this->employee = employee;
-    this->plane = plane;
 }
 
 string Service::getType() {
@@ -20,10 +19,6 @@ Date Service::getDate() {
 
 Employee Service::getEmployee() {
     return employee;
-}
-
-Plane Service::getPlane() {
-    return plane;
 }
 
 void Service::setType(string type) {
@@ -41,6 +36,3 @@ void Service::setEmployee(Employee employee) {
         cout << "The employee selected is not qualified for the service" << endl;
 }
 
-void Service::setPlane(Plane plane) {
-    this->plane = plane;
-}
