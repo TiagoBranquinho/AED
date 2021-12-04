@@ -8,6 +8,8 @@
 
 #include "time.h"
 #include "Date.h"
+#include "Passenger.h"
+#include <list>
 
 using namespace std;
 
@@ -19,6 +21,7 @@ private:
     Date date;
     unsigned int duration; //in seconds
     string origin, destiny;
+    list<Passenger> passengers;
 
 public:
     Flight();
@@ -33,7 +36,7 @@ public:
     string getOrigin();
     void setDestiny(string destiny);
     string getDestiny();
-
+    void addPassenger(const Passenger &passenger);
 };
 
 

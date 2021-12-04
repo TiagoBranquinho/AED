@@ -53,3 +53,9 @@ void Flight::setDestiny(string destiny) {
 string Flight::getDestiny() {
     return destiny;
 }
+
+void Flight::addPassenger(const Passenger &passenger) {
+    passengers.push_back(passenger);
+
+}
+

@@ -4,6 +4,7 @@
 #include <string>
 #include "Date.h"
 #include "Employee.h"
+#include "Plane.h"
 
 using namespace std;
 
@@ -12,15 +13,18 @@ private:
     string type;
     Date date;
     Employee employee;
+    Plane plane;
 public:
     Service();
-    Service(string type, Date date, Employee employee);
+    Service(string type, Date date, Employee employee, Plane plane);
     string getType();
     Date getDate();
     Employee getEmployee();
+    Plane getPlane();
     void setType(string type);
     void setDate(Date date);
     void setEmployee(Employee employee);
+    void setPlane(Plane plane)
 };
 
 

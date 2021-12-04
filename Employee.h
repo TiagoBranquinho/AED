@@ -10,7 +10,8 @@
 
 class Employee: public Person {
 private:
-    string type;  // pilot or cleaner
+    string type;  // pilot, cleaner or maintenance
+
 public:
     Employee();
     Employee(string name, string type);

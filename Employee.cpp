@@ -18,3 +18,4 @@ void Employee::setType(string type) {
 string Employee::getType() {
     return std::string();
 }
+
