@@ -1,0 +1,14 @@
+//
+// Created by Tiago Branquinho on 04/12/2021.
+//
+
+#ifndef PROJETOAEROPORTO_GROUNDTRANSPORTATION_H
+#define PROJETOAEROPORTO_GROUNDTRANSPORTATION_H
+
+
+class groundTransportation {
+
+};
+
+
+#endif //PROJETOAEROPORTO_GROUNDTRANSPORTATION_H
