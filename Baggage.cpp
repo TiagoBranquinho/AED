@@ -36,7 +36,7 @@ bool Baggage::isOverweight() {
 }
 
 void Baggage::checkWeight() {
-    if(weight <= MAXWEIGHT)
+    if(weight <= MAX_WEIGHT)
         overweight = false;
     else
         overweight = true;
