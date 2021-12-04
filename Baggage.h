@@ -10,7 +10,7 @@ using namespace std;
 
 class Baggage {
 private:
-    const double MAX_WEIGHT = 25;
+    double MAX_WEIGHT = 25;
     double weight;
     bool special;
     bool overweight;

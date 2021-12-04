@@ -9,7 +9,13 @@
 #include "Person.h"
 
 class Employee: public Person {
-
+private:
+    string type;  // pilot or cleaner
+public:
+    Employee();
+    Employee(string name, string type);
+    void setType(string type);
+    string getType();
 };
 
 

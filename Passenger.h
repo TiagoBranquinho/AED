@@ -7,8 +7,17 @@
 
 
 #include "Person.h"
+#include "Baggage.h"
 
 class Passenger: public Person{
+private:
+    Baggage baggage;
+public:
+    Passenger();
+    Passenger(string name);
+    Passenger(string name, Baggage baggage);
+    void setBaggage(Baggage baggage);
+    Baggage getBaggage();
 
 };
 
