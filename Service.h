@@ -4,7 +4,6 @@
 #include <string>
 #include "Date.h"
 #include "Employee.h"
-#include "Plane.h"
 
 using namespace std;
 
@@ -19,11 +18,9 @@ public:
     string getType();
     Date getDate();
     Employee getEmployee();
-    Plane getPlane();
     void setType(string type);
     void setDate(Date date);
     void setEmployee(Employee employee);
-    void setPlane(Plane plane)
 };
 
 
