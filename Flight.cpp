@@ -9,7 +9,7 @@ using namespace std;
 
 Flight::Flight() = default;
 
-Flight::Flight(unsigned int number, Date date, unsigned int duration, string origin, string destiny) {
+Flight::Flight(unsigned int number, const Date &date, unsigned int duration, string origin, string destiny) {
     this->number = number;
     this->date = date;
     this->duration = duration;
@@ -25,7 +25,7 @@ unsigned int Flight::getNumber() {
     return number;
 }
 
-void Flight::setDate(Date date) {
+void Flight::setDate(const Date &date) {
     this->date = date;
 }
 

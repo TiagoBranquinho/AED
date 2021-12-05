@@ -15,8 +15,8 @@ private:
 public:
     Passenger();
     Passenger(std::string name);
-    Passenger(std::string name, Baggage baggage);
-    void setBaggage(Baggage baggage);
+    Passenger(std::string name, const Baggage &baggage);
+    void setBaggage(const Baggage &baggage);
     Baggage getBaggage();
 
 };

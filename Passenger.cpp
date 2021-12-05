@@ -14,12 +14,12 @@ Passenger::Passenger(string name) {
     // null baggage?? -> no caso de nao apresentar mala
 }
 
-Passenger::Passenger(string name, Baggage baggage) {
+Passenger::Passenger(string name, const Baggage &baggage) {
     this->name = name;
     this->baggage = baggage;
 }
 
-void Passenger::setBaggage(Baggage baggage) {
+void Passenger::setBaggage(const Baggage &baggage) {
     this->baggage = baggage;      // if MAX_WEIGHT == const --> ERROR!
 }
 

@@ -13,13 +13,13 @@ private:
     Employee employee;
 public:
     Service();
-    Service(std::string type, Date date, Employee employee);
+    Service(std::string type, const Date &date, const Employee &employee);
     std::string getType();
     Date getDate();
     Employee getEmployee();
     void setType(std::string type);
-    void setDate(Date date);
-    void setEmployee(Employee employee);
+    void setDate(const Date &date);
+    void setEmployee(const Employee &employee);
 };
 
 

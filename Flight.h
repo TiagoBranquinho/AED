@@ -23,10 +23,10 @@ private:
 
 public:
     Flight();
-    Flight(unsigned int number, Date date, unsigned int duration, std::string origin, std::string destiny);
+    Flight(unsigned int number, const Date &date, unsigned int duration, std::string origin, std::string destiny);
     void setNumber(unsigned int number);
     unsigned int getNumber();
-    void setDate(Date date);
+    void setDate(const Date &date);
     Date getDate();
     void setDuration(unsigned int duration);
     unsigned int getDuration();
