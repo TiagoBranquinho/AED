@@ -20,8 +20,9 @@ public:
     void start();
     void displayMenu();
     void loadData();
-    void load(ifstream &file);
-    void readInput();
+    void load(string filename);
+    int readInput();
+    bool chooseOpt(int opt);
 };
 
 
