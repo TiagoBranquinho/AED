@@ -9,6 +9,8 @@
 #include <ctime>
 #include "Date.h"
 #include "Passenger.h"
+#include "Plane.h"
+#include "Airport.h"
 #include <list>
 
 
@@ -23,7 +25,7 @@ private:
 
 public:
     Flight();
-    Flight(unsigned int number, const Date &date, unsigned int duration, std::string origin, std::string destiny);
+    Flight(unsigned int number, const Date &date, unsigned int duration, Airport &departureAirport, Airport &arrivalAirport);
     void setNumber(unsigned int number);
     unsigned int getNumber();
     void setDate(const Date &date);

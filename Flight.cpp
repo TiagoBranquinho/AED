@@ -9,12 +9,12 @@ using namespace std;
 
 Flight::Flight() = default;
 
-Flight::Flight(unsigned int number, const Date &date, unsigned int duration, string origin, string destiny) {
+Flight::Flight(unsigned int number, const Date &date, unsigned int duration, Airport &departureAirport, Airport &arrivalAirport) {
     this->number = number;
     this->date = date;
     this->duration = duration;
-    this->origin = origin;
-    this->destiny = destiny;
+    this->origin = departureAirport.getCity();
+    this->destiny = arrivalAirport.getCity();
 }
 
 void Flight::setNumber(unsigned int number) {
