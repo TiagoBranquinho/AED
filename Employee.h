@@ -16,7 +16,7 @@ public:
     Employee();
     Employee(std::string name, std::string type);
     void setType(std::string type);
-    std::string getType();
+    std::string getType() const;
 };
 
 

@@ -18,7 +18,7 @@ void Employee::setType(string type) {
     this->type = type;
 }
 
-string Employee::getType() {
+string Employee::getType() const {
     return std::string();
 }
 
