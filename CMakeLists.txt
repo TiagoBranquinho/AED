@@ -3,4 +3,4 @@ project(ProjetoAeroporto)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(ProjetoAeroporto main.cpp Plane.cpp Plane.h Flight.cpp Flight.h Baggage.cpp Baggage.h Date.cpp Date.h tests.cpp Service.cpp Service.h Person.cpp Person.h Passenger.cpp Passenger.h Employee.cpp Employee.h groundTransportation.cpp groundTransportation.h bst.h)
+add_executable(ProjetoAeroporto main.cpp Plane.cpp Plane.h Flight.cpp Flight.h Baggage.cpp Baggage.h Date.cpp Date.h tests.cpp Service.cpp Service.h Person.cpp Person.h Passenger.cpp Passenger.h Employee.cpp Employee.h groundTransportation.cpp groundTransportation.h bst.h Schedule.cpp Schedule.h)
