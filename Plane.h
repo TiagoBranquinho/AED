@@ -1,3 +1,4 @@
+#pragma once
 #ifndef PROJETOAEROPORTO_PLANE_H
 #define PROJETOAEROPORTO_PLANE_H
 
