@@ -21,7 +21,7 @@ private:
 public:
     Plane();
     Plane(std::string plate, unsigned int capacity);
-    std::string getPlate();
+    std::string getPlate() const;
     unsigned int getCapacity();
     void setPlate(std::string plate);
     void setCapacity(unsigned int capacity);

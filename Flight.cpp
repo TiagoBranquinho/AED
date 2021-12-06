@@ -9,19 +9,19 @@ using namespace std;
 
 Flight::Flight() = default;
 
-Flight::Flight(unsigned int number, const Date &date, unsigned int duration, Airport &departureAirport, Airport &arrivalAirport) {
+Flight::Flight(unsigned int number, const Date &date, unsigned int duration, string origin, string destiny) {
     this->number = number;
     this->date = date;
     this->duration = duration;
-    this->origin = departureAirport.getCity();
-    this->destiny = arrivalAirport.getCity();
+    this->origin = origin;
+    this->destiny = destiny;
 }
 
 void Flight::setNumber(unsigned int number) {
     this->number = number;
 }
 
-unsigned int Flight::getNumber() {
+unsigned int Flight::getNumber() const{
     return number;
 }
 

@@ -10,7 +10,7 @@ Plane::Plane(string plate, unsigned int capacity) {
     this->capacity = capacity;
 }
 
-string Plane::getPlate() {
+string Plane::getPlate() const{
     return plate;
 }
 
