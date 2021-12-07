@@ -21,11 +21,12 @@ public:
     Schedule(const std::string& hm);
     void displayTime();
     void setTime(const std::string& hm); // string format HH:MM
-    std::string getTime();
+    std::string getTime() const;
     int getHour() const;
     int getMin() const;
     bool operator<(const Schedule &s) const;
 };
+
 
 
 #endif //PROJETOAEROPORTO_SCHEDULE_H

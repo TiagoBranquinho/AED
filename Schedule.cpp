@@ -26,7 +26,7 @@ void Schedule::setTime(const std::string& hm) {
     }
 }
 
-string Schedule::getTime() {
+string Schedule::getTime() const{
     stringstream ss;
     ss << put_time(&tm, "%R");
     return ss.str();

@@ -24,10 +24,19 @@ public:
     void setDistance(unsigned int distance);
     std::string getType();
     unsigned int getDistance();
+    void setSchedules(std::vector<Schedule> &schedules);
+    std::vector<Schedule> getSchedules();
+    void addSchedule(const Schedule &schedule);
+    void removeSchedule(const Schedule &schedule);
     void sortSchedules();
+};
 
-
-
+class ScheduleNotFoundException{
+private:
+    Schedule schedule;
+public:
+    ScheduleNotFoundException(Schedule schedule) : schedule(schedule) {};
+    Schedule getSchedule(){return schedule;}
 };
 
 
