@@ -6,6 +6,12 @@
 #include <string>
 #include <ctime>
 
+#if defined(_WIN32)
+    #define so() "win"
+#elif defined(unix) || defined(__unix__) || defined(__unix)
+    #define so() "unix"
+#endif
+
 class Schedule {
 private:
     std::time_t time;

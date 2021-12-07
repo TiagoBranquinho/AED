@@ -8,6 +8,7 @@
 #include <string>
 #include "Schedule.h"
 #include <vector>
+#include <algorithm>
 
 
 class groundTransportation {

@@ -17,8 +17,13 @@ void Schedule::displayTime() {
 }
 
 void Schedule::setTime(const std::string& hm) {
-    strptime(hm.c_str(), "%R", &tm);
-    time = mktime(&tm);
+    if (so() == "unix"){
+        strptime(hm.c_str(), "%R", &tm);
+        time = mktime(&tm);
+    }
+    else if (so() == "win"){
+        cout << "windows" << endl;
+    }
 }
 
 string Schedule::getTime() {

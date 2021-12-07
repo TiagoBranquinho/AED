@@ -36,7 +36,7 @@ bool CompareSchedule(Schedule schedule1, Schedule schedule2){
 }
 
 void groundTransportation::sortSchedules() {
-    std::sort(schedules.begin(), schedules.end(), CompareSchedule);
+    sort(schedules.begin(), schedules.end(), CompareSchedule);
 }
 
 
