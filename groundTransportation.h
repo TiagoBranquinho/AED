@@ -6,6 +6,8 @@
 #define PROJETOAEROPORTO_GROUNDTRANSPORTATION_H
 
 #include <string>
+#include "Schedule.h"
+#include <vector>
 
 
 class groundTransportation {
@@ -13,8 +15,7 @@ class groundTransportation {
 private:
     std::string type;
     unsigned int distance;
-    //Schedule schedule; Class schedule should be implemented?
-
+    std::vector<Schedule> schedules;
 public:
     groundTransportation();
     groundTransportation(std::string type, unsigned int distance);
@@ -22,6 +23,7 @@ public:
     void setDistance(unsigned int distance);
     std::string getType();
     unsigned int getDistance();
+    void sortSchedules();
 
 
 

@@ -31,4 +31,13 @@ unsigned int groundTransportation::getDistance() {
     return distance;
 }
 
+bool CompareSchedule(Schedule schedule1, Schedule schedule2){
+    return schedule1 < schedule2;
+}
+
+void groundTransportation::sortSchedules() {
+    std::sort(schedules.begin(), schedules.end(), CompareSchedule);
+}
+
+
 
