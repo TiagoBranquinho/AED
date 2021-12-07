@@ -14,7 +14,7 @@ string Plane::getPlate() const{
     return plate;
 }
 
-unsigned int Plane::getCapacity() {
+unsigned int Plane::getCapacity() const{
     return capacity;
 }
 

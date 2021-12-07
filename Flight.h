@@ -32,6 +32,7 @@ public:
     std::string getOrigin();
     void setDestiny(std::string destiny);
     std::string getDestiny();
+    unsigned int getNumberPassengers();
     void addPassenger(const Passenger &passenger);
 };
 

@@ -9,7 +9,6 @@
 #include "Flight.h"
 #include "Service.h"
 
-
 class Plane {
 
 private:
@@ -23,7 +22,7 @@ public:
     Plane();
     Plane(std::string plate, unsigned int capacity);
     std::string getPlate() const;
-    unsigned int getCapacity();
+    unsigned int getCapacity() const;
     void setPlate(std::string plate);
     void setCapacity(unsigned int capacity);
     void addFlight(const Flight &flight);

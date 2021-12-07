@@ -57,8 +57,12 @@ string Flight::getDestiny() {
     return destiny;
 }
 
+unsigned int Flight::getNumberPassengers() {
+    return passengers.size();
+}
+
 void Flight::addPassenger(const Passenger &passenger) {
     passengers.push_back(passenger);
-
 }
+
 
