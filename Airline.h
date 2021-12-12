@@ -7,11 +7,13 @@
 
 
 #include "Plane.h"
+#include "TransportCart.h"
 
 class Airline {
 private:
     std::vector<Plane> planes = {Plane("ABC", 89), Plane("XYZ", 13)};
     std::queue<Baggage> treadmill;
+    TransportCart transportCart = TransportCart(2,3,4);
 public:
     Airline();
     Airline(std::vector<Plane> planes);
@@ -20,7 +22,8 @@ public:
     std::vector<Plane> getPlanes();
     void addPassengerToFlight(Flight flight, const Plane &plane, const Passenger &passenger);
     void checkInPassenger(Flight &flight, Passenger &passenger);
-    void baggageTransportation(const Baggage &baggage);
+    void baggageTransportation(Flight &flight, const Baggage &baggage);
+    void addToTreadmill(const Baggage &baggage);
 };
 
 class PlaneNotFoundException{

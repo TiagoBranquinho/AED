@@ -13,6 +13,7 @@ class Passenger: public Person{
 private:
     Baggage baggage;
     bool checkedIn = false;
+    bool withBaggage = false;
 public:
     Passenger();
     Passenger(std::string name);

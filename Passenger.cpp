@@ -17,10 +17,12 @@ Passenger::Passenger(string name) {
 Passenger::Passenger(string name, const Baggage &baggage) {
     this->name = name;
     this->baggage = baggage;
+    withBaggage = true;
 }
 
 void Passenger::setBaggage(const Baggage &baggage) {
     this->baggage = baggage;      // if MAX_WEIGHT == const --> ERROR!
+    withBaggage = true;
 }
 
 Baggage Passenger::getBaggage() const{

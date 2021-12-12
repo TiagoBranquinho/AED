@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Schedule.h"
-
+#include "Flight.h"
+unsigned int Flight::numberBaggages = 0;
 int main() {
     std::cout << "Hello, World!" << std::endl;
     Schedule h1 = Schedule("11:02");

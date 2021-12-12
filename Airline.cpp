@@ -43,7 +43,7 @@ void Airline::checkInPassenger(Flight &flight, Passenger &passenger) {
         if(p == passenger){
             hasTicket = true;
             passenger.checkIn();
-            baggageTransportation(passenger.getBaggage());
+            baggageTransportation(flight, passenger.getBaggage());
             break;
         }
     }
@@ -51,9 +51,15 @@ void Airline::checkInPassenger(Flight &flight, Passenger &passenger) {
         throw NoTicketException(passenger.getName());
 }
 
-void Airline::baggageTransportation(const Baggage &baggage) {
-    treadmill.push(baggage);
+void Airline::baggageTransportation(Flight &flight, const Baggage &baggage) {
+    addToTreadmill(baggage);
+    if(treadmill.size() == flight.getNumberPassengers())
+        transportCart.addBaggage(baggage);
 
     // ...
 
+}
+
+void Airline::addToTreadmill(const Baggage &baggage) {
+    treadmill.push(baggage);
 }

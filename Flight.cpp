@@ -62,7 +62,11 @@ std::list<Passenger> Flight::getPassengers() const{
 }
 
 unsigned int Flight::getNumberPassengers() {
-    return passengers.size();
+    return numberBaggages;
+}
+
+unsigned int Flight::getNumberBaggages() {
+    return numberBaggages;
 }
 
 void Flight::addPassenger(const Passenger &passenger) {
