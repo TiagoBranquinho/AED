@@ -11,6 +11,7 @@
 class Airline {
 private:
     std::vector<Plane> planes = {Plane("ABC", 89), Plane("XYZ", 13)};
+    std::queue<Baggage> treadmill;
 public:
     Airline();
     Airline(std::vector<Plane> planes);
@@ -18,6 +19,8 @@ public:
     void removePlane(const Plane &plane);
     std::vector<Plane> getPlanes();
     void addPassengerToFlight(Flight flight, const Plane &plane, const Passenger &passenger);
+    void checkInPassenger(Flight &flight, Passenger &passenger);
+    void baggageTransportation(const Baggage &baggage);
 };
 
 class PlaneNotFoundException{
@@ -35,6 +38,22 @@ private:
 public:
     FullPlaneException(const unsigned int capacity){this->capacity = capacity;}
     unsigned int getCapacity(){return capacity;}
+};
+
+class NoTicketException{
+private:
+    std::string name;
+public:
+    NoTicketException(const std::string name){this->name = name;}
+    std::string getName(){return name;}
+};
+
+class ClosedCheckInException{
+private:
+    unsigned int number;
+public:
+    ClosedCheckInException(unsigned int number){this->number = number;}
+    unsigned int getNumber(){return number;}
 };
 
 

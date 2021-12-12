@@ -18,6 +18,7 @@ private:
     unsigned int duration; //in seconds
     std::string origin, destiny;
     std::list<Passenger> passengers;
+    bool checkIn = false;
 
 public:
     Flight();
@@ -32,8 +33,12 @@ public:
     std::string getOrigin();
     void setDestiny(std::string destiny);
     std::string getDestiny();
+    std::list<Passenger> getPassengers() const;
     unsigned int getNumberPassengers();
     void addPassenger(const Passenger &passenger);
+    void closeCheckIn();
+    void openCheckIn();
+    bool getCheckInStatus();
 };
 
 

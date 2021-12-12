@@ -16,12 +16,13 @@ private:
 public:
     Baggage();
     Baggage(double weight, bool special);
-    double getWeight();
+    double getWeight() const;
     void setWeight(double weight);
-    bool isSpecial();
+    bool isSpecial() const;
     void setSpecial(bool special);
-    bool isOverweight();
+    bool isOverweight() const;
     void checkWeight();
+    bool operator==(const Baggage &baggage);
 };
 
 

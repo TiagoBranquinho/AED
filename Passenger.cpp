@@ -23,6 +23,28 @@ void Passenger::setBaggage(const Baggage &baggage) {
     this->baggage = baggage;      // if MAX_WEIGHT == const --> ERROR!
 }
 
-Baggage Passenger::getBaggage() {
+Baggage Passenger::getBaggage() const{
     return baggage;
 }
+
+std::string Passenger::getName() const {
+    return std::string();
+}
+
+void Passenger::checkIn() {
+
+}
+
+bool Passenger::operator==(const Passenger &passenger) {
+    return (this->getName() == passenger.getName() && this->getBaggage() == passenger.getBaggage() && this->isCheckedIn() == passenger.isCheckedIn());
+}
+
+bool Passenger::isCheckedIn() const{
+    return checkedIn;
+}
+
+void Passenger::Checkin() {
+    checkedIn = true;
+}
+
+

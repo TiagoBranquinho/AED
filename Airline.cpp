@@ -34,3 +34,26 @@ void Airline::addPassengerToFlight(Flight flight, const Plane &plane, const Pass
     else
         throw FullPlaneException(plane.getCapacity());
 }
+
+void Airline::checkInPassenger(Flight &flight, Passenger &passenger) {
+    if(!flight.getCheckInStatus())
+        throw ClosedCheckInException(flight.getNumber());
+    bool hasTicket = false;
+    for(Passenger p : flight.getPassengers()){
+        if(p == passenger){
+            hasTicket = true;
+            passenger.checkIn();
+            baggageTransportation(passenger.getBaggage());
+            break;
+        }
+    }
+    if(!hasTicket)
+        throw NoTicketException(passenger.getName());
+}
+
+void Airline::baggageTransportation(const Baggage &baggage) {
+    treadmill.push(baggage);
+
+    // ...
+
+}

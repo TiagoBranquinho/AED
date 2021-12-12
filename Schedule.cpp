@@ -17,14 +17,14 @@ void Schedule::displayTime() {
 }
 
 void Schedule::setTime(const std::string& hm) {
-    if (so() == "unix"){
+    //if (so() == "unix"){
         strptime(hm.c_str(), "%R", &tm);
         time = mktime(&tm);
     }
-    else if (so() == "win"){
-        cout << "windows" << endl;
-    }
-}
+    //else if (so() == "win"){
+        //cout << "windows" << endl;
+   // }
+//}
 
 string Schedule::getTime() const{
     stringstream ss;

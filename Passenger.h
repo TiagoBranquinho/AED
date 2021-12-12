@@ -12,12 +12,18 @@
 class Passenger: public Person{
 private:
     Baggage baggage;
+    bool checkedIn = false;
 public:
     Passenger();
     Passenger(std::string name);
     Passenger(std::string name, const Baggage &baggage);
     void setBaggage(const Baggage &baggage);
-    Baggage getBaggage();
+    Baggage getBaggage() const;
+    std::string getName() const;
+    void checkIn();
+    bool isCheckedIn() const;
+    void Checkin();
+    bool operator==(const Passenger &passenger);
 
 };
 

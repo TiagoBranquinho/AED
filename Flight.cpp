@@ -57,6 +57,10 @@ string Flight::getDestiny() {
     return destiny;
 }
 
+std::list<Passenger> Flight::getPassengers() const{
+    return passengers;
+}
+
 unsigned int Flight::getNumberPassengers() {
     return passengers.size();
 }
@@ -65,4 +69,15 @@ void Flight::addPassenger(const Passenger &passenger) {
     passengers.push_back(passenger);
 }
 
+void Flight::closeCheckIn() {
+    checkIn = false;
+}
+
+void Flight::openCheckIn() {
+    checkIn = true;
+}
+
+bool Flight::getCheckInStatus() {
+    return checkIn;
+}
 

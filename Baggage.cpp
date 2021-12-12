@@ -15,7 +15,7 @@ Baggage::Baggage(double weight, bool special) {
     checkWeight();
 }
 
-double Baggage::getWeight() {
+double Baggage::getWeight() const{
     return weight;
 }
 
@@ -25,7 +25,7 @@ void Baggage::setWeight(double weight) {
 
 }
 
-bool Baggage::isSpecial() {
+bool Baggage::isSpecial() const{
     return special;
 }
 
@@ -34,7 +34,7 @@ void Baggage::setSpecial(bool special) {
 
 }
 
-bool Baggage::isOverweight() {
+bool Baggage::isOverweight() const{
     return overweight;
 }
 
@@ -43,4 +43,8 @@ void Baggage::checkWeight() {
         overweight = false;
     else
         overweight = true;
+}
+
+bool Baggage::operator==(const Baggage &baggage) {
+    return(this->getWeight() == baggage.getWeight() && this->isSpecial() == baggage.isSpecial());
 }
