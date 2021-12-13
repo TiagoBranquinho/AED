@@ -31,6 +31,10 @@ public:
     void addGroundTransportation(const GroundTransportation &groundTransportation);
     void printLocals();
     BSTItrIn<GroundTransportation> localsItrIn();
+    iteratorBST<GroundTransportation> localsBeginItr();
+    iteratorBST<GroundTransportation> localsEndItr();
+    TransportationLocals &getLocals();
+
 };
 
 

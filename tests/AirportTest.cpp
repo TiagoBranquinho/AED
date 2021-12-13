@@ -11,7 +11,7 @@ TEST(test_1, createAirport){
     GroundTransportation gd2("Bus", 7);
     GroundTransportation gd3("Taxi", 2);
     GroundTransportation gd4("Uber", 4);
-    GroundTransportation gd5("Trot", 1);
+    GroundTransportation gd5("Uber", 1);
 
     airport.addGroundTransportation(gd1);
     airport.addGroundTransportation(gd2);
@@ -26,8 +26,22 @@ TEST(test_1, createAirport){
         it.advance();
     }
 
+    iteratorBST<GroundTransportation> itr = airport.localsBeginItr();
+
+    while (itr != airport.getLocals().endItr()){
+        cout << (*itr).getType() << endl;
+        if ((*itr).getType() == "Uber"){
+            airport.getLocals().removeGroundTransportation(*itr);
+        }
+        itr++;
+    }
+
+    vector<GroundTransportation> gds = airport.getLocals().asVector();
     cout << endl;
-    airport.printLocals();
+    for (auto gd : gds){
+        cout << gd << endl;
+    }
+    cout << endl << endl;
 
     EXPECT_EQ(1, true);
 }

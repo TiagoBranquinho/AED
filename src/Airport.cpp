@@ -51,10 +51,22 @@ void Airport::addGroundTransportation(const GroundTransportation &groundTranspor
 }
 
 void Airport::printLocals() {
-    locals.printLocals();
+    locals.print();
 }
 
 BSTItrIn<GroundTransportation> Airport::localsItrIn() {
-    return locals.localsItrIn();
+    return locals.itrInOrder();
+}
+
+iteratorBST<GroundTransportation> Airport::localsBeginItr() {
+    return locals.beginItr();
+}
+
+iteratorBST<GroundTransportation> Airport::localsEndItr() {
+    return locals.endItr();
+}
+
+TransportationLocals &Airport::getLocals() {
+    return locals;
 }
 

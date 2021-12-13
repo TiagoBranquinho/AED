@@ -9,10 +9,13 @@ private:
     BST<GroundTransportation> locals;
 public:
     TransportationLocals(): locals(GroundTransportation("", 0)){};
+    void print();
     void addGroundTransportation(const GroundTransportation &groundTransportation);
-    void printLocals();
-    BSTItrIn<GroundTransportation> localsItrIn();
-
+    void removeGroundTransportation(const GroundTransportation &groundTransportation);
+    vector<GroundTransportation> asVector();
+    BSTItrIn<GroundTransportation> itrInOrder();
+    iteratorBST<GroundTransportation> beginItr();
+    iteratorBST<GroundTransportation> endItr();
 };
 
 
