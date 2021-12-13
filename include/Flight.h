@@ -33,8 +33,8 @@ public:
     void setDestiny(std::string destiny);
     std::string getDestiny();
     std::list<Passenger> getPassengers() const;
-    unsigned int getNumberPassengers();
-    unsigned int getNumberBaggages();
+    unsigned int getNumberPassengers() const;
+    unsigned int getNumberBaggages() const;
     void addPassenger(const Passenger &passenger);
     void closeCheckIn();
     void openCheckIn();

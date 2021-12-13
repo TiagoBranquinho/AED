@@ -61,11 +61,11 @@ std::list<Passenger> Flight::getPassengers() const{
     return passengers;
 }
 
-unsigned int Flight::getNumberPassengers() {
+unsigned int Flight::getNumberPassengers() const {
     return numberBaggages;
 }
 
-unsigned int Flight::getNumberBaggages() {
+unsigned int Flight::getNumberBaggages() const {
     return numberBaggages;
 }
 

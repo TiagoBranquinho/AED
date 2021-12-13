@@ -23,7 +23,7 @@ public:
     void addFlight(Flight &flight);
     bool validateFlight(Flight &flight);
     std::vector<Plane> getPlanes();
-    void addPassengerToFlight(Flight flight, const Plane &plane, const Passenger &passenger);
+    void addPassengerToFlight(Flight &flight, const Plane &plane, const Passenger &passenger);
     void checkInPassenger(Flight &flight, Passenger &passenger);
     void baggageTransportation(Flight &flight, const Baggage &baggage);
     void addToTreadmill(const Baggage &baggage);

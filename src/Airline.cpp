@@ -44,9 +44,9 @@ std::vector<Plane> Airline::getPlanes() {
     return planes;
 }
 
-void Airline::addPassengerToFlight(Flight flight, const Plane &plane, const Passenger &passenger) {
+void Airline::addPassengerToFlight(Flight &flight, const Plane &plane, const Passenger &passenger) {
     bool found = false;
-    for(Flight f : flights){
+    for(const Flight &f : flights){
         if(flight.getNumber() == f.getNumber()){
             found = true;
             break;

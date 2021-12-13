@@ -2,10 +2,9 @@
 
 using namespace std;
 
-
-Plane::Plane() = default;
-
 Plane::Plane(string plate, unsigned int capacity) {
+    if(!validPlate(plate))
+        throw InvalidPlateException();
     this->plate = plate;
     this->capacity = capacity;
 }
@@ -37,4 +36,17 @@ void Plane::addService(const Service &service) {
 void Plane::removeServiceDONE() {
     servicesDONE.push_back(servicesTODO.front());
     servicesTODO.pop();
+}
+
+bool Plane::validPlate(std::string plate) {
+    if (plate.size() != 4)
+        return false;
+    string l = plate.substr(0,1);
+    if (int(l[0]) < 65 || int(l[0]) > 90)
+        return false;
+    for (char c : plate.substr(1,3)){
+        if (int(c) > 59 || int(c) < 48)
+            return false;
+    }
+    return true;
 }
