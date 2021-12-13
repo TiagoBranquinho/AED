@@ -11,24 +11,25 @@
 #include <algorithm>
 
 
-class groundTransportation {
+class GroundTransportation {
 
 private:
     std::string type;
     unsigned int distance;
     std::vector<Schedule> schedules;
 public:
-    groundTransportation();
-    groundTransportation(std::string type, unsigned int distance);
+    GroundTransportation(std::string type, unsigned int distance);
     void setType(std::string type);
     void setDistance(unsigned int distance);
-    std::string getType();
+    std::string getType() const;
     unsigned int getDistance();
     void setSchedules(std::vector<Schedule> &schedules);
     std::vector<Schedule> getSchedules();
     void addSchedule(const Schedule &schedule);
     void removeSchedule(const Schedule &schedule);
     void sortSchedules();
+    bool operator<(const GroundTransportation &local) const;
+    friend std::ostream &operator<<(std::ostream &os, GroundTransportation &local);
 };
 
 class ScheduleNotFoundException{

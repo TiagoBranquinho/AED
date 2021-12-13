@@ -4,12 +4,9 @@
 
 #include "../include/Airport.h"
 
-Airport::Airport() = default;
-
-Airport::Airport(std::string name, std::string city, std::vector<Flight> flights) {
+Airport::Airport(std::string name, std::string city) {
     this->name = name;
     this->city = city;
-    this->flights = flights;
 }
 
 std::string Airport::getName() {
@@ -41,8 +38,23 @@ void Airport::addFlight(const Flight &flight) {
 }
 
 void Airport::removeFlight(const Flight &flight) {
-    for(std::vector<Flight>::iterator it = flights.begin(); it != flights.end(); it++){ // had to make getNumber const, otherwise --> ERROR
-        if((*it).getNumber() == flight.getNumber())
+    for(auto it = flights.begin(); it != flights.end(); it++){ // had to make getNumber const, otherwise --> ERROR
+        if((*it).getNumber() == flight.getNumber()){
             flights.erase(it);
+            break;
+        }
     }
 }
+
+void Airport::addGroundTransportation(const GroundTransportation &groundTransportation) {
+    locals.addGroundTransportation(groundTransportation);
+}
+
+void Airport::printLocals() {
+    locals.printLocals();
+}
+
+BSTItrIn<GroundTransportation> Airport::localsItrIn() {
+    return locals.localsItrIn();
+}
+

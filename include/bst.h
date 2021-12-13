@@ -4,7 +4,7 @@
 #include <iostream>
 #include <stack>
 #include <queue>
-
+using namespace std;
 
 template <class Comparable> class BSTItrIn;
 template <class Comparable> class BSTItrPre;
@@ -58,7 +58,7 @@ public:
     void makeEmpty( );
     bool insert(const Comparable& x);
     bool remove(const Comparable& x);
-    std::const BST& operator= (const BST& rhs);
+    const BST& operator= (const BST& rhs);
     iteratorBST<Comparable> begin() const;
     iteratorBST<Comparable> end() const;
 };
@@ -124,7 +124,7 @@ void BST<Comparable>::printTree( ) const {
 }
 
 template <class Comparable>
-std::const BST<Comparable>& BST<Comparable>::operator= (const BST<Comparable>& rhs) {
+const BST<Comparable>& BST<Comparable>::operator= (const BST<Comparable>& rhs) {
     if(this != &rhs) {
         makeEmpty( );
         root = clone(rhs.root);
