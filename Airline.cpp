@@ -53,10 +53,14 @@ void Airline::checkInPassenger(Flight &flight, Passenger &passenger) {
 
 void Airline::baggageTransportation(Flight &flight, const Baggage &baggage) {
     addToTreadmill(baggage);
-    if(treadmill.size() == flight.getNumberPassengers())
-        transportCart.addBaggage(baggage);
+    if(treadmill.size() == flight.getNumberPassengers()){
+        while(!treadmill.empty()){
+            transportCart.addBaggage(treadmill.front());
+            treadmill.pop();
+        }
+    }
 
-    // ...
+    // ... not finished
 
 }
 

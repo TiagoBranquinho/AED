@@ -15,6 +15,7 @@ class TransportCart {
 private:
     unsigned int c,n,m;  // c -> numero de carruagens, n -> numero de pilhas por bagagem, m -> numero de malas por bagagem
     std::queue<std::list<std::stack<Baggage>>> slots;
+    std::list<std::stack<Baggage>> carriage;
 public:
     TransportCart();
     TransportCart(unsigned int c, unsigned int n,unsigned int m);
