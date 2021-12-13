@@ -17,19 +17,19 @@ void Schedule::displayTime() {
 }
 
 void Schedule::setTime(const std::string& hm) {
-    //if (so() == "unix"){
-        strptime(hm.c_str(), "%R", &tm);
-        time = mktime(&tm);
+    char c; int h, m;
+    stringstream input(hm);
+    input >> h >> c >> m;
+    if (h < 0 || h > 24 || m < 0 || m > 59 || c != ':')
+        throw InvalidScheduleException();
+    tm.tm_hour = h;
+    tm.tm_min  = m;
     }
-    //else if (so() == "win"){
-        //cout << "windows" << endl;
-   // }
-//}
 
 string Schedule::getTime() const{
-    stringstream ss;
-    ss << put_time(&tm, "%R");
-    return ss.str();
+    char timeStr[MAXSIZE];
+    strftime (timeStr,MAXSIZE,"%H:%M",&tm);
+    return timeStr;
 }
 
 int Schedule::getHour() const {
@@ -41,5 +41,5 @@ int Schedule::getMin() const {
 }
 
 bool Schedule::operator<(const Schedule &s) const {
-    return this->time < s.time;
+    return getTime() < s.getTime();
 }

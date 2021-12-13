@@ -5,16 +5,17 @@
 #include <sstream>
 #include <string>
 #include <ctime>
+#include <exception>
 
-#if defined(_WIN32)
-    #define so() "win"
-#elif defined(unix) || defined(__unix__) || defined(__unix)
-    #define so() "unix"
-#endif
+//#if defined(_WIN32)
+//    #define so() "win"
+//#elif defined(unix) || defined(__unix__) || defined(__unix)
+//    #define so() "unix"
+//#endif
 
 class Schedule {
 private:
-    std::time_t time;
+    size_t MAXSIZE=6;
     struct std::tm tm{0};
 
 public:
@@ -27,6 +28,10 @@ public:
     bool operator<(const Schedule &s) const;
 };
 
-
+class InvalidScheduleException : public std::exception {
+    const char * what () const noexcept override {
+        return "Invalid schedule format!";
+    }
+};
 
 #endif //PROJETOAEROPORTO_SCHEDULE_H
