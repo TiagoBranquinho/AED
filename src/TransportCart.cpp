@@ -18,15 +18,15 @@ TransportCart::TransportCart(unsigned int c, unsigned int n, unsigned int m) {
         addCarriage();
 }
 
-void TransportCart::setC(){
+void TransportCart::setC(unsigned int c){
     this->c = c;
 }
 
-void TransportCart::setN(){
+void TransportCart::setN(unsigned int n){
     this->n = n;
 }
 
-void TransportCart::setM(){
+void TransportCart::setM(unsigned int m){
     this->m = m;
 }
 

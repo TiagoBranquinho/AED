@@ -18,9 +18,9 @@ private:
 public:
     TransportCart();
     TransportCart(unsigned int c, unsigned int n,unsigned int m);
-    void setC();
-    void setN();
-    void setM();
+    void setC(unsigned int c);
+    void setN(unsigned int n);
+    void setM(unsigned int m);
     void addCarriage();
     void addStack();
     bool addBaggage(const Baggage &baggage);

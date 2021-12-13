@@ -15,7 +15,6 @@ class Airport {
 private:
     std::string name;
     std::string city;
-    std::vector<Flight> flights;
     TransportationLocals locals;
 
 public:
@@ -24,10 +23,6 @@ public:
     std::string getCity() const;
     void setName(std::string name);
     void setCity(std::string city);
-    std::vector<Flight> getFlights();
-    void setFlights(std::vector<Flight> flights);
-    void addFlight(const Flight &flight);
-    void removeFlight(const Flight &flight);
     void addGroundTransportation(const GroundTransportation &groundTransportation);
     void printLocals();
     BSTItrIn<GroundTransportation> localsItrIn();
