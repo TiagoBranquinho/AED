@@ -25,27 +25,6 @@ void Airport::setCity(std::string city) {
     this->city = city;
 }
 
-std::vector<Flight> Airport::getFlights() {
-    return flights;
-}
-
-void Airport::setFlights(std::vector<Flight> flights) {
-    this->flights = flights;
-}
-
-void Airport::addFlight(const Flight &flight) {
-    flights.push_back(flight);
-}
-
-void Airport::removeFlight(const Flight &flight) {
-    for(auto it = flights.begin(); it != flights.end(); it++){ // had to make getNumber const, otherwise --> ERROR
-        if((*it).getNumber() == flight.getNumber()){
-            flights.erase(it);
-            break;
-        }
-    }
-}
-
 void Airport::addGroundTransportation(const GroundTransportation &groundTransportation) {
     locals.addGroundTransportation(groundTransportation);
 }

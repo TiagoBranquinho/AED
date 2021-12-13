@@ -12,6 +12,7 @@
 class Airline {
 private:
     std::vector<Plane> planes = {Plane("ABC", 89), Plane("XYZ", 13)};
+    std::vector<Flight> flights;
     std::queue<Baggage> treadmill;
     TransportCart transportCart = TransportCart(2,3,4);
 public:
@@ -19,6 +20,8 @@ public:
     Airline(std::vector<Plane> planes);
     void addPlane(const Plane &plane);
     void removePlane(const Plane &plane);
+    void addFlight(Flight &flight);
+    bool validateFlight(Flight &flight);
     std::vector<Plane> getPlanes();
     void addPassengerToFlight(Flight flight, const Plane &plane, const Passenger &passenger);
     void checkInPassenger(Flight &flight, Passenger &passenger);
@@ -59,5 +62,12 @@ public:
     unsigned int getNumber(){return number;}
 };
 
+class InvalidFlightException{
+private:
+    unsigned int number;
+public:
+    InvalidFlightException(unsigned int number){this->number = number;}
+    unsigned int getNumber(){return number;}
+};
 
 #endif //PROJETOAEROPORTO_AIRLINE_H

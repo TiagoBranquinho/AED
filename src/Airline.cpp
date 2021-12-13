@@ -24,11 +24,36 @@ void Airline::removePlane(const Plane &plane) {
     throw(PlaneNotFoundException(plane.getPlate()));
 }
 
+void Airline::addFlight(Flight &flight) {
+    if(validateFlight(flight))
+        flights.push_back(flight);
+    else
+        throw InvalidFlightException(flight.getNumber());
+}
+
+bool Airline::validateFlight(Flight &flight) {
+    for(Flight f : flights){
+        if(f.getNumber() == flight.getNumber()){
+            return true;
+        }
+    }
+    return false;
+}
+
 std::vector<Plane> Airline::getPlanes() {
     return planes;
 }
 
 void Airline::addPassengerToFlight(Flight flight, const Plane &plane, const Passenger &passenger) {
+    bool found = false;
+    for(Flight f : flights){
+        if(flight.getNumber() == f.getNumber()){
+            found = true;
+            break;
+        }
+    }
+    if(!found)
+        flights.push_back(flight);
     if(plane.getCapacity() < flight.getNumberPassengers())
         flight.addPassenger(passenger);
     else
