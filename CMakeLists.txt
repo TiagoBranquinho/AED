@@ -3,4 +3,10 @@ project(ProjetoAeroporto)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(ProjetoAeroporto main.cpp Plane.cpp Plane.h Flight.cpp Flight.h Baggage.cpp Baggage.h Date.cpp Date.h tests.cpp Service.cpp Service.h Person.cpp Person.h Passenger.cpp Passenger.h Employee.cpp Employee.h groundTransportation.cpp groundTransportation.h bst.h Schedule.cpp Schedule.h Airport.cpp Airport.h Airline.cpp Airline.h TransportCart.cpp TransportCart.h)
+add_executable(ProjetoAeroporto main.cpp src/Plane.cpp include/Plane.h src/Flight.cpp include/Flight.h src/Baggage.cpp include/Baggage.h src/Date.cpp include/Date.h src/Service.cpp include/Service.h src/Person.cpp include/Person.h src/Passenger.cpp include/Passenger.h src/Employee.cpp include/Employee.h src/groundTransportation.cpp include/groundTransportation.h include/bst.h src/Schedule.cpp include/Schedule.h src/Airport.cpp include/Airport.h src/Airline.cpp include/Airline.h src/TransportCart.cpp include/TransportCart.h tests/ScheduleTest.cpp tests/FlightTest.cpp)
+
+add_subdirectory(lib/googletest-master)
+include_directories(lib/googletest-master/googletest/include)
+include_directories(lib/googletest-master/googlemock/include)
+
+target_link_libraries(ProjetoAeroporto gtest gtest_main)

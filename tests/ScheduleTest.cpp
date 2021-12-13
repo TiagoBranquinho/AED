@@ -1,0 +1,26 @@
+#include <gtest/gtest.h>
+#include <gmock/gmock.h>
+#include "../include/Schedule.h"
+
+using namespace std;
+using testing::Eq;
+
+TEST(test_1, createSchedule){
+    Schedule h1 = Schedule("11:02");
+    Schedule h2 = Schedule("01:02");
+    Schedule h3 = Schedule("21:23");
+
+    EXPECT_EQ(h1.getTime(), "11:02");
+    EXPECT_EQ(h2.getTime(), "01:02");
+    EXPECT_EQ(h3.getTime(), "21:23");
+
+    if (h1 < h2){
+        std::cout << "h2 > h1" << std::endl;
+        std::cout << h2.getHour() << ":" << h2.getMin() << std::endl;
+
+    }
+    else if (h1 < h3){
+        std::cout << "h3 > h1" << std::endl;
+        std::cout << h3.getHour() << ":" << h3.getMin() << std::endl;
+    }
+}
