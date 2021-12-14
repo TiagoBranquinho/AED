@@ -5,30 +5,39 @@
 #ifndef PROJETOAEROPORTO_DATE_H
 #define PROJETOAEROPORTO_DATE_H
 
+#include <string>
 
 class Date {
 private:
     unsigned int day,month,year;
+    std::string date;
 public:
     Date();
     Date(unsigned int day, unsigned int month, unsigned int year);
     void setDay(unsigned int day);
     void setMonth(unsigned int month);
     void setYear(unsigned int year);
-    unsigned int getDay();
-    unsigned int getMonth();
-    unsigned int getYear();
-    static bool isValid(unsigned int day, unsigned int month);
+    void setDate(std::string date);
+    void setDate(unsigned int day, unsigned int month, unsigned int year);
+    unsigned int getDay() const;
+    unsigned int getMonth() const;
+    unsigned int getYear() const;
+    std::string getDate() const;
+    bool validDate(unsigned int day, unsigned int month, unsigned int year);
+    bool validDate(std::string date);
     bool operator<(Date &d) const;
+    bool leapYear(unsigned int year);
 };
 
-class InvalidDateException {
+class InvalidDateException: public std::exception{
 private:
-    unsigned int day,month;
+    unsigned int day,month,year;
 public:
-    InvalidDateException(unsigned int day,unsigned int month):day(day),month(month){};
+    InvalidDateException(unsigned int day,unsigned int month, unsigned int year):day(day),month(month),year(year){};
     unsigned int getDay() {return day;};
     unsigned int getMonth() {return month;};
-
+    const char * what () const noexcept override {
+        return "Invalid date format!";
+    }
 };
 #endif //PROJETOAEROPORTO_DATE_H

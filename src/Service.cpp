@@ -6,9 +6,11 @@ using namespace std;
 
 Service::Service() = default;
 
-Service::Service(string type, const Date &date, const Employee &employee) {
+Service::Service(string type, const Employee &employee) {
+    time_t dt = time(nullptr);
+    tm *ltm = localtime(&dt);
+    this->date = Date(ltm->tm_mday, ltm->tm_mon+1, ltm->tm_year+1900);
     this->type = type;
-    this->date = date;
     this->employee = employee;
 }
 

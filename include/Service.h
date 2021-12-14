@@ -2,6 +2,7 @@
 #define PROJETOAEROPORTO_SERVICE_H
 
 #include <string>
+#include <ctime>
 #include "Date.h"
 #include "Employee.h"
 
@@ -13,7 +14,7 @@ private:
     Employee employee;
 public:
     Service();
-    Service(std::string type, const Date &date, const Employee &employee);
+    Service(std::string type, const Employee &employee);
     std::string getType();
     Date getDate();
     Employee getEmployee();
