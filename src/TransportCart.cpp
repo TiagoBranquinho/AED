@@ -9,13 +9,13 @@ using namespace std;
 TransportCart::TransportCart() = default;
 
 TransportCart::TransportCart(unsigned int c, unsigned int n, unsigned int m) {
-    this->c = c;
-    this->n = n;
     this->m = m;
-    for (unsigned int i = 0; i < n; i++)
-        addStack();
-    for (unsigned int i = 0; i < c; i++)
+    for (unsigned int i = 0; i < c; i++) {
         addCarriage();
+        for (unsigned int i = 0; i < n; i++)
+            addStack();
+    }
+    this->n= this->n / c;
 }
 
 void TransportCart::setC(unsigned int c){
@@ -30,12 +30,30 @@ void TransportCart::setM(unsigned int m){
     this->m = m;
 }
 
+int TransportCart::getC(){
+    return c;
+}
+
+int TransportCart::getN(){
+    return n;
+}
+
+int TransportCart::getM(){
+    return m;
+}
+
+std::queue<std::list<std::stack<Baggage>>> TransportCart::getSlots() {
+    return slots;
+}
+
 void TransportCart::addCarriage() {
     slots.push(list<stack<Baggage>>());
+    c++;
 }
 
 void TransportCart::addStack() {
     slots.back().push_back(stack<Baggage>());
+    n++;
 }
 
 bool TransportCart::addBaggage(const Baggage &baggage) {
@@ -45,7 +63,7 @@ bool TransportCart::addBaggage(const Baggage &baggage) {
         slotsVector.push_back(slots.front());
         slots.pop();
     }
-    for(list<stack<Baggage>> carriage : slotsVector){
+    for(const list<stack<Baggage>> carriage : slotsVector){
         for(stack<Baggage> stack : carriage){
             if(stack.size() == m){}
             else{
@@ -57,7 +75,7 @@ bool TransportCart::addBaggage(const Baggage &baggage) {
         if(done)
             break;
     }
-    for(list<stack<Baggage>> carriage : slotsVector){
+    for(const list<stack<Baggage>> carriage : slotsVector){
         slots.push(carriage);
     }
     if(done)
