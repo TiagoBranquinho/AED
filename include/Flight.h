@@ -19,6 +19,7 @@ private:
     std::string origin, destiny;
     std::list<Passenger> passengers;
     bool checkIn = false;
+    unsigned int numberOfBaggages;
 public:
     Flight();
     Flight(unsigned int number, const Date &date, unsigned int duration, std::string origin, std::string destiny);
@@ -39,7 +40,6 @@ public:
     void closeCheckIn();
     void openCheckIn();
     bool getCheckInStatus();
-    static unsigned int numberBaggages;
 };
 
 #endif //PROJETOAEROPORTO_FLIGHT_H

@@ -11,19 +11,19 @@
 
 class Passenger: public Person{
 private:
-    Baggage baggage;
+    Baggage *baggage;
     bool checkedIn = false;
-    bool withBaggage = false;
+    bool automaticCheckIn;
 public:
     Passenger();
     Passenger(std::string name);
-    Passenger(std::string name, const Baggage &baggage);
-    void setBaggage(const Baggage &baggage);
-    Baggage getBaggage() const;
+    Passenger(std::string name, Baggage *baggage, bool wantsAutomaticCheckIn);
+    void setBaggage(Baggage *baggage);
+    Baggage* getBaggage() const;
     std::string getName() const;
     void checkIn();
     bool isCheckedIn() const;
-    void Checkin();
+    bool wantsAutomaticCheckIn();
     bool operator==(const Passenger &passenger);
 
 };

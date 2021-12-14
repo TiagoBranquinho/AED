@@ -11,30 +11,28 @@ Passenger::Passenger() = default;
 
 Passenger::Passenger(string name) {
     this->name = name;
-    // null baggage?? -> no caso de nao apresentar mala
 }
 
-Passenger::Passenger(string name, const Baggage &baggage) {
+Passenger::Passenger(string name, Baggage *baggage, bool automaticCheckIn) {
     this->name = name;
     this->baggage = baggage;
-    withBaggage = true;
+    this->automaticCheckIn = automaticCheckIn;
 }
 
-void Passenger::setBaggage(const Baggage &baggage) {
+void Passenger::setBaggage(Baggage *baggage) {
     this->baggage = baggage;      // if MAX_WEIGHT == const --> ERROR!
-    withBaggage = true;
 }
 
-Baggage Passenger::getBaggage() const{
+Baggage* Passenger::getBaggage() const{
     return baggage;
 }
 
 std::string Passenger::getName() const {
-    return std::string();
+    return name;
 }
 
 void Passenger::checkIn() {
-
+    checkedIn = true;
 }
 
 bool Passenger::operator==(const Passenger &passenger) {
@@ -45,8 +43,8 @@ bool Passenger::isCheckedIn() const{
     return checkedIn;
 }
 
-void Passenger::Checkin() {
-    checkedIn = true;
+bool Passenger::wantsAutomaticCheckIn() {
+    return automaticCheckIn;
 }
 
 
