@@ -62,15 +62,13 @@ std::list<Passenger> Flight::getPassengers() const{
 }
 
 unsigned int Flight::getNumberPassengers() const {
-    return numberBaggages;
-}
-
-unsigned int Flight::getNumberBaggages() const {
-    return numberBaggages;
+    return passengers.size();
 }
 
 void Flight::addPassenger(const Passenger &passenger) {
     passengers.push_back(passenger);
+    if(passenger.getBaggage() != nullptr)
+        numberOfBaggages++;
 }
 
 void Flight::closeCheckIn() {
@@ -83,5 +81,9 @@ void Flight::openCheckIn() {
 
 bool Flight::getCheckInStatus() {
     return checkIn;
+}
+
+unsigned int Flight::getNumberBaggages() const {
+    return numberOfBaggages;
 }
 

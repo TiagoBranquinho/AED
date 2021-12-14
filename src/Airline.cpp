@@ -54,8 +54,9 @@ void Airline::addPassengerToFlight(Flight &flight, const Plane &plane, const Pas
     }
     if(!found)
         flights.push_back(flight);
-    if(plane.getCapacity() < flight.getNumberPassengers())
+    if(plane.getCapacity() > flight.getNumberPassengers()){
         flight.addPassenger(passenger);
+    }
     else
         throw FullPlaneException(plane.getCapacity());
 }
@@ -68,7 +69,8 @@ void Airline::checkInPassenger(Flight &flight, Passenger &passenger) {
         if(p == passenger){
             hasTicket = true;
             passenger.checkIn();
-            baggageTransportation(flight, passenger.getBaggage());
+            if(passenger.getBaggage() != nullptr && passenger.wantsAutomaticCheckIn())
+                baggageTransportation(flight, *passenger.getBaggage());
             break;
         }
     }
@@ -78,7 +80,7 @@ void Airline::checkInPassenger(Flight &flight, Passenger &passenger) {
 
 void Airline::baggageTransportation(Flight &flight, const Baggage &baggage) {
     addToTreadmill(baggage);
-    if(treadmill.size() == flight.getNumberPassengers()){
+    if(treadmill.size() == flight.getNumberBaggages()){
         while(!treadmill.empty()){
             transportCart.addBaggage(treadmill.front());
             treadmill.pop();
