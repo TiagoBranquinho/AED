@@ -6,10 +6,10 @@ using namespace std;
 
 Service::Service() = default;
 
-Service::Service(string type, const Employee &employee) {
-    time_t dt = time(nullptr);
-    tm *ltm = localtime(&dt);
-    this->date = Date(ltm->tm_mday, ltm->tm_mon+1, ltm->tm_year+1900);
+Service::Service(string type, const Date &date, Employee *employee) {
+    if (validType(type, employee))
+        throw InvalidEmplpoyeeException(employee);
+    this->date = date;
     this->type = type;
     this->employee = employee;
 }
@@ -18,26 +18,32 @@ string Service::getType() {
     return type;
 }
 
-Date Service::getDate() {
+Date &Service::getDate() {
     return date;
 }
 
-Employee Service::getEmployee() {
+Employee *Service::getEmployee() {
     return employee;
 }
 
 void Service::setType(string type) {
-    this->type = type;
+    if (validType(type, employee))
+        this->type = type;
+    else
+        throw InvalidEmplpoyeeException(employee);
 }
 
 void Service::setDate(const Date &date) {
     this->date = date;
 }
 
-void Service::setEmployee(const Employee &employee) {
-    if(employee.getType() == type)
+void Service::setEmployee(Employee *employee) {
+    if (validType(type, employee))
         this->employee = employee;
     else
-        cout << "The employee selected is not qualified for the service" << endl;
+        throw InvalidEmplpoyeeException(employee);
 }
 
+bool Service::validType(string type, Employee *employee) {
+    return employee->getType() == type;
+}
