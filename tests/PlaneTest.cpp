@@ -14,7 +14,8 @@ TEST(test_1, createPlane){
     try{
         Plane pl1 ("As20", 342);
     }
-    catch (exception &e){
-        cout << e.what() << endl;
+    catch (InvalidPlateException &e){
+        cout <<  e.what() << endl << e.getPlate() << endl;
+        EXPECT_EQ(e.getPlate(), "As20");
     }
 }

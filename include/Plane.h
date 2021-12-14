@@ -31,9 +31,15 @@ public:
 };
 
 class InvalidPlateException: public std::exception{
+private:
+    std::string plate;
+public:
+    InvalidPlateException(std::string plate){this->plate = plate;}
+    std::string getPlate(){return plate;}
     const char * what () const noexcept override {
         return "Invalid plane plate!";
     }
 };
+
 
 #endif //PROJETOAEROPORTO_PLANE_H

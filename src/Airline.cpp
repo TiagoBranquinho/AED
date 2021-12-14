@@ -15,7 +15,7 @@ void Airline::addPlane(const Plane &plane) {
 }
 
 void Airline::removePlane(const Plane &plane) {
-    for(std::vector<Plane>::iterator it = planes.begin(); it != planes.end(); it++){
+    for(auto it = planes.begin(); it != planes.end(); it++){
         if((*it).getPlate() == plane.getPlate()){
             planes.erase(it);
             break;
@@ -32,7 +32,7 @@ void Airline::addFlight(Flight &flight) {
 }
 
 bool Airline::validateFlight(Flight &flight) {
-    for(Flight f : flights){
+    for(const Flight &f : flights){
         if(f.getNumber() == flight.getNumber()){
             return true;
         }

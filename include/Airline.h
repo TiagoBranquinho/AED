@@ -11,7 +11,7 @@
 
 class Airline {
 private:
-    std::vector<Plane> planes = {Plane("ABC", 89), Plane("XYZ", 13)};
+    std::vector<Plane> planes = {Plane("A123", 89), Plane("F032", 13)};
     std::vector<Flight> flights;
     std::queue<Baggage> treadmill;
     TransportCart transportCart = TransportCart(2,3,4);

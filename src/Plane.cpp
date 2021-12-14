@@ -4,7 +4,7 @@ using namespace std;
 
 Plane::Plane(string plate, unsigned int capacity) {
     if(!validPlate(plate))
-        throw InvalidPlateException();
+        throw InvalidPlateException(plate);
     this->plate = plate;
     this->capacity = capacity;
 }
