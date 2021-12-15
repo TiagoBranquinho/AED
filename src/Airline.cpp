@@ -37,7 +37,7 @@ bool Airline::duplicatedFlight(Flight &flight) {
     return false;
 }
 
-std::vector<Plane> Airline::getPlanes() {
+std::vector<Plane> &Airline::getPlanes() {
     return planes;
 }
 

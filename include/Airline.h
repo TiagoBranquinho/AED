@@ -14,6 +14,7 @@ private:
     std::vector<Plane> planes = {Plane("A123", 89), Plane("F032", 13)};
     std::vector<Flight> flights;
     std::queue<Baggage> treadmill;
+    vector<Employee> c;
     TransportCart transportCart = TransportCart(2,3,4);
 public:
     Airline();
@@ -23,14 +24,14 @@ public:
     void addFlight(Flight &flight);
     bool duplicatedFlight(Flight &flight);
     bool validPlane(const Plane &plane);
-    std::vector<Plane> getPlanes();
+    std::vector<Plane> &getPlanes();
     void addPassengerToFlight(Flight &flight, const Plane &plane, const Passenger &passenger);
     void checkInPassenger(Flight &flight, Passenger &passenger);
     void baggageTransportation(Flight &flight, const Baggage &baggage);
     void addToTreadmill(const Baggage &baggage);
 };
 
-class PlaneNotFoundException{
+class PlaneNotFoundException: public std::exception{
 private:
     std::string plate;
 public:
@@ -39,15 +40,15 @@ public:
 
 };
 
-class FullPlaneException{
+class FullPlaneException: public std::exception{
 private:
     unsigned int capacity;
 public:
     FullPlaneException(const unsigned int capacity){this->capacity = capacity;}
-    unsigned int getCapacity(){return capacity;}
+    unsigned int getCapacity() const{return capacity;}
 };
 
-class NoTicketException{
+class NoTicketException: public std::exception{
 private:
     std::string name;
 public:
@@ -55,12 +56,12 @@ public:
     std::string getName(){return name;}
 };
 
-class ClosedCheckInException{
+class ClosedCheckInException: public std::exception{
 private:
     unsigned int number;
 public:
     ClosedCheckInException(unsigned int number){this->number = number;}
-    unsigned int getNumber(){return number;}
+    unsigned int getNumber() const{return number;}
 };
 
 #endif //PROJETOAEROPORTO_AIRLINE_H
