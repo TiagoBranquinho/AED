@@ -98,7 +98,11 @@ unsigned int Flight::getNumberBaggages() const {
     return numberOfBaggages;
 }
 
-bool Flight::operator==(Flight &flight) {
+bool Flight::operator==(const Flight &flight) const {
     return this->getNumber() == flight.getNumber();
+}
+
+bool Flight::operator<(const Flight &flight) const {
+    return this->getNumber() < flight.getNumber();
 }
 

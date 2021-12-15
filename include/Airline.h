@@ -14,7 +14,6 @@ private:
     std::vector<Plane> planes = {Plane("A123", 89), Plane("F032", 13)};
     std::vector<Flight> flights;
     std::queue<Baggage> treadmill;
-    vector<Employee> c;
     TransportCart transportCart = TransportCart(2,3,4);
 public:
     Airline();
@@ -22,7 +21,8 @@ public:
     void addPlane(const Plane &plane);
     void removePlane(const Plane &plane);
     void addFlight(Flight &flight);
-    bool duplicatedFlight(Flight &flight);
+    void removeFlight(const Flight &flight);
+    bool duplicatedFlight(const Flight &flight);
     bool validPlane(const Plane &plane);
     std::vector<Plane> &getPlanes();
     void addPassengerToFlight(Flight &flight, const Plane &plane, const Passenger &passenger);

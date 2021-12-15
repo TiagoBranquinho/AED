@@ -44,7 +44,8 @@ public:
     void closeCheckIn();
     void openCheckIn();
     bool getCheckInStatus();
-    bool operator==(Flight &flight);
+    bool operator==(const Flight &flight) const;
+    bool operator<(const Flight &flight) const;
 };
 
 #endif //PROJETOAEROPORTO_FLIGHT_H

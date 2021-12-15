@@ -29,8 +29,13 @@ void Airline::addFlight(Flight &flight) {
         flights.push_back(flight);
 }
 
-bool Airline::duplicatedFlight(Flight &flight) {
-    for(Flight &f : flights){
+void Airline::removeFlight(const Flight &flight) {
+    auto flightItr = find(flights.begin(), flights.end(), flight);
+    if (flightItr != flights.end()) flights.erase(flightItr);
+}
+
+bool Airline::duplicatedFlight(const Flight &flight) {
+    for(const Flight &f : flights){
         if(f == flight)
             return true;
     }
