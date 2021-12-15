@@ -74,21 +74,35 @@ void Airline::checkInPassenger(Flight &flight, Passenger &passenger) {
             break;
         }
     }
+    baggageToPlane(flight);
     if(!hasTicket)
         throw NoTicketException(passenger.getName());
 }
 
 void Airline::baggageTransportation(Flight &flight, const Baggage &baggage) {
     addToTreadmill(baggage);
-    if(treadmill.size() == flight.getNumberBaggages()){
+    if(treadmill.size() == flight.getNumberBaggages() ){
         while(!treadmill.empty()){
             transportCart.addBaggage(treadmill.front());
             treadmill.pop();
         }
     }
+}
 
-    // ... not finished
-
+void Airline::baggageToPlane(Flight &flight) {
+    for(Plane &plane : planes) {
+        if(find(plane.getFlightPlan().begin(), plane.getFlightPlan().end(), flight) != plane.getFlightPlan().end()) {
+            for(list<stack<Baggage>> carriage : transportCart.getSlots()){
+                for(stack<Baggage> stack : carriage){
+                    while(!stack.empty()){
+                        plane.addBaggage(stack.top());
+                        stack.pop();
+                    }
+                }
+            }
+            break;
+        }
+    }
 }
 
 void Airline::addToTreadmill(const Baggage &baggage) {

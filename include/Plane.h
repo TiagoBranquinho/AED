@@ -17,18 +17,24 @@ private:
     std::list<Flight> flightPlan;
     std::queue<Service> servicesTODO;
     std::vector<Service> servicesDONE;
+    std::list<Baggage> planeTrunk;
 
 public:
     Plane(std::string plate, unsigned int capacity);
     std::string getPlate() const;
     unsigned int getCapacity() const;
+    std::list<Flight> getFlightPlan() const;
     void setPlate(std::string plate);
     void setCapacity(unsigned int capacity);
     void addFlight(const Flight &flight);
     void addService(const Service &service);
+    void addBaggage(const Baggage &baggage);
     void removeServiceDONE(); // removes service from serviceTODO queue and adds it to serviceDONE vector
     bool validPlate(std::string plate);
     bool operator==(const Plane &plane);
+
+
+
 };
 
 class InvalidPlateException: public std::exception{

@@ -30,6 +30,7 @@ public:
     void addPassengerToFlight(Flight &flight, const Plane &plane, const Passenger &passenger);
     void checkInPassenger(Flight &flight, Passenger &passenger);
     void baggageTransportation(Flight &flight, const Baggage &baggage);
+    void baggageToPlane(Flight &flight);
     void addToTreadmill(const Baggage &baggage);
     void addEmployee(const Employee &employee);
     void removeEmployee(const Employee &employee);

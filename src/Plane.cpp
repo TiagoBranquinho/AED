@@ -17,6 +17,10 @@ unsigned int Plane::getCapacity() const{
     return capacity;
 }
 
+std::list<Flight> Plane::getFlightPlan() const {
+    return flightPlan;
+}
+
 void Plane::setPlate(string plate) {
     this->plate = plate;
 }
@@ -31,6 +35,10 @@ void Plane::addFlight(const Flight &flight) {
 
 void Plane::addService(const Service &service) {
     servicesTODO.push(service);
+}
+
+void Plane::addBaggage(const Baggage &baggage) {
+    planeTrunk.push_back(baggage);
 }
 
 void Plane::removeServiceDONE() {
@@ -54,4 +62,5 @@ bool Plane::validPlate(std::string plate) {
 bool Plane::operator==(const Plane &plane) {
     return this->getPlate() == plane.getPlate();
 }
+
 
