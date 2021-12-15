@@ -13,21 +13,24 @@
 
 class TransportCart {
 private:
-    unsigned int c = 0,n = 0,m = 0;  // c -> numero de carruagens, n -> numero de pilhas por carruagem, m -> numero de malas por pilha
-    std::queue<std::list<std::stack<Baggage>>> slots;
+    bool cartFull = false;
+    unsigned int numBaggages = 0;
+    const unsigned int C_MAX = 0, N_MAX = 0, M_MAX = 0;  // C_MAX -> numero de carruagens, N_MAX -> numero de pilhas por carruagem, M_MAX -> numero de malas por pilha
+    std::list<std::list<std::stack<Baggage>>> slots;
 public:
     TransportCart();
     TransportCart(unsigned int c, unsigned int n,unsigned int m);
-    void setC(unsigned int c);
-    void setN(unsigned int n);
-    void setM(unsigned int m);
-    int getC();
-    int getN();
-    int getM();
-    std::queue<std::list<std::stack<Baggage>>> getSlots();
+    unsigned int getC() const;
+    unsigned int getN() const;
+    unsigned int getM() const;
+    std::list<std::list<std::stack<Baggage>>> getSlots();
     void addCarriage();
     void addStack();
     bool addBaggage(const Baggage &baggage);
+
+private:
+    void buildCartCarriages();
+    void checkCartFull();
 };
 
 

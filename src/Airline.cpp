@@ -25,19 +25,18 @@ void Airline::removePlane(const Plane &plane) {
 }
 
 void Airline::addFlight(Flight &flight) {
-    if(validateFlight(flight))
+    if(validFlight(flight))
         flights.push_back(flight);
     else
         throw InvalidFlightException(flight.getNumber());
 }
 
-bool Airline::validateFlight(Flight &flight) {
+bool Airline::validFlight(Flight &flight) {
     for(const Flight &f : flights){
-        if(f.getNumber() == flight.getNumber()){
-            return true;
-        }
+        if(f.getNumber() == flight.getNumber())
+            return false;
     }
-    return false;
+    return true;
 }
 
 std::vector<Plane> Airline::getPlanes() {

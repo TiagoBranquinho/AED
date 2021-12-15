@@ -19,7 +19,7 @@ private:
     std::string origin, destiny;
     std::list<Passenger> passengers;
     bool checkIn = false;
-    unsigned int numberOfBaggages;
+    unsigned int numberOfBaggages = 0;
 public:
     Flight();
     Flight(unsigned int number, const Date &date, unsigned int duration, std::string origin, std::string destiny);

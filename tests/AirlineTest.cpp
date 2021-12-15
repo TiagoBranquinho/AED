@@ -15,11 +15,11 @@ TEST(test_1, addBaggage){
     Plane plane("A213", 81);
     Passenger passenger1 = Passenger("Alberto",new Baggage(14,false), true);
     Passenger passenger2 = Passenger("Toze", nullptr, true);
-    /*Airline airline = Airline();
+    Airline airline = Airline();
     airline.addFlight(f);
     airline.addPlane(plane);
     airline.addPassengerToFlight(f,plane,passenger1);
-    airline.addPassengerToFlight(f,plane,passenger2);*/
+    airline.addPassengerToFlight(f,plane,passenger2);
 
     EXPECT_EQ(f.getNumberPassengers(), 2);
     EXPECT_EQ(f.getNumberBaggages(), 1);

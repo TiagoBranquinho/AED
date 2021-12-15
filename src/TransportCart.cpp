@@ -8,77 +8,63 @@ using namespace std;
 
 TransportCart::TransportCart() = default;
 
-TransportCart::TransportCart(unsigned int c, unsigned int n, unsigned int m) {
-    this->m = m;
-    for (unsigned int i = 0; i < c; i++) {
-        addCarriage();
-        for (unsigned int i = 0; i < n; i++)
-            addStack();
-    }
-    this->n= this->n / c;
+TransportCart::TransportCart(unsigned int c, unsigned int n, unsigned int m): C_MAX(c), N_MAX(n), M_MAX(m){
+    buildCartCarriages();
 }
 
-void TransportCart::setC(unsigned int c){
-    this->c = c;
+unsigned int TransportCart::getC() const{
+    return C_MAX;
 }
 
-void TransportCart::setN(unsigned int n){
-    this->n = n;
+unsigned int TransportCart::getN() const{
+    return N_MAX;
 }
 
-void TransportCart::setM(unsigned int m){
-    this->m = m;
+unsigned int TransportCart::getM() const{
+    return M_MAX;
 }
 
-int TransportCart::getC(){
-    return c;
-}
-
-int TransportCart::getN(){
-    return n;
-}
-
-int TransportCart::getM(){
-    return m;
-}
-
-std::queue<std::list<std::stack<Baggage>>> TransportCart::getSlots() {
+std::list<std::list<std::stack<Baggage>>> TransportCart::getSlots() {
     return slots;
 }
 
 void TransportCart::addCarriage() {
-    slots.push(list<stack<Baggage>>());
-    c++;
+    slots.emplace_back();
 }
 
 void TransportCart::addStack() {
     slots.back().push_back(stack<Baggage>());
-    n++;
 }
 
 bool TransportCart::addBaggage(const Baggage &baggage) {
-    vector<list<stack<Baggage>>> slotsVector = vector<list<stack<Baggage>>>();
+    if (cartFull) return false;
     bool done = false;
-    for(int i = 0; i < c; i++){
-        slotsVector.push_back(slots.front());
-        slots.pop();
-    }
-    for(const list<stack<Baggage>> carriage : slotsVector){
-        for(stack<Baggage> stack : carriage){
-            if(stack.size() == m){}
-            else{
-                stack.push(baggage);
-                done = true;
-                break;
-            }
-        }
-        if(done)
+    auto carriage = slots.begin();
+    advance(carriage, numBaggages / (N_MAX * M_MAX));
+
+    for (auto& stack : *carriage){
+        if (stack.size() < M_MAX){
+            stack.push(baggage);
+            numBaggages++;
+            done = true;
             break;
+        }
     }
-    for(const list<stack<Baggage>> carriage : slotsVector){
-        slots.push(carriage);
+    checkCartFull();
+    if (done) return done;
+    else return false;
+}
+
+void TransportCart::buildCartCarriages() {
+    slots.clear();
+    for (unsigned int i = 0; i < C_MAX; i++) {
+        addCarriage();
+        for (unsigned int j = 0; j < N_MAX; j++)
+            addStack();
     }
-    if(done)
-        return true;
-    return false;
+}
+
+void TransportCart::checkCartFull() {
+    if (numBaggages == C_MAX*N_MAX*M_MAX)
+        cartFull = true;
 }

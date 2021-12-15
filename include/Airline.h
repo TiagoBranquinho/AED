@@ -21,7 +21,7 @@ public:
     void addPlane(const Plane &plane);
     void removePlane(const Plane &plane);
     void addFlight(Flight &flight);
-    bool validateFlight(Flight &flight);
+    bool validFlight(Flight &flight);
     std::vector<Plane> getPlanes();
     void addPassengerToFlight(Flight &flight, const Plane &plane, const Passenger &passenger);
     void checkInPassenger(Flight &flight, Passenger &passenger);
