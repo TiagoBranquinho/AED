@@ -7,6 +7,7 @@
 #include <list>
 #include <ctime>
 #include "Date.h"
+#include "Schedule.h"
 #include "Passenger.h"
 #include "Airport.h"
 
