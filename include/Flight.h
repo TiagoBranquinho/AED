@@ -43,7 +43,7 @@ public:
     void addPassenger(const Passenger &passenger);
     void closeCheckIn();
     void openCheckIn();
-    bool getCheckInStatus();
+    bool getCheckInStatus() const;
     bool operator==(const Flight &flight) const;
     bool operator<(const Flight &flight) const;
 };

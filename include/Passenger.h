@@ -24,7 +24,6 @@ public:
     void checkIn();
     bool isCheckedIn() const;
     bool wantsAutomaticCheckIn();
-    bool operator==(const Passenger &passenger);
 
 };
 

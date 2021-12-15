@@ -90,7 +90,7 @@ void Flight::openCheckIn() {
     checkIn = true;
 }
 
-bool Flight::getCheckInStatus() {
+bool Flight::getCheckInStatus() const{
     return checkIn;
 }
 

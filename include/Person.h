@@ -10,12 +10,15 @@
 
 class Person {
 protected:
+    unsigned int id;
     std::string name;
+    static unsigned int ID;
 public:
     Person();
     Person(std::string name);
     void setName(std::string name);
     std::string getName();
+    bool operator==(const Person& person) const;
 };
 
 

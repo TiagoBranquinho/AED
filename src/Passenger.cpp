@@ -31,12 +31,8 @@ std::string Passenger::getName() const {
     return name;
 }
 
-void Passenger::checkIn() {
+void Passenger::checkIn(){
     checkedIn = true;
-}
-
-bool Passenger::operator==(const Passenger &passenger) {
-    return (this->getName() == passenger.getName() && this->getBaggage() == passenger.getBaggage() && this->isCheckedIn() == passenger.isCheckedIn());
 }
 
 bool Passenger::isCheckedIn() const{

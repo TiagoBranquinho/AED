@@ -65,7 +65,7 @@ void Airline::checkInPassenger(Flight &flight, Passenger &passenger) {
     if(!flight.getCheckInStatus())
         throw ClosedCheckInException(flight.getNumber());
     bool hasTicket = false;
-    for(Passenger p : flight.getPassengers()){
+    for(Passenger &p : flight.getPassengers()){
         if(p == passenger){
             hasTicket = true;
             passenger.checkIn();
