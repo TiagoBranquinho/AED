@@ -21,7 +21,8 @@ public:
     void addPlane(const Plane &plane);
     void removePlane(const Plane &plane);
     void addFlight(Flight &flight);
-    bool validFlight(Flight &flight);
+    bool duplicatedFlight(Flight &flight);
+    bool validPlane(const Plane &plane);
     std::vector<Plane> getPlanes();
     void addPassengerToFlight(Flight &flight, const Plane &plane, const Passenger &passenger);
     void checkInPassenger(Flight &flight, Passenger &passenger);
@@ -59,14 +60,6 @@ private:
     unsigned int number;
 public:
     ClosedCheckInException(unsigned int number){this->number = number;}
-    unsigned int getNumber(){return number;}
-};
-
-class InvalidFlightException{
-private:
-    unsigned int number;
-public:
-    InvalidFlightException(unsigned int number){this->number = number;}
     unsigned int getNumber(){return number;}
 };
 

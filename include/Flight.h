@@ -40,6 +40,7 @@ public:
     void closeCheckIn();
     void openCheckIn();
     bool getCheckInStatus();
+    bool operator==(Flight &flight);
 };
 
 #endif //PROJETOAEROPORTO_FLIGHT_H

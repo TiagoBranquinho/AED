@@ -16,27 +16,25 @@ void Airline::addPlane(const Plane &plane) {
 
 void Airline::removePlane(const Plane &plane) {
     for(auto it = planes.begin(); it != planes.end(); it++){
-        if((*it).getPlate() == plane.getPlate()){
+        if((*it) == plane){
             planes.erase(it);
-            break;
+            return;
         }
     }
     throw(PlaneNotFoundException(plane.getPlate()));
 }
 
 void Airline::addFlight(Flight &flight) {
-    if(validFlight(flight))
+    if (!duplicatedFlight(flight))
         flights.push_back(flight);
-    else
-        throw InvalidFlightException(flight.getNumber());
 }
 
-bool Airline::validFlight(Flight &flight) {
-    for(const Flight &f : flights){
-        if(f.getNumber() == flight.getNumber())
-            return false;
+bool Airline::duplicatedFlight(Flight &flight) {
+    for(Flight &f : flights){
+        if(f == flight)
+            return true;
     }
-    return true;
+    return false;
 }
 
 std::vector<Plane> Airline::getPlanes() {
@@ -44,15 +42,9 @@ std::vector<Plane> Airline::getPlanes() {
 }
 
 void Airline::addPassengerToFlight(Flight &flight, const Plane &plane, const Passenger &passenger) {
-    bool found = false;
-    for(const Flight &f : flights){
-        if(flight.getNumber() == f.getNumber()){
-            found = true;
-            break;
-        }
-    }
-    if(!found)
-        flights.push_back(flight);
+    if(!validPlane(plane))
+        throw PlaneNotFoundException(plane.getPlate());
+    addFlight(flight);
     if(plane.getCapacity() > flight.getNumberPassengers()){
         flight.addPassenger(passenger);
     }
@@ -92,4 +84,12 @@ void Airline::baggageTransportation(Flight &flight, const Baggage &baggage) {
 
 void Airline::addToTreadmill(const Baggage &baggage) {
     treadmill.push(baggage);
+}
+
+bool Airline::validPlane(const Plane &plane) {
+    for(Plane p : planes){
+        if (p == plane)
+            return true;
+    }
+    return false;
 }
