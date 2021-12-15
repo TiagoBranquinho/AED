@@ -11,7 +11,7 @@ using testing::Eq;
 
 TEST(test_1, addBaggage){
     Date date = Date(12,3,2020);
-    Flight f = Flight(23, date , 3, "Porto", "Lisbon");
+    Flight f = Flight(23, date, new Airport("air1", "Porto"), new Airport("air2", "Lisboa"));
     Plane plane("A213", 81);
     Passenger passenger1 = Passenger("Alberto",new Baggage(14,false), true);
     Passenger passenger2 = Passenger("Toze", nullptr, true);

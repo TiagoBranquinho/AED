@@ -9,10 +9,9 @@ using namespace std;
 
 Flight::Flight() = default;
 
-Flight::Flight(unsigned int number, const Date &date, unsigned int duration, string origin, string destiny) {
+Flight::Flight(unsigned int number, const Date &date, Airport* origin, Airport* destiny) {
     this->number = number;
     this->date = date;
-    this->duration = duration;
     this->origin = origin;
     this->destiny = destiny;
 }
@@ -33,28 +32,40 @@ Date Flight::getDate() {
     return date;
 }
 
-void Flight::setDuration(unsigned int duration) {
-    this->duration = duration;
+void Flight::setDeparture(std::string departure) {
+    this->departure = Schedule(departure);
 }
 
-unsigned int Flight::getDuration() {
-    return duration;
+std::string Flight::getDeparture() {
+    return departure.getTime();
 }
 
-void Flight::setOrigin(string origin) {
+std::string Flight::getArrival() {
+    return departure.addTime(duration).getTime();
+}
+
+void Flight::setDuration(string duration) {
+    this->duration = Schedule(duration);
+}
+
+string Flight::getDuration() {
+    return duration.getTime();
+}
+
+void Flight::setOrigin(Airport* origin) {
     this->origin = origin;
 }
 
 string Flight::getOrigin() {
-    return origin;
+    return origin->getCity();
 }
 
-void Flight::setDestiny(string destiny) {
+void Flight::setDestiny(Airport* destiny) {
     this->destiny = destiny;
 }
 
 string Flight::getDestiny() {
-    return destiny;
+    return destiny->getCity();
 }
 
 std::list<Passenger> Flight::getPassengers() const{

@@ -8,7 +8,6 @@
 #include <string>
 #include <vector>
 #include "bst.h"
-#include "Flight.h"
 #include "TransportationLocals.h"
 
 class Airport {

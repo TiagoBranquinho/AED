@@ -4,34 +4,38 @@
 #ifndef PROJETOAEROPORTO_FLIGHT_H
 #define PROJETOAEROPORTO_FLIGHT_H
 
-
+#include <list>
 #include <ctime>
 #include "Date.h"
 #include "Passenger.h"
-#include <list>
+#include "Airport.h"
 
 class Flight {
 
 private:
     unsigned int number;
     Date date;
-    unsigned int duration; //in seconds
-    std::string origin, destiny;
+    Schedule departure;
+    Schedule duration;
+    Airport *origin, *destiny;
     std::list<Passenger> passengers;
     bool checkIn = false;
     unsigned int numberOfBaggages = 0;
 public:
     Flight();
-    Flight(unsigned int number, const Date &date, unsigned int duration, std::string origin, std::string destiny);
+    Flight(unsigned int number, const Date &date, Airport* origin, Airport* destiny);
     void setNumber(unsigned int number);
     unsigned int getNumber() const;
     void setDate(const Date &date);
     Date getDate();
-    void setDuration(unsigned int duration);
-    unsigned int getDuration();
-    void setOrigin(std::string origin);
+    void setDeparture(std::string departure);
+    std::string getDeparture();
+    std::string getArrival();
+    void setDuration(std::string duration);
+    std::string getDuration();
+    void setOrigin(Airport* origin);
     std::string getOrigin();
-    void setDestiny(std::string destiny);
+    void setDestiny(Airport* destiny);
     std::string getDestiny();
     std::list<Passenger> getPassengers() const;
     unsigned int getNumberPassengers() const;
