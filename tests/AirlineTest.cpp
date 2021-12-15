@@ -90,3 +90,33 @@ TEST(test_1, removePlane){
     }
 
 }
+
+TEST(test_1, addEmployee){
+    Plane plane1("A778", 2);
+    Airline airline;
+    Employee emp1("Alberto", "pilot");
+    Employee emp2("Jose", "pilot");
+    Employee emp3("Antonio", "cleaner");
+    Employee emp4("Joao", "mechanic");
+
+    airline.addEmployee(emp1);
+    airline.addEmployee(emp2);
+    airline.addEmployee(emp3);
+
+    airline.removeEmployee(emp4);
+    airline.removeEmployee(emp2);
+
+    EXPECT_EQ(airline.getEmployees().size(), 2);
+}
+
+TEST(test_1, addFlight){
+    Plane plane1("A778", 2);
+    Airline airline;
+
+    Flight f(32, Date(), nullptr, nullptr);
+    airline.addFlight(f);
+    airline.removeFlight(f);
+
+    EXPECT_EQ(airline.getFlights().size(), 0);
+}
+

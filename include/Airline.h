@@ -14,6 +14,7 @@ private:
     std::vector<Plane> planes = {Plane("A123", 89), Plane("F032", 13)};
     std::vector<Flight> flights;
     std::queue<Baggage> treadmill;
+    std::vector<Employee> employees;
     TransportCart transportCart = TransportCart(2,3,4);
 public:
     Airline();
@@ -22,6 +23,7 @@ public:
     void removePlane(const Plane &plane);
     void addFlight(Flight &flight);
     void removeFlight(const Flight &flight);
+    std::vector<Flight> &getFlights();
     bool duplicatedFlight(const Flight &flight);
     bool validPlane(const Plane &plane);
     std::vector<Plane> &getPlanes();
@@ -29,6 +31,9 @@ public:
     void checkInPassenger(Flight &flight, Passenger &passenger);
     void baggageTransportation(Flight &flight, const Baggage &baggage);
     void addToTreadmill(const Baggage &baggage);
+    void addEmployee(const Employee &employee);
+    void removeEmployee(const Employee &employee);
+    std::vector<Employee> &getEmployees();
 };
 
 class PlaneNotFoundException: public std::exception{

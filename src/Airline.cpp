@@ -34,6 +34,10 @@ void Airline::removeFlight(const Flight &flight) {
     if (flightItr != flights.end()) flights.erase(flightItr);
 }
 
+std::vector<Flight> &Airline::getFlights() {
+    return flights;
+}
+
 bool Airline::duplicatedFlight(const Flight &flight) {
     for(const Flight &f : flights){
         if(f == flight)
@@ -97,4 +101,17 @@ bool Airline::validPlane(const Plane &plane) {
             return true;
     }
     return false;
+}
+
+void Airline::addEmployee(const Employee &employee) {
+    employees.push_back(employee);
+}
+
+void Airline::removeEmployee(const Employee &employee) {
+    auto employeeItr = find(employees.begin(), employees.end(), employee);
+    if (employeeItr != employees.end()) employees.erase(employeeItr);
+}
+
+std::vector<Employee> &Airline::getEmployees() {
+    return employees;
 }

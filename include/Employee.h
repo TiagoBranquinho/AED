@@ -10,13 +10,21 @@
 
 class Employee: public Person {
 private:
+    unsigned int id;
     std::string type;  // pilot, cleaner or maintenance
+    bool onDuty = false;
+public:
+    static unsigned int ID;
 
 public:
     Employee();
     Employee(std::string name, std::string type);
     void setType(std::string type);
     std::string getType() const;
+    void setOnDuty();
+    void setOffDuty();
+    bool isOnDuty();
+    bool operator==(const Employee& emp);
 };
 
 
