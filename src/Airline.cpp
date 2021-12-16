@@ -87,8 +87,13 @@ void Airline::baggageTransportation(Flight &flight, const Baggage &baggage) {
     addToTreadmill(baggage,flight);
     if(flight.getTreadmill().size() == flight.getNumberBaggages() ){
         while(!flight.getTreadmill().empty()){
-            transportCart.addBaggage(flight.getTreadmill().front());
-            flight.getTreadmill().pop();
+            for(TransportCart &cart : carts){
+                if(cart.getNumber() == flight.getNumber()){
+                    cart.addBaggage(flight.getTreadmill().front());
+                    flight.getTreadmill().pop();
+                    break;
+                }
+            }
         }
     }
 }
@@ -96,13 +101,18 @@ void Airline::baggageTransportation(Flight &flight, const Baggage &baggage) {
 void Airline::baggageToPlane(Flight &flight) {
     for(Plane &plane : planes) {
         if(find(plane.getFlightPlan().begin(), plane.getFlightPlan().end(), flight) != plane.getFlightPlan().end()) {
-            for(list<stack<Baggage>> carriage : transportCart.getSlots()){
-                for(stack<Baggage> stack : carriage){
-                    while(!stack.empty()){
-                        plane.addBaggage(stack.top());
-                        stack.pop();
+            for(TransportCart &cart : carts){
+                if(cart.getNumber() == flight.getNumber()){
+                    for(list<stack<Baggage>> carriage : cart.getSlots()){
+                        for(stack<Baggage> stack : carriage){
+                            while(!stack.empty()){
+                                plane.addBaggage(stack.top());
+                                stack.pop();
+                            }
+                        }
                     }
                 }
+                break;
             }
             break;
         }
@@ -132,5 +142,23 @@ void Airline::removeEmployee(const Employee &employee) {
 
 std::vector<Employee> &Airline::getEmployees() {
     return employees;
+}
+
+void Airline::addCart(const TransportCart &cart) {
+    if(!duplicatedCart(cart))
+        carts.push_back(cart);
+}
+/*
+void Airline::removeCart(const TransportCart &cart) {
+    auto cartItr = find(carts.begin(), carts.end(), cart);
+    if (cartItr != carts.end()) carts.erase(cartItr);
+}
+*/
+bool Airline::duplicatedCart(const TransportCart &cart) {
+    for(const TransportCart &tc : carts){
+        if(tc == cart)
+            return true;
+    }
+    return false;
 }
 

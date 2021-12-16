@@ -15,7 +15,7 @@ private:
     std::vector<Flight> flights;
     std::vector<Employee> employees;
     std::vector<Airport> airports;
-    TransportCart transportCart = TransportCart(2,3,4);
+    std::vector<TransportCart> carts;
 public:
     Airline();
     Airline(std::vector<Plane> planes);
@@ -35,6 +35,9 @@ public:
     void addToTreadmill(const Baggage &baggage, Flight &flight);
     void addEmployee(const Employee &employee);
     void removeEmployee(const Employee &employee);
+    void addCart(const TransportCart &cart);
+//    void removeCart(const TransportCart &cart);
+    bool duplicatedCart(const TransportCart &cart);
     std::vector<Employee> &getEmployees();
 };
 

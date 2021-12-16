@@ -6,8 +6,7 @@
 #include "../include/TransportCart.h"
 
 using namespace std;
-using testing::Eq;
-
+using testing::Eq;/*
 TEST(test_1, createCart) {
     TransportCart tc = TransportCart(2,3,4);
     Baggage bg1(20, false);
@@ -25,3 +24,4 @@ TEST(test_1, createCart) {
     EXPECT_EQ(tc.getSlots().front().size(), 3);
     EXPECT_EQ((tc.getSlots().front().front().size()), 2);
 }
+ */

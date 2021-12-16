@@ -10,7 +10,7 @@ unsigned TransportCart::ID = 0;
 
 TransportCart::TransportCart() = default;
 
-TransportCart::TransportCart(unsigned int c, unsigned int n, unsigned int m): C_MAX(c), N_MAX(n), M_MAX(m){
+TransportCart::TransportCart(unsigned int c, unsigned int n, unsigned int m, unsigned int number): C_MAX(c), N_MAX(n), M_MAX(m), number(number){
     id = ID++;
     buildCartCarriages();
 }
@@ -70,4 +70,12 @@ void TransportCart::buildCartCarriages() {
 void TransportCart::checkCartFull() {
     if (numBaggages == C_MAX*N_MAX*M_MAX)
         cartFull = true;
+}
+
+bool TransportCart::operator==(const TransportCart &cart) const{
+    return this->getNumber() == cart.getNumber();
+}
+
+unsigned int TransportCart::getNumber() const {
+    return number;
 }
