@@ -120,3 +120,16 @@ TEST(test_1, addFlight){
     EXPECT_EQ(airline.getFlights().size(), 0);
 }
 
+TEST(test_1, addCart_removeCart){
+    Airline airline;
+    TransportCart c1 (3,3,3,99);
+
+    airline.addCart(c1);
+
+    EXPECT_EQ(airline.getCarts().size(), 1);
+
+    airline.removeCart(c1);
+
+    EXPECT_EQ(airline.getCarts().size(), 0);
+}
+

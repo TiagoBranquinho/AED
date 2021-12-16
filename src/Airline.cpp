@@ -154,11 +154,12 @@ void Airline::addCart(const TransportCart &cart) {
 }
 
 void Airline::removeCart(const TransportCart &cart) {
-    for(TransportCart transportCart : carts){
-        if(cart.getNumber() == transportCart.getNumber()){
-            std::remove(carts.begin(), carts.end(), transportCart);
-        }
-    }
+    auto cartItr = find(carts.begin(), carts.end(), cart);
+    if (cartItr != carts.end()) carts.erase(cartItr);
+}
+
+vector<TransportCart> &Airline::getCarts() {
+    return carts;
 }
 
 bool Airline::duplicatedCart(const TransportCart &cart) {
