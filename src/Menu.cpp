@@ -186,8 +186,42 @@ Menu *FlightMenu::nextMenu() {
         case 1: return new ViewFlights(app);
         case 2: return new ViewFlights(app,"date");
         case 3: return new ViewFlights(app,"id");
-        case 4: return nullptr;
-        case 5: return nullptr;
+        case 4: {
+            cout << "Insert flight's number" << endl;
+            unsigned int number;
+            cin >> number;
+            cout << "Insert date of flight (day/month/year)" << endl;
+            unsigned int day, month, year;
+            cin >> day;
+            cin >> month;
+            cin >> year;
+            Date date (day, month, year);
+            cout << "Insert origin of flight" << endl;
+            //Airport origin;
+            //cin >> origin;
+            cout << "Insert destiny of flight" << endl;
+            //Airport destiny;
+            //cin >> destiny;
+            //app.getAirline().addFlight(Flight(number, date, origin, destiny));
+        }
+        case 5: {
+            cout << "Insert flight's number" << endl;
+            unsigned int number;
+            cin >> number;
+            bool done = false;
+            for (Flight flight : app.getAirline().getFlights()){
+                if(flight.getNumber() == number){
+                    std::remove(app.getAirline().getFlights().begin(), app.getAirline().getFlights().end(), flight);
+                    done = true;
+                    break;
+                }
+            }
+            if(done){
+
+            }
+            else
+                cout << "There's no such flight";
+        }
         case 0: return nullptr;
         default: return invalidInput();
     }
@@ -214,8 +248,33 @@ Menu *EmployeesMenu::nextMenu() {
         case 1: return new ViewEmployees(app);
         case 2: return new ViewEmployees(app,"name");
         case 3: return new ViewEmployees(app,"id");
-        case 4: return nullptr;
-        case 5: return nullptr;
+        case 4: {
+            cout << "Insert employee's name" << endl;
+            std::string name;
+            cin >> name;
+            cout << "Insert employee's type" << endl;
+            std::string type;
+            cin >> type;
+            app.getAirline().addEmployee(Employee(name, type));
+        }
+        case 5: {
+            cout << "Insert employee's id" << endl;
+            unsigned int id;
+            cin >> id;
+            bool done = false;
+            for (Employee employee : app.getAirline().getEmployees()){
+                if(employee.getId() == id){
+                    std::remove(app.getAirline().getEmployees().begin(), app.getAirline().getEmployees().end(), employee);
+                    done = true;
+                    break;
+                }
+            }
+            if(done){
+
+            }
+            else
+                cout << "There's no such flight";
+        }
         case 0: return nullptr;
         default: return invalidInput();
     }
