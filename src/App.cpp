@@ -4,33 +4,43 @@ using namespace std;
 
 App::App() {
     loadData();
+    menuStack.push(new MainMenu());
+}
+
+App::~App() {
+    saveData();
 }
 
 void App::start() {
-    int opt;
-    while (true) {
-        displayMenu();
-        opt = readInput();
-        if (chooseOpt(opt)) break;
+    while (!menuStack.empty()) {
+        menuStack.top()->display();
+        Menu *nextMenu = menuStack.top()->nextMenu();
+        if (nextMenu){
+            if (nextMenu != menuStack.top()){
+                menuStack.push(nextMenu);
+            }
+        }
+        else {
+            delete menuStack.top();
+            menuStack.pop();
+        }
     }
-}
-
-void App::displayMenu() {
-    cout << endl;
-    cout << "Options:" << endl;
-    cout << "1 - View data" << endl;
-    cout << "2 - Add data" << endl;
-    cout << "3 - Exit" << endl;
-    cout << endl;
 }
 
 void App::loadData() {
-    for (const auto &file : filesPath){
-        load("../data/"+file);
+    for (const string& file : files.names){
+        readFile(file);
     }
 }
 
-void App::load(string filename) {
+void App::saveData() {
+    for (const string& file : files.names){
+        writeFile(file);
+    }
+}
+
+void App::readFile(string filename) {
+    string dataFolder = "../data/";
     string line;
     fstream f(filename);
     while (getline(f,line)){
@@ -38,30 +48,6 @@ void App::load(string filename) {
     }
 }
 
-int App::readInput() {
-    int opt;
-    while (true){
-        cin >> opt;
-        if(!cin.fail() && cin.peek()=='\n') break;
-        cin.clear();
-        cin.ignore(10000, '\n');
-    }
-    return opt;
-}
+void App::writeFile(std::string filename) {
 
-bool App::chooseOpt(int opt) {
-    switch (opt) {
-        case 1:
-            cout << opt;
-            return false;
-        case 2:
-            cout << opt;
-            return false;
-        case 3:
-            cout << opt;
-            return true;
-        default:
-            return false;
-
-    }
 }
