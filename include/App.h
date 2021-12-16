@@ -26,6 +26,7 @@ public:
     App();
     ~App();
     void start();
+    Airline getAirline();
     void writePlanesFile();
 
 private:

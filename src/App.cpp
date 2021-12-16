@@ -10,6 +10,10 @@ App::~App() {
     saveData();
 }
 
+Airline App::getAirline() {
+    return airline;
+}
+
 void App::loadData() {
     for (int file = 0; file < files.names.size(); file++){
         readFile(file);
@@ -175,3 +179,5 @@ void App::readServicesFile() {
 void App::readTranspLocalsFile() {
 
 }
+
+

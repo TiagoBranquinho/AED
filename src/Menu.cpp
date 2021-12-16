@@ -70,9 +70,9 @@ Menu *AirportMenu::nextMenu() {
         case 1: return new ViewAirports(app, "name");
         case 2: return new ViewAirports(app, "city");
         case 3: return new ViewGroundLocals(app, "distance");
-        case 4: break;
-        case 5: break;
-        case 6: break;
+        case 4: return nullptr;
+        case 5: return nullptr;
+        case 6: return nullptr;
         case 0: return nullptr;
         default: return invalidInput();
     }
@@ -86,7 +86,7 @@ void PlaneMenu::display() {
     cout << "2 - View Planes on duty" << endl;
     cout << "3 - View Planes off duty" << endl;
     cout << "4 - Add Service to Plane" << endl;
-    cout << "5 - View Service of Plane" << endl;
+    cout << "5 - View Services of Plane" << endl;
     cout << "6 - Add Plane" << endl;
     cout << "7 - Remove Plane" << endl;
     cout << "8 - View Plane's Flights" << endl;
@@ -99,7 +99,41 @@ Menu *PlaneMenu::nextMenu() {
         case 1: return new ViewPlanes(app);
         case 2: return new ViewPlanes(app,"on");
         case 3: return new ViewPlanes(app, "off");
-        case 4: return nullptr;
+        case 4: {
+            cout << "Insert plane plate" << endl;
+            std::string plate;
+            cin >> plate;
+            for(Plane plane : app.getAirline().getPlanes()){
+                if(plane.getPlate() == plate){
+                    cout << "Insert type of service" << endl;
+                    std::string type;
+                    cin >> type;
+                    cout << "Insert date of service (day/month/year)" << endl;
+                    unsigned int day, month, year;
+                    cin >> day;
+                    cin >> month;
+                    cin >> year;
+                    Date date (day, month, year);
+                    cout << "Insert the id of the employee responsible for the service" << endl;
+                    unsigned int id;
+                    cin >> id;
+                    Service service;
+                    for (Employee &employee : app.getAirline().getEmployees()){
+                        if(employee.getId() == id){
+                            service = Service (type, date, &employee);
+                            break;
+                        }
+                        else
+                            cout << "There's no such employee";
+                    }
+                    plane.addService(service);
+                    break;
+                }
+                else
+                    cout << "There's no such plane";
+            }
+            nextMenu();
+        }
         case 5: return new ViewServicesTODO(app);
         case 6: return nullptr;
         case 7: return nullptr;
@@ -144,7 +178,9 @@ void EmployeesMenu::display() {
     cout << "2 - View Employees sorted by name" << endl;
     cout << "3 - View Employees sorted by id" << endl;
     cout << "4 - Add Employ" << endl;
-    cout << "4 - Remove Employ" << endl;
+    cout << "5 - Remove Employ" << endl;
+    cout << "6 - Add Employee to Service" << endl;
+    cout << "7 - Remove Employee of Service" << endl;
     cout << "0 - Exit" << endl;
     cout << endl;
 }
@@ -154,8 +190,8 @@ Menu *EmployeesMenu::nextMenu() {
         case 1: return new ViewEmployees(app);
         case 2: return new ViewEmployees(app,"name");
         case 3: return new ViewEmployees(app,"id");
-        case 4: break;
-        case 5: break;
+        case 4: return nullptr;
+        case 5: return nullptr;
         case 0: return nullptr;
         default: return invalidInput();
     }
