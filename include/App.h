@@ -12,7 +12,7 @@
 struct Filesname{
     std::vector<std::string> names = {"airports.txt", "baggages.txt", "employees.txt",
                                       "flights.txt", "passengers.txt", "planes.txt",
-                                      "servicesDone.txt", "servicesToDo", "transp_locals.txt"};
+                                      "servicesDone.txt", "servicesToDo.txt", "transp_locals.txt"};
 };
 
 class App {

@@ -52,7 +52,8 @@ void App::writeFile(int file) {
 }
 
 void App::writeAirportsFile() {
-    std::ofstream file(files.names.at(0), ofstream::trunc);
+    std::ofstream file(dataFolder + files.names.at(0));
+    file.clear();
     if(file.is_open()){
        // for(const Airport &airport : airline.get()){
      }
@@ -109,7 +110,8 @@ void App::writePlanesFile() {
 }
 
 void App::writeServicesToDoFile() {
-    std::ofstream file(files.names.at(6), ofstream::trunc);
+    std::ofstream file(dataFolder + files.names.at(6));
+    file.clear();
     if(file.is_open()){
         for(const Plane &plane : airline.getPlanes()){
             while(!plane.getServicesToDo().empty()){
@@ -122,7 +124,8 @@ void App::writeServicesToDoFile() {
 }
 
 void App::writeServicesDoneFile() {
-    std::ofstream file(files.names.at(6), ofstream::trunc);
+    std::ofstream file(dataFolder + files.names.at(6));
+    file.clear();
     if(file.is_open()){
         for(const Plane &plane : airline.getPlanes()){
             for(const Service &service : plane.getServicesDone())
