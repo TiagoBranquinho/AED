@@ -2,17 +2,16 @@
 #include "gmock/gmock.h"
 #include <iostream>
 
-#include "include/App.h"
+#include "include/AppStarter.h"
 
 int main() {
-    App application = App();
-    //application.start();
-    application.writePlanesFile();
+    AppStarter app;
+    app.start();
     return 0;
 }
-/*
-int main(int argc, char* argv[]) {
+
+/*int main(int argc, char* argv[]) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
-}
-*/
+}*/
+

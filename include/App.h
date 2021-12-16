@@ -7,7 +7,6 @@
 #include <vector>
 #include <stack>
 
-#include "Menu.h"
 #include "Airline.h"
 
 struct Filesname{
@@ -21,7 +20,6 @@ class App {
 private:
     std::string dataFolder = "../data/";
     Filesname files;
-    std::stack<Menu*> menuStack;
     Airline airline;
 
 public:

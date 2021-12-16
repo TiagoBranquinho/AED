@@ -1,33 +1,13 @@
 #include "../include/App.h"
 
-#include <utility>
-#include <algorithm>
-
 using namespace std;
 
 App::App() {
     loadData();
-    menuStack.push(new MainMenu());
 }
 
 App::~App() {
     saveData();
-}
-
-void App::start() {
-    while (!menuStack.empty()) {
-        menuStack.top()->display();
-        Menu *nextMenu = menuStack.top()->nextMenu();
-        if (nextMenu){
-            if (nextMenu != menuStack.top()){
-                menuStack.push(nextMenu);
-            }
-        }
-        else {
-            delete menuStack.top();
-            menuStack.pop();
-        }
-    }
 }
 
 void App::loadData() {
@@ -44,34 +24,28 @@ void App::saveData() {
 
 void App::readFile(int file) {
     switch (file) {
-        case 1: readAirportsFile();break;
-        case 2: readBaggagesFile();break;
-        case 3: readEmployeesFile();break;
-        case 4: readFlightsFile();break;
-        case 5: readPassengersFile();break;
-        case 6: readPlanesFile();break;
-        case 7: readServicesFile();break;
-        case 8: readTranspLocalsFile();break;
+        case 1: readAirportsFile(); break;
+        case 2: readBaggagesFile(); break;
+        case 3: readEmployeesFile(); break;
+        case 4: readFlightsFile(); break;
+        case 5: readPassengersFile(); break;
+        case 6: readPlanesFile(); break;
+        case 7: readServicesFile(); break;
+        case 8: readTranspLocalsFile(); break;
         default: break;
     }
-    /*string line;
-    fstream f(files.names.at(file));
-    while (getline(f,line)){
-        cout << line << endl;
-    }*/
 }
 
 void App::writeFile(int file) {
     switch (file) {
-        case 1: writeAirportsFile();break;
-        case 2: writeBaggagesFile();break;
-        case 3: writeEmployeesFile();break;
-        case 4: writeFlightsFile();break;
-        case 5: writePassengersFile();break;
-        case 6: writePlanesFile();break;
-        case 7: writeServicesDoneFile();break;
-        case 8: writeServicesToDoFile();break;
-        case 9: writeTranspLocalsFile();break;
+        case 0: writeAirportsFile(); break;
+        case 1: writeBaggagesFile(); break;
+        case 2: writeEmployeesFile(); break;
+        case 3: writeFlightsFile(); break;
+        case 4: writePassengersFile(); break;
+        case 5: writePlanesFile(); break;
+        case 6: writeServicesFile(); break;
+        case 7: writeTranspLocalsFile(); break;
         default: break;
     }
 }
