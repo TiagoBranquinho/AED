@@ -69,6 +69,21 @@ void Airline::checkInPassengers(Flight &flight) {
     baggageToPlane(flight);
 }
 
+void Airline::checkInPassenger(Flight &flight, Passenger &passenger) {
+    if(!flight.getCheckInStatus())
+        throw ClosedCheckInException(flight.getNumber());
+    for(Passenger &p : flight.getPassengers()){
+        if(p == passenger){
+            p.checkIn();
+            if(p.getBaggage() != nullptr && p.wantsAutomaticCheckIn())
+                baggageTransportation(flight, *p.getBaggage());
+            return;
+        }
+    }
+    throw(NoTicketException(passenger.getName(),flight.getNumber()));
+    //baggageToPlane(flight);
+}
+
 void Airline::baggageTransportation(Flight &flight, const Baggage &baggage) {
     addToTreadmill(baggage);
     if(treadmill.size() == flight.getNumberBaggages() ){
@@ -119,3 +134,4 @@ void Airline::removeEmployee(const Employee &employee) {
 std::vector<Employee> &Airline::getEmployees() {
     return employees;
 }
+
