@@ -15,13 +15,10 @@ void Airline::addPlane(const Plane &plane) {
 }
 
 void Airline::removePlane(const Plane &plane) {
-    for(auto it = planes.begin(); it != planes.end(); it++){
-        if((*it) == plane){
-            planes.erase(it);
-            return;
-        }
-    }
-    throw(PlaneNotFoundException(plane.getPlate()));
+    auto planeItr = find(planes.begin(), planes.end(), plane);
+    if (planeItr != planes.end()) planes.erase(planeItr);
+    else
+        throw(PlaneNotFoundException(plane.getPlate()));
 }
 
 void Airline::addFlight(Flight &flight) {
@@ -61,22 +58,15 @@ void Airline::addPassengerToFlight(Flight &flight, const Plane &plane, const Pas
         throw FullPlaneException(plane.getCapacity());
 }
 
-void Airline::checkInPassenger(Flight &flight, Passenger &passenger) {
+void Airline::checkInPassengers(Flight &flight) {
     if(!flight.getCheckInStatus())
         throw ClosedCheckInException(flight.getNumber());
-    bool hasTicket = false;
     for(Passenger &p : flight.getPassengers()){
-        if(p == passenger){
-            hasTicket = true;
-            passenger.checkIn();
-            if(passenger.getBaggage() != nullptr && passenger.wantsAutomaticCheckIn())
-                baggageTransportation(flight, *passenger.getBaggage());
-            break;
-        }
+        p.checkIn();
+        if(p.getBaggage() != nullptr && p.wantsAutomaticCheckIn())
+            baggageTransportation(flight, *p.getBaggage());
     }
     baggageToPlane(flight);
-    if(!hasTicket)
-        throw NoTicketException(passenger.getName());
 }
 
 void Airline::baggageTransportation(Flight &flight, const Baggage &baggage) {

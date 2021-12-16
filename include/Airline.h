@@ -28,7 +28,7 @@ public:
     bool validPlane(const Plane &plane);
     std::vector<Plane> &getPlanes();
     void addPassengerToFlight(Flight &flight, const Plane &plane, const Passenger &passenger);
-    void checkInPassenger(Flight &flight, Passenger &passenger);
+    void checkInPassengers(Flight &flight);
     void baggageTransportation(Flight &flight, const Baggage &baggage);
     void baggageToPlane(Flight &flight);
     void addToTreadmill(const Baggage &baggage);
@@ -52,14 +52,6 @@ private:
 public:
     FullPlaneException(const unsigned int capacity){this->capacity = capacity;}
     unsigned int getCapacity() const{return capacity;}
-};
-
-class NoTicketException: public std::exception{
-private:
-    std::string name;
-public:
-    NoTicketException(const std::string name){this->name = name;}
-    std::string getName(){return name;}
 };
 
 class ClosedCheckInException: public std::exception{
