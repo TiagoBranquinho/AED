@@ -53,7 +53,7 @@ Menu *MainMenu::nextMenu() {
 AirportMenu::AirportMenu(App &app): Menu(app){}
 
 void AirportMenu::display() {
-    cout << endl;
+    cout << "Airport menu:" << endl;
     cout << "1 - View Airports sorted by name" << endl;
     cout << "2 - View Airports sorted by city" << endl;
     cout << "3 - View Airport Ground Locals sorted by distance" << endl;
@@ -81,14 +81,15 @@ Menu *AirportMenu::nextMenu() {
 PlaneMenu::PlaneMenu(App &app): Menu(app){}
 
 void PlaneMenu::display() {
-    cout << endl;
+    cout << "Plane menu:" << endl;
     cout << "1 - View all Planes" << endl;
     cout << "2 - View Planes on duty" << endl;
     cout << "3 - View Planes off duty" << endl;
-    cout << "4 - Add Services to Plane" << endl;
-    cout << "5 - Remove Services of Plane" << endl;
+    cout << "4 - Add Service to Plane" << endl;
+    cout << "5 - View Service of Plane" << endl;
     cout << "6 - Add Plane" << endl;
     cout << "7 - Remove Plane" << endl;
+    cout << "8 - View Plane's Flights" << endl;
     cout << "0 - Exit" << endl;
     cout << endl;
 }
@@ -96,27 +97,42 @@ void PlaneMenu::display() {
 Menu *PlaneMenu::nextMenu() {
     switch (readOpt()) {
         case 1: return new ViewPlanes(app);
-        case 2: return new ViewPlanes(app, "on duty");
-        case 3: return new ViewPlanes(app, "off duty");
-        case 4: break;
-        case 5: break;
-        case 6: break;
-        case 7: break;
+        case 2: return new ViewPlanes(app,"on");
+        case 3: return new ViewPlanes(app, "off");
+        case 4: return nullptr;
+        case 5: return new ViewServicesTODO(app);
+        case 6: return nullptr;
+        case 7: return nullptr;
+        case 8: return new ViewPlaneFlights(app);
         case 0: return nullptr;
         default: return invalidInput();
     }
 }
 
 FlightMenu::FlightMenu(App &app): Menu(app) {
-
 }
 
 void FlightMenu::display() {
-
+    cout << "Flight menu:" << endl;
+    cout << "1 - View all Flights" << endl;
+    cout << "2 - View Flights sorted by Date" << endl;
+    cout << "3 - View Flights sorted by Id" << endl;
+    cout << "4 - Add Flight" << endl;
+    cout << "5 - Remove Flight" << endl;
+    cout << "0 - Exit" << endl;
+    cout << endl;
 }
 
 Menu *FlightMenu::nextMenu() {
-    return nullptr;
+    switch (readOpt()) {
+        case 1: return new ViewFlights(app);
+        case 2: return new ViewFlights(app,"date");
+        case 3: return new ViewFlights(app,"id");
+        case 4: return nullptr;
+        case 5: return nullptr;
+        case 0: return nullptr;
+        default: return invalidInput();
+    }
 }
 
 EmployeesMenu::EmployeesMenu(App &app): Menu(app) {
@@ -136,11 +152,20 @@ PassengerAndBaggageMenu::PassengerAndBaggageMenu(App &app): Menu(app) {
 }
 
 void PassengerAndBaggageMenu::display() {
-
+    cout << "Passengers and Baggage menu:" << endl;
+    cout << "1 - Add to Flight" << endl;
+    cout << "2 - Remove from Flight" << endl;
+    cout << "3 - ...........";  // not finished
+    cout << endl;
 }
 
 Menu *PassengerAndBaggageMenu::nextMenu() {
-    return nullptr;
+    switch (readOpt()) {
+        case 1: return nullptr;
+        case 2: return nullptr;
+        case 0: return nullptr;
+        default: return invalidInput();
+    }
 }
 
 ViewAirports::ViewAirports(App &app, std::string sortedBy): Menu(app), sortedBy(sortedBy){
