@@ -135,7 +135,16 @@ Menu *PlaneMenu::nextMenu() {
             nextMenu();
         }
         case 5: return new ViewServicesTODO(app);
-        case 6: return nullptr;
+        case 6: {
+            cout << "Insert new's plane plate" << endl;
+            std::string plate;
+            cin >> plate;
+            cout << "Insert new's plane capacity" << endl;
+            unsigned int capacity;
+            cin >> capacity;
+            app.getAirline().addPlane(Plane(plate, capacity));
+            nextMenu();
+        }
         case 7: return nullptr;
         case 8: return new ViewPlaneFlights(app);
         case 0: return nullptr;
