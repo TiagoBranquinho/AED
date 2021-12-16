@@ -4123,8 +4123,8 @@ static bool PortableLocaltime(time_t seconds, struct tm* out) {
   return localtime_s(out, &seconds) == 0;
 #elif defined(__MINGW32__) || defined(__MINGW64__)
   // MINGW <time.h> provides neither localtime_r nor localtime_s, but uses
-  // Windows' localtime(), which has a thread-local time buffer.
-  struct time* tm_ptr = localtime(&seconds);  // NOLINT
+  // Windows' localtime(), which has a thread-local tm buffer.
+  struct tm* tm_ptr = localtime(&seconds);  // NOLINT
   if (tm_ptr == nullptr) return false;
   *out = *tm_ptr;
   return true;

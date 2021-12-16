@@ -3784,10 +3784,10 @@ class ElementsAreArrayMatcher {
   const ::std::vector<T> matchers_;
 };
 
-// Given a 2-tuple matcher time of type Tuple2Matcher and a value second
-// of type Second, BoundSecondMatcher<Tuple2Matcher, Second>(time,
+// Given a 2-tuple matcher tm of type Tuple2Matcher and a value second
+// of type Second, BoundSecondMatcher<Tuple2Matcher, Second>(tm,
 // second) is a polymorphic matcher that matches a value x if and only if
-// time matches tuple (x, second).  Useful for implementing
+// tm matches tuple (x, second).  Useful for implementing
 // UnorderedPointwise() in terms of UnorderedElementsAreArray().
 //
 // BoundSecondMatcher is copyable and assignable, as we need to put
@@ -3849,9 +3849,9 @@ class BoundSecondMatcher {
   const Second second_value_;
 };
 
-// Given a 2-tuple matcher time and a value second,
-// MatcherBindSecond(time, second) returns a matcher that matches a
-// value x if and only if time matches tuple (x, second).  Useful for
+// Given a 2-tuple matcher tm and a value second,
+// MatcherBindSecond(tm, second) returns a matcher that matches a
+// value x if and only if tm matches tuple (x, second).  Useful for
 // implementing UnorderedPointwise() in terms of UnorderedElementsAreArray().
 template <typename Tuple2Matcher, typename Second>
 BoundSecondMatcher<Tuple2Matcher, Second> MatcherBindSecond(
