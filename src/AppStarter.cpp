@@ -1,11 +1,11 @@
 #include "../include/AppStarter.h"
 
 AppStarter::AppStarter() {
+    app.writePlanesFile();
     menuStack.push(new MainMenu(app));
 }
 
 void AppStarter::start() {
-    app.writePlanesFile();
     while (!menuStack.empty()) {
         menuStack.top()->display();
         Menu *nextMenu = menuStack.top()->nextMenu();

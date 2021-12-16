@@ -3,11 +3,11 @@
 //
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
-#include "../include/App.h"
+#include "../include/AppStarter.h"
 
 using namespace std;
 using testing::Eq;
 
 TEST(test_1, writeEmployee){
-    App app;
+    AppStarter app;
 }
