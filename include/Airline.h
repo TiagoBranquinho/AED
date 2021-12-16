@@ -36,7 +36,7 @@ public:
     void addEmployee(const Employee &employee);
     void removeEmployee(const Employee &employee);
     void addCart(const TransportCart &cart);
-//    void removeCart(const TransportCart &cart);
+    void removeCart(const TransportCart &cart);
     bool duplicatedCart(const TransportCart &cart);
     std::vector<Employee> &getEmployees();
 };

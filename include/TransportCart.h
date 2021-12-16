@@ -16,7 +16,7 @@ private:
     unsigned int id;
     bool cartFull = false;
     unsigned int numBaggages = 0;
-    const unsigned int C_MAX = 0, N_MAX = 0, M_MAX = 0;// C_MAX -> numero de carruagens, N_MAX -> numero de pilhas por carruagem, M_MAX -> numero de malas por pilha
+    unsigned int C_MAX = 0, N_MAX = 0, M_MAX = 0;// C_MAX -> numero de carruagens, N_MAX -> numero de pilhas por carruagem, M_MAX -> numero de malas por pilha
     std::list<std::list<std::stack<Baggage>>> slots;
     static unsigned int ID;
     unsigned int number;

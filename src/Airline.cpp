@@ -85,14 +85,18 @@ void Airline::checkInPassenger(Flight &flight, Passenger &passenger) {
 
 void Airline::baggageTransportation(Flight &flight, const Baggage &baggage) {
     addToTreadmill(baggage,flight);
-    if(flight.getTreadmill().size() == flight.getNumberBaggages() ){
-        while(!flight.getTreadmill().empty()){
-            for(TransportCart &cart : carts){
-                if(cart.getNumber() == flight.getNumber()){
-                    cart.addBaggage(flight.getTreadmill().front());
-                    flight.getTreadmill().pop();
-                    break;
+    if(flight.getTreadmill().size() == flight.getNumberBaggages() ) {
+        for (TransportCart &cart: carts) {
+            if (cart.getNumber() == flight.getNumber()) {
+                while (!flight.getTreadmill().empty()) {
+                    for (TransportCart &cart: carts) {
+                        if (cart.getNumber() == flight.getNumber()) {
+                            cart.addBaggage(flight.getTreadmill().front());
+                            flight.getTreadmill().pop();
+                        }
+                    }
                 }
+                break;
             }
         }
     }
@@ -148,12 +152,15 @@ void Airline::addCart(const TransportCart &cart) {
     if(!duplicatedCart(cart))
         carts.push_back(cart);
 }
-/*
+
 void Airline::removeCart(const TransportCart &cart) {
-    auto cartItr = find(carts.begin(), carts.end(), cart);
-    if (cartItr != carts.end()) carts.erase(cartItr);
+    for(TransportCart transportCart : carts){
+        if(cart.getNumber() == transportCart.getNumber()){
+            std::remove(carts.begin(), carts.end(), transportCart);
+        }
+    }
 }
-*/
+
 bool Airline::duplicatedCart(const TransportCart &cart) {
     for(const TransportCart &tc : carts){
         if(tc == cart)
