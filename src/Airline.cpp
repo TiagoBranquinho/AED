@@ -17,8 +17,7 @@ void Airline::addPlane(const Plane &plane) {
 void Airline::removePlane(const Plane &plane) {
     auto planeItr = find(planes.begin(), planes.end(), plane);
     if (planeItr != planes.end()) planes.erase(planeItr);
-    else
-        throw(PlaneNotFoundException(plane.getPlate()));
+    else throw(PlaneNotFoundException(plane.getPlate()));
 }
 
 void Airline::addFlight(Flight &flight) {

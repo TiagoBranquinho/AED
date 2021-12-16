@@ -14,9 +14,12 @@
 class GroundTransportation {
 
 private:
+    unsigned int id;
     std::string type;
     unsigned int distance;
     std::vector<Schedule> schedules;
+    static unsigned int ID;
+
 public:
     GroundTransportation(std::string type, unsigned int distance);
     void setType(std::string type);

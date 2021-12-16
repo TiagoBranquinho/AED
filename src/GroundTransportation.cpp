@@ -6,10 +6,12 @@
 
 using namespace std;
 
+unsigned GroundTransportation::ID = 0;
+
 GroundTransportation::GroundTransportation(string type, unsigned int distance) {
     this->type = type;
     this->distance = distance;
-
+    id = ID++;
 }
 
 void GroundTransportation::setType(string type) {

@@ -13,10 +13,12 @@
 
 class TransportCart {
 private:
+    unsigned int id;
     bool cartFull = false;
     unsigned int numBaggages = 0;
     const unsigned int C_MAX = 0, N_MAX = 0, M_MAX = 0;  // C_MAX -> numero de carruagens, N_MAX -> numero de pilhas por carruagem, M_MAX -> numero de malas por pilha
     std::list<std::list<std::stack<Baggage>>> slots;
+    static unsigned int ID;
 public:
     TransportCart();
     TransportCart(unsigned int c, unsigned int n,unsigned int m);
@@ -27,7 +29,7 @@ public:
     void addCarriage();
     void addStack();
     bool addBaggage(const Baggage &baggage);
-
+    friend std::ostream& operator<<(std::ostream& os, const TransportCart &transportCart);
 private:
     void buildCartCarriages();
     void checkCartFull();

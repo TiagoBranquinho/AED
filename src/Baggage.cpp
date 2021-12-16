@@ -6,12 +6,14 @@
 
 using namespace std;
 
+unsigned Baggage::ID = 0;
 
 Baggage::Baggage() = default;
 
 Baggage::Baggage(double weight, bool special) {
     this->weight = weight;
     this->special = special;
+    id = ID++;
     checkWeight();
 }
 

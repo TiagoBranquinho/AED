@@ -15,6 +15,7 @@ private:
     std::vector<Flight> flights;
     std::queue<Baggage> treadmill;
     std::vector<Employee> employees;
+    std::vector<Airport> airports;
     TransportCart transportCart = TransportCart(2,3,4);
 public:
     Airline();

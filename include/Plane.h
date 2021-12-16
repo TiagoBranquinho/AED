@@ -32,9 +32,7 @@ public:
     void removeServiceDONE(); // removes service from serviceTODO queue and adds it to serviceDONE vector
     bool validPlate(std::string plate);
     bool operator==(const Plane &plane);
-
-
-
+    friend std::ostream& operator<<(std::ostream& os, const Plane &plane);
 };
 
 class InvalidPlateException: public std::exception{

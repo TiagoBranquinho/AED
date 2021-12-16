@@ -21,6 +21,7 @@ public:
     void setOnDuty();
     void setOffDuty();
     bool isOnDuty();
+    friend std::ostream& operator<<(std::ostream& os, const Employee &employee);
 };
 
 

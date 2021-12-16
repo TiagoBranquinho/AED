@@ -4,9 +4,12 @@
 
 #include "../include/Airport.h"
 
+unsigned Airport::ID = 0;
+
 Airport::Airport(std::string name, std::string city) {
     this->name = name;
     this->city = city;
+    id = ID++;
 }
 
 std::string Airport::getName() {

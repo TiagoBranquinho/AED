@@ -47,6 +47,7 @@ public:
     bool getCheckInStatus() const;
     bool operator==(const Flight &flight) const;
     bool operator<(const Flight &flight) const;
+    friend std::ostream& operator<<(std::ostream& os, const Flight &flight);
 };
 
 #endif //PROJETOAEROPORTO_FLIGHT_H

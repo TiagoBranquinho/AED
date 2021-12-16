@@ -5,14 +5,17 @@
 #ifndef PROJETOAEROPORTO_BAGGAGE_H
 #define PROJETOAEROPORTO_BAGGAGE_H
 #include <string>
-
+#include <sstream>
 
 class Baggage {
 private:
+    unsigned int id;
     double MAX_WEIGHT = 25;
     double weight;
     bool special;
     bool overweight;
+    static unsigned int ID;
+
 public:
     Baggage();
     Baggage(double weight, bool special);
@@ -23,6 +26,7 @@ public:
     bool isOverweight() const;
     void checkWeight();
     bool operator==(const Baggage &baggage);
+    friend std::ostream& operator<<(std::ostream& os, const Baggage &baggage);
 };
 
 

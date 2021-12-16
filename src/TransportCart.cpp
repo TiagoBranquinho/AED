@@ -6,9 +6,12 @@
 
 using namespace std;
 
+unsigned TransportCart::ID = 0;
+
 TransportCart::TransportCart() = default;
 
 TransportCart::TransportCart(unsigned int c, unsigned int n, unsigned int m): C_MAX(c), N_MAX(n), M_MAX(m){
+    id = ID++;
     buildCartCarriages();
 }
 

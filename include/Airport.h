@@ -12,9 +12,11 @@
 
 class Airport {
 private:
+    unsigned int id;
     std::string name;
     std::string city;
     TransportationLocals locals;
+    static unsigned int ID;
 
 public:
     Airport(std::string name, std::string city);
@@ -28,7 +30,7 @@ public:
     iteratorBST<GroundTransportation> localsBeginItr();
     iteratorBST<GroundTransportation> localsEndItr();
     TransportationLocals &getLocals();
-
+    friend std::ostream& operator<<(std::ostream& os, const Airport &aiport);
 };
 
 

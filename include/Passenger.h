@@ -24,7 +24,7 @@ public:
     void checkIn();
     bool isCheckedIn() const;
     bool wantsAutomaticCheckIn();
-
+    friend std::ostream& operator<<(std::ostream& os, const Passenger &passenger);
 };
 
 

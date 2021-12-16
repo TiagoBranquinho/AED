@@ -22,6 +22,7 @@ public:
     void setDate(const Date &date);
     void setEmployee(Employee *employee);
     bool validType(std::string type, Employee *employee);
+    friend std::ostream& operator<<(std::ostream& os, const Service &service);
 };
 
 class InvalidEmplpoyeeException: public std::exception{
