@@ -132,20 +132,35 @@ Menu *PlaneMenu::nextMenu() {
                 else
                     cout << "There's no such plane";
             }
-            nextMenu();
         }
         case 5: return new ViewServicesTODO(app);
         case 6: {
-            cout << "Insert new's plane plate" << endl;
+            cout << "Insert new plane's plate" << endl;
             std::string plate;
             cin >> plate;
-            cout << "Insert new's plane capacity" << endl;
+            cout << "Insert new plane's capacity" << endl;
             unsigned int capacity;
             cin >> capacity;
             app.getAirline().addPlane(Plane(plate, capacity));
-            nextMenu();
         }
-        case 7: return nullptr;
+        case 7: {
+            cout << "Insert plane's plate" << endl;
+            std::string plate;
+            cin >> plate;
+            bool done = false;
+            for (Plane plane : app.getAirline().getPlanes()){
+                if(plane.getPlate() == plate){
+                    std::remove(app.getAirline().getPlanes().begin(), app.getAirline().getPlanes().end(), plane);
+                    done = true;
+                    break;
+                }
+            }
+            if(done){
+
+            }
+            else
+                cout << "There's no such plane";
+        }
         case 8: return new ViewPlaneFlights(app);
         case 0: return nullptr;
         default: return invalidInput();
