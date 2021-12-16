@@ -11,7 +11,8 @@ Airline::Airline(std::vector<Plane> planes) {
 }
 
 void Airline::addPlane(const Plane &plane) {
-    planes.push_back(plane);
+    if(!duplicatedPlane(plane))
+        planes.push_back(plane);
 }
 
 void Airline::removePlane(const Plane &plane) {
@@ -37,6 +38,14 @@ std::vector<Flight> &Airline::getFlights() {
 bool Airline::duplicatedFlight(const Flight &flight) {
     for(const Flight &f : flights){
         if(f == flight)
+            return true;
+    }
+    return false;
+}
+
+bool Airline::duplicatedPlane(const Plane &plane) {
+    for(Plane &p : planes){
+        if(p == plane)
             return true;
     }
     return false;

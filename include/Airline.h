@@ -21,6 +21,7 @@ public:
     Airline(std::vector<Plane> planes);
     void addPlane(const Plane &plane);
     void removePlane(const Plane &plane);
+    bool duplicatedPlane(const Plane &plane);
     void addFlight(Flight &flight);
     void removeFlight(const Flight &flight);
     std::vector<Flight> &getFlights();
