@@ -6,7 +6,7 @@
 #define PROJETOAEROPORTO_PERSON_H
 
 #include <string>
-
+#include <sstream>
 
 class Person {
 protected:

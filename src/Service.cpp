@@ -50,4 +50,5 @@ bool Service::validType(string type, Employee *employee) {
 
 std::ostream &operator<<(ostream &os, const Service &service) {
     os << service.type << " " << service.getDate().getDate() << " " << service.getEmployee();
+    return os;
 }
