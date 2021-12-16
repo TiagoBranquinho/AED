@@ -24,28 +24,29 @@ void App::saveData() {
 
 void App::readFile(int file) {
     switch (file) {
-        case 1: readAirportsFile(); break;
-        case 2: readBaggagesFile(); break;
-        case 3: readEmployeesFile(); break;
-        case 4: readFlightsFile(); break;
-        case 5: readPassengersFile(); break;
-        case 6: readPlanesFile(); break;
-        case 7: readServicesFile(); break;
-        case 8: readTranspLocalsFile(); break;
+        case 0: readAirportsFile(); break;
+        case 1: readBaggagesFile(); break;
+        case 2: readEmployeesFile(); break;
+        case 3: readFlightsFile(); break;
+        case 4: readPassengersFile(); break;
+        case 5: readPlanesFile(); break;
+        case 6: readServicesFile(); break;
+        case 7: readTranspLocalsFile(); break;
         default: break;
     }
 }
 
 void App::writeFile(int file) {
     switch (file) {
-        case 0: writeAirportsFile(); break;
-        case 1: writeBaggagesFile(); break;
-        case 2: writeEmployeesFile(); break;
-        case 3: writeFlightsFile(); break;
-        case 4: writePassengersFile(); break;
-        case 5: writePlanesFile(); break;
-        case 6: writeServicesFile(); break;
-        case 7: writeTranspLocalsFile(); break;
+        case 0: writeAirportsFile();break;
+        case 1: writeBaggagesFile();break;
+        case 2: writeEmployeesFile();break;
+        case 3: writeFlightsFile();break;
+        case 4: writePassengersFile();break;
+        case 5: writePlanesFile();break;
+        case 6: writeServicesDoneFile();break;
+        case 7: writeServicesToDoFile();break;
+        case 8: writeTranspLocalsFile();break;
         default: break;
     }
 }
