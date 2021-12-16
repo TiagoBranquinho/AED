@@ -136,15 +136,29 @@ Menu *FlightMenu::nextMenu() {
 }
 
 EmployeesMenu::EmployeesMenu(App &app): Menu(app) {
-
 }
 
 void EmployeesMenu::display() {
-
+    cout << "Employee menu:" << endl;
+    cout << "1 - View all Employees" << endl;
+    cout << "2 - View Employees sorted by name" << endl;
+    cout << "3 - View Employees sorted by id" << endl;
+    cout << "4 - Add Employ" << endl;
+    cout << "4 - Remove Employ" << endl;
+    cout << "0 - Exit" << endl;
+    cout << endl;
 }
 
 Menu *EmployeesMenu::nextMenu() {
-    return nullptr;
+    switch (readOpt()) {
+        case 1: return new ViewEmployees(app);
+        case 2: return new ViewEmployees(app,"name");
+        case 3: return new ViewEmployees(app,"id");
+        case 4: break;
+        case 5: break;
+        case 0: return nullptr;
+        default: return invalidInput();
+    }
 }
 
 PassengerAndBaggageMenu::PassengerAndBaggageMenu(App &app): Menu(app) {
