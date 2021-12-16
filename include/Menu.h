@@ -15,22 +15,22 @@ public:
 class MainMenu: public Menu{
 public:
     MainMenu();
-    void display();
-    Menu *nextMenu();
+    void display() override;
+    Menu *nextMenu() override;
 };
 
 class AirportMenu: public Menu{
 public:
     AirportMenu();
-    void display();
-    Menu *nextMenu();
+    void display() override;
+    Menu *nextMenu() override;
 };
 
 class PlaneMenu: public Menu{
 public:
     PlaneMenu();
-    void display();
-    Menu *nextMenu();
+    void display() override;
+    Menu *nextMenu() override;
 };
 
 
