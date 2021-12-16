@@ -13,7 +13,6 @@ class Airline {
 private:
     std::vector<Plane> planes = {Plane("A123", 89), Plane("F032", 13)};
     std::vector<Flight> flights;
-    std::queue<Baggage> treadmill;
     std::vector<Employee> employees;
     std::vector<Airport> airports;
     TransportCart transportCart = TransportCart(2,3,4);
@@ -33,7 +32,7 @@ public:
     void checkInPassenger(Flight &flight, Passenger &passenger);
     void baggageTransportation(Flight &flight, const Baggage &baggage);
     void baggageToPlane(Flight &flight);
-    void addToTreadmill(const Baggage &baggage);
+    void addToTreadmill(const Baggage &baggage, Flight &flight);
     void addEmployee(const Employee &employee);
     void removeEmployee(const Employee &employee);
     std::vector<Employee> &getEmployees();

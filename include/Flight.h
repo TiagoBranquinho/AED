@@ -22,6 +22,7 @@ private:
     std::list<Passenger> passengers;
     bool checkIn = false;
     unsigned int numberOfBaggages = 0;
+    std::queue<Baggage> treadmill;
 public:
     Flight();
     Flight(unsigned int number, const Date &date, Airport* origin, Airport* destiny);
@@ -41,6 +42,7 @@ public:
     std::list<Passenger> getPassengers() const;
     unsigned int getNumberPassengers() const;
     unsigned int getNumberBaggages() const;
+    queue<Baggage> getTreadmill();
     void addPassenger(const Passenger &passenger);
     void closeCheckIn();
     void openCheckIn();

@@ -84,11 +84,11 @@ void Airline::checkInPassenger(Flight &flight, Passenger &passenger) {
 }
 
 void Airline::baggageTransportation(Flight &flight, const Baggage &baggage) {
-    addToTreadmill(baggage);
-    if(treadmill.size() == flight.getNumberBaggages() ){
-        while(!treadmill.empty()){
-            transportCart.addBaggage(treadmill.front());
-            treadmill.pop();
+    addToTreadmill(baggage,flight);
+    if(flight.getTreadmill().size() == flight.getNumberBaggages() ){
+        while(!flight.getTreadmill().empty()){
+            transportCart.addBaggage(flight.getTreadmill().front());
+            flight.getTreadmill().pop();
         }
     }
 }
@@ -109,8 +109,8 @@ void Airline::baggageToPlane(Flight &flight) {
     }
 }
 
-void Airline::addToTreadmill(const Baggage &baggage) {
-    treadmill.push(baggage);
+void Airline::addToTreadmill(const Baggage &baggage, Flight &flight) {
+    flight.getTreadmill().push(baggage);
 }
 
 bool Airline::validPlane(const Plane &plane) {
