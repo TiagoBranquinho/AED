@@ -17,7 +17,8 @@ public:
     Person();
     Person(std::string name);
     void setName(std::string name);
-    std::string getName();
+    std::string getName() const;
+    unsigned int getId() const;
     bool operator==(const Person& person) const;
 };
 

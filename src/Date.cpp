@@ -108,3 +108,8 @@ bool Date::leapYear(unsigned int year) {
     else return false;
 }
 
+std::ostream &operator<<(ostream &os, const Date &date) {
+    os << date.getDate();
+    return os;
+}
+

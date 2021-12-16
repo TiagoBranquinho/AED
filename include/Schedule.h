@@ -31,7 +31,7 @@ public:
     bool invalidSchedule(unsigned int hour, unsigned int min);
     bool operator<(const Schedule &s) const;
     Schedule diffTime(const Schedule& sch);
-    Schedule addTime(const Schedule& sch);
+    Schedule addTime(const Schedule& sch) const;
 private:
     int convertToMin() const;
     static Schedule convertToSchedule(int min);

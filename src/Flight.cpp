@@ -28,7 +28,7 @@ void Flight::setDate(const Date &date) {
     this->date = date;
 }
 
-Date Flight::getDate() {
+Date Flight::getDate() const{
     return date;
 }
 
@@ -36,11 +36,11 @@ void Flight::setDeparture(std::string departure) {
     this->departure = Schedule(departure);
 }
 
-std::string Flight::getDeparture() {
+std::string Flight::getDeparture() const{
     return departure.getTime();
 }
 
-std::string Flight::getArrival() {
+std::string Flight::getArrival() const{
     return departure.addTime(duration).getTime();
 }
 
@@ -56,7 +56,7 @@ void Flight::setOrigin(Airport* origin) {
     this->origin = origin;
 }
 
-string Flight::getOrigin() {
+string Flight::getOrigin() const{
     return origin->getCity();
 }
 
@@ -64,7 +64,7 @@ void Flight::setDestiny(Airport* destiny) {
     this->destiny = destiny;
 }
 
-string Flight::getDestiny() {
+string Flight::getDestiny() const{
     return destiny->getCity();
 }
 
@@ -108,5 +108,10 @@ bool Flight::operator<(const Flight &flight) const {
 
 queue<Baggage> Flight::getTreadmill() {
     return treadmill;
+}
+
+std::ostream &operator<<(ostream &os, const Flight &flight) {
+    os << flight.getNumber() << " " << flight.getDate().getDate() << " " << flight.getOrigin() << " " << flight.getDestiny() << " " << flight.getDeparture() << " " << flight.getArrival() << '\n';
+    return os;
 }
 

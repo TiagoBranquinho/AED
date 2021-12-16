@@ -13,7 +13,7 @@
 struct Filesname{
     std::vector<std::string> names = {"airports.txt", "baggages.txt", "employees.txt",
                                       "flights.txt", "passengers.txt", "planes.txt",
-                                      "services.txt", "transp_locals.txt"};
+                                      "servicesDone.txt", "servicesToDo", "transp_locals.txt"};
 };
 
 class App {
@@ -28,6 +28,7 @@ public:
     App();
     ~App();
     void start();
+    void writePlanesFile();
 
 private:
     void displayMenu();
@@ -41,8 +42,9 @@ private:
     void writeEmployeesFile();
     void writeFlightsFile();
     void writePassengersFile();
-    void writePlanesFile();
-    void writeServicesFile();
+    //
+    void writeServicesDoneFile();
+    void writeServicesToDoFile();
     void writeTranspLocalsFile();
 
     void readAirportsFile();

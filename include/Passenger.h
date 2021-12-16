@@ -23,7 +23,7 @@ public:
     std::string getName() const;
     void checkIn();
     bool isCheckedIn() const;
-    bool wantsAutomaticCheckIn();
+    bool wantsAutomaticCheckIn() const;
     friend std::ostream& operator<<(std::ostream& os, const Passenger &passenger);
 };
 

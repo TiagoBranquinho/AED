@@ -21,11 +21,15 @@ void Person::setName(string name) {
     this->name = name;
 }
 
-string Person::getName() {
+string Person::getName() const{
     return name;
 }
 
 bool Person::operator==(const Person& person) const {
     return id == person.id;
+}
+
+unsigned int Person::getId() const {
+    return id;
 }
 

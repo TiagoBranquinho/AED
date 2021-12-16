@@ -15,9 +15,9 @@ private:
 public:
     Service();
     Service(std::string type, const Date &date, Employee *employee);
-    std::string getType();
-    Date &getDate();
-    Employee *getEmployee();
+    std::string getType() const;
+    const Date getDate()const ;
+    Employee *getEmployee()const ;
     void setType(std::string type);
     void setDate(const Date &date);
     void setEmployee(Employee *employee);

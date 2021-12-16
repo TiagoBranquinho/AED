@@ -14,15 +14,15 @@ Service::Service(string type, const Date &date, Employee *employee) {
     this->employee = employee;
 }
 
-string Service::getType() {
+string Service::getType() const{
     return type;
 }
 
-Date &Service::getDate() {
+const Date Service::getDate() const{
     return date;
 }
 
-Employee *Service::getEmployee() {
+Employee *Service::getEmployee() const{
     return employee;
 }
 
@@ -46,4 +46,8 @@ void Service::setEmployee(Employee *employee) {
 
 bool Service::validType(string type, Employee *employee) {
     return employee->getType() == type;
+}
+
+std::ostream &operator<<(ostream &os, const Service &service) {
+    os << service.type << " " << service.getDate().getDate() << " " << service.getEmployee();
 }

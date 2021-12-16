@@ -39,8 +39,13 @@ bool Passenger::isCheckedIn() const{
     return checkedIn;
 }
 
-bool Passenger::wantsAutomaticCheckIn() {
+bool Passenger::wantsAutomaticCheckIn() const{
     return automaticCheckIn;
+}
+
+std::ostream &operator<<(ostream &os, const Passenger &passenger) {
+    os << passenger.getName() << " " << passenger.getId() << " " << passenger.getBaggage() << " " << passenger.wantsAutomaticCheckIn() << '\n';
+    return os;
 }
 
 

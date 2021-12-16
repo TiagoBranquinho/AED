@@ -76,7 +76,7 @@ Schedule Schedule::diffTime(const Schedule &sch) {
     return convertToSchedule(abs(res));
 }
 
-Schedule Schedule::addTime(const Schedule &sch) {
+Schedule Schedule::addTime(const Schedule &sch) const {
     int res;
     int min1 = this->convertToMin();
     int min2 = sch.convertToMin();

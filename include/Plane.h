@@ -24,6 +24,8 @@ public:
     std::string getPlate() const;
     unsigned int getCapacity() const;
     std::list<Flight> getFlightPlan() const;
+    std::vector<Service> getServicesDone() const;
+    std::queue<Service> getServicesToDo() const;
     void setPlate(std::string plate);
     void setCapacity(unsigned int capacity);
     void addFlight(const Flight &flight);

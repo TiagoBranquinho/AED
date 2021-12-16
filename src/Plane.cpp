@@ -63,4 +63,17 @@ bool Plane::operator==(const Plane &plane) {
     return this->getPlate() == plane.getPlate();
 }
 
+std::ostream &operator<<(ostream &os, const Plane &plane) {
+    os << plane.getPlate() << " " << plane.getCapacity() << '\n';
+    return os;
+}
+
+std::vector<Service> Plane::getServicesDone() const{
+    return servicesDONE;
+}
+
+std::queue<Service> Plane::getServicesToDo() const{
+    return servicesTODO;
+}
+
 
