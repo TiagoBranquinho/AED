@@ -82,22 +82,26 @@ PlaneMenu::PlaneMenu(App &app): Menu(app){}
 
 void PlaneMenu::display() {
     cout << endl;
-    cout << "1 - View Planes" << endl;
-    cout << "2 - Add Plane" << endl;
-    cout << "3 - Remove Plane" << endl;
-    cout << "4 - Add Flight to Plane" << endl;
-    cout << "5 - Remove Flight from Plane" << endl;
+    cout << "1 - View all Planes" << endl;
+    cout << "2 - View Planes on duty" << endl;
+    cout << "3 - View Planes off duty" << endl;
+    cout << "4 - Add Services to Plane" << endl;
+    cout << "5 - Remove Services of Plane" << endl;
+    cout << "6 - Add Plane" << endl;
+    cout << "7 - Remove Plane" << endl;
     cout << "0 - Exit" << endl;
     cout << endl;
 }
 
 Menu *PlaneMenu::nextMenu() {
     switch (readOpt()) {
-        case 1: return new ViewPlanes(app, "duty");
-        case 2: break;
-        case 3: break;
+        case 1: return new ViewPlanes(app);
+        case 2: return new ViewPlanes(app, "on duty");
+        case 3: return new ViewPlanes(app, "off duty");
         case 4: break;
         case 5: break;
+        case 6: break;
+        case 7: break;
         case 0: return nullptr;
         default: return invalidInput();
     }
