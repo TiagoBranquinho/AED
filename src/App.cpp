@@ -157,7 +157,12 @@ void App::readPassengersFile() {
 }
 
 void App::readPlanesFile() {
-
+    std::string plate;
+    unsigned int capacity;
+    ifstream file(dataFolder + files.names.at(5));
+    while(file >> plate >> capacity){
+        airline.addPlane(Plane(plate,capacity));
+    }
 }
 
 void App::readServicesFile() {
