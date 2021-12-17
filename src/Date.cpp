@@ -5,10 +5,15 @@
 #include "../include/Date.h"
 #include <sstream>
 #include <iomanip>
+#include <utility>
 
 using namespace std;
 
 Date::Date() = default;
+
+Date::Date(std::string date) {
+    setDate(std::move(date));
+}
 
 Date::Date(unsigned int day, unsigned int month, unsigned int year) {
     setDate(day, month, year);

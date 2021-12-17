@@ -10,11 +10,11 @@ App::~App() {
     //saveData();
 }
 
-Airline App::getAirline() const{
+Airline &App::getAirline(){
     return airline;
 }
 
-vector<Airport> App::getAirports() const{
+vector<Airport> &App::getAirports(){
     return airports;
 }
 

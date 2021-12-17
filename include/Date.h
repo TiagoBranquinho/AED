@@ -13,6 +13,7 @@ private:
     std::string date;
 public:
     Date();
+    Date(std::string date);
     Date(unsigned int day, unsigned int month, unsigned int year);
     void setDay(unsigned int day);
     void setMonth(unsigned int month);

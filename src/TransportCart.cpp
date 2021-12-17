@@ -79,3 +79,7 @@ bool TransportCart::operator==(const TransportCart &cart) const{
 unsigned int TransportCart::getId() const {
     return id;
 }
+
+unsigned int TransportCart::getNumber() {
+    return number;
+}

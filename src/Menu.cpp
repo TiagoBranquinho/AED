@@ -78,7 +78,7 @@ Menu *AirportMenu::nextMenu() {
             std::string city;
             cin >> city;
             app.addAirport(Airport(name, city));
-            break;
+            return this;
         }
         case 5: {
             cout << "Insert airport's id" << endl;
@@ -97,7 +97,7 @@ Menu *AirportMenu::nextMenu() {
             }
             else
                 cout << "There's no such plane";
-            break;
+            return this;
         }
         case 6: return nullptr;
         case 0: return nullptr;
@@ -161,7 +161,7 @@ Menu *PlaneMenu::nextMenu() {
                 else
                     cout << "There's no such plane";
             }
-            break;
+            return this;
         }
         case 5: return new ViewServicesTODO(app);
         case 6: return new ViewServicesDONE(app);
@@ -173,7 +173,7 @@ Menu *PlaneMenu::nextMenu() {
             unsigned int capacity;
             cin >> capacity;
             app.getAirline().addPlane(Plane(plate, capacity));
-            break;
+            return this;
         }
         case 8: {
             cout << "Insert plane's plate" << endl;
@@ -192,7 +192,7 @@ Menu *PlaneMenu::nextMenu() {
             }
             else
                 cout << "There's no such plane";
-            break;
+            return this;
         }
         case 9:  return new ViewPlaneFlights(app,"date");
         case 10: return new ViewPlaneFlights(app,"number");
@@ -225,51 +225,41 @@ Menu *FlightMenu::nextMenu() {
             unsigned int number;
             cin >> number;
             cout << "Insert date of flight (day/month/year)" << endl;
-            unsigned int day, month, year;
-            cin >> day;
-            cin >> month;
-            cin >> year;
-            Date date (day, month, year);
-            cout << "Insert the id of the airport of origin of the flight" << endl;
-            unsigned int id1;
-            cin >> id1;
-            cout << "Insert the id of the airport of destiny of the flight" << endl;
-            unsigned int id2;
-            cin >> id2;
-            bool originExists = false;
-            bool destinyExists = false;
-            for (Airport &airport : app.getAirports()){
-                if(airport.getId() == id1) {
-                    Airport origin = airport;
-                    originExists = true;
-                }
-                else if(airport.getId() == id2) {
-                    Airport destiny = airport;
-                    destinyExists = true;
-                }
+            string dt;
+            cin >> dt;
+            Date date (dt);
+            cout << "Insert the airport of origin of the flight" << endl;
+            std::string name1;
+            cin >> name1;
+            cout << "Insert the airport of destiny of the flight" << endl;
+            std::string name2;
+            cin >> name2;
+            auto origin = find_if(app.getAirports().begin(), app.getAirports().end(),
+                                  [&name1](const Airport &air){return air.getName()==name1;});
+            auto destiny = find_if(app.getAirports().begin(), app.getAirports().end(),
+                                   [&name2](const Airport &air){return air.getName()==name2;});
+            if (origin != app.getAirports().end() && destiny != app.getAirports().end()){
+                app.getAirline().addFlight(new Flight(number, date, origin.base(), destiny.base()));
+                cout << "Flight added successfully." << endl;
             }
-            if(originExists && destinyExists)
-                //app.getAirline().addFlight(Flight(number, date, &origin, &destiny)); ERRO
-            break;
+            else {
+                cout << "Invalid airport names!" << endl;
+            }
+            return this;
         }
         case 5: {
             cout << "Insert flight's number" << endl;
             unsigned int number;
             cin >> number;
-            bool done = false;
-            for (Flight flight : app.getAirline().getFlights()){
-                if(flight.getNumber() == number){
-                    std::remove(app.getAirline().getFlights().begin(), app.getAirline().getFlights().end(), flight);
-                    done = true;
-                    break;
-                }
-            }
-            if(done){
-
+            auto flight = find_if(app.getAirline().getFlights().begin(), app.getAirline().getFlights().end(),
+                    [&number](Flight &f){return f.getNumber() == number;});
+            if (flight != app.getAirline().getFlights().end()){
+                app.getAirline().getFlights().erase(flight);
+                cout << "Flight removed successfully." << endl;
             }
             else
                 cout << "There's no such flight";
-            break;
+            return this;
         }
         case 0: return nullptr;
         default: return invalidInput();
@@ -305,7 +295,7 @@ Menu *EmployeesMenu::nextMenu() {
             std::string type;
             cin >> type;
             app.getAirline().addEmployee(Employee(name, type));
-            break;
+            return this;
         }
         case 5: {
             cout << "Insert employee's id" << endl;
@@ -324,7 +314,7 @@ Menu *EmployeesMenu::nextMenu() {
             }
             else
                 cout << "There's no such employee";
-            break;
+            return this;
         }
         case 0: return nullptr;
         default: return invalidInput();
@@ -374,7 +364,7 @@ Menu *PassengerAndBaggageMenu::nextMenu() {
             }
             if(!done)
                 cout << "Invalid Flight Number!!" << endl;
-            break;
+            return this;
         }
         case 2: {
             cout << "Insert flight's number" << endl;
@@ -400,7 +390,9 @@ Menu *PassengerAndBaggageMenu::nextMenu() {
                     break;
                 }
             }
-            break;
+            if(!done)
+                cout << "Invalid Flight Number!!" << endl;
+            return this;
         }
         case 0: return nullptr;
         default: return invalidInput();

@@ -21,7 +21,7 @@ public:
     void addPlane(const Plane &plane);
     void removePlane(const Plane &plane);
     bool duplicatedPlane(const Plane &plane);
-    void addFlight(Flight &flight);
+    void addFlight(Flight *flight);
     void removeFlight(const Flight &flight);
     std::vector<Flight> &getFlights();
     bool duplicatedFlight(const Flight &flight);

@@ -21,9 +21,9 @@ void Airline::removePlane(const Plane &plane) {
     else throw(PlaneNotFoundException(plane.getPlate()));
 }
 
-void Airline::addFlight(Flight &flight) {
-    if (!duplicatedFlight(flight))
-        flights.push_back(flight);
+void Airline::addFlight(Flight *flight) {
+    if (!duplicatedFlight(*flight))
+        flights.push_back(*flight);
 }
 
 void Airline::removeFlight(const Flight &flight) {
@@ -58,7 +58,7 @@ std::vector<Plane> &Airline::getPlanes() {
 void Airline::addPassengerToFlight(Flight &flight, const Plane &plane, const Passenger &passenger) {
     if(!validPlane(plane))
         throw PlaneNotFoundException(plane.getPlate());
-    addFlight(flight);
+    addFlight(&flight);
     if(plane.getCapacity() > flight.getNumberPassengers()){
         flight.addPassenger(passenger);
     }

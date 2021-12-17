@@ -27,12 +27,12 @@ public:
     App();
     ~App();
     void start();
-    Airline getAirline() const;
-    vector<Airport> getAirports() const;
+    Airline &getAirline();
+    vector<Airport> &getAirports();
     void addAirport(Airport airport);
     void writePlanesFile();
 
-private:
+public:
     void displayMenu();
     void loadData();
     void saveData();
