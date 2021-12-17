@@ -57,4 +57,15 @@ public:
     friend std::ostream& operator<<(std::ostream& os, const Flight &flight);
 };
 
+class InvalidFlightException: public std::exception{
+private:
+    unsigned int number;
+public:
+    InvalidFlightException(unsigned int number){this->number = number;}
+    unsigned int getNumber(){return number;}
+    const char * what () const noexcept override {
+        return "Invalid flight!";
+    }
+};
+
 #endif //PROJETOAEROPORTO_FLIGHT_H

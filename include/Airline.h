@@ -27,7 +27,7 @@ public:
     bool duplicatedFlight(const Flight &flight);
     bool validPlane(const Plane &plane);
     std::vector<Plane> &getPlanes();
-    void addPassengerToFlight(Flight &flight, const Plane &plane, const Passenger &passenger);
+    void addPassengerToFlight(Flight &flight, const Passenger &passenger);
     void checkInPassengers(Flight &flight);
     void checkInPassenger(Flight &flight, Passenger &passenger);
     void baggageTransportation(Flight &flight, const Baggage &baggage);

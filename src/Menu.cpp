@@ -85,7 +85,6 @@ Menu *AirportMenu::nextMenu() {
             cout << "Insert airport's id" << endl;
             unsigned int id;
             cin >> id;
-            bool done = false;
             auto it = std::find_if(app.getAirports().begin(), app.getAirports().end(), [&id](const auto &airport){return airport.getId() == id;});
             if(it != app.getAirports().end())
                 app.getAirports().erase(it);
@@ -94,9 +93,52 @@ Menu *AirportMenu::nextMenu() {
             return this;
        }
         case 6: {
+            cout << "Insert airport's id" << endl;
+            unsigned int id;
+            cin >> id;
+            cout << "Insert local's transportations service type" << endl;
+            std::string type;
+            cin >> type;
+            cout << "Insert local's distance to airport" << endl;
+            unsigned int distance;
+            cin >> distance;
+            bool done = false;
+            for(Airport airport : app.getAirports()){
+                if(airport.getId() == id){
+                    airport.addGroundTransportation(GroundTransportation(type, distance));
+                    done = true;
+                }
+            }
+            if(!done){
+                cout << "There's no such airport" << endl;
+            }
             return this;
         }
-        case 7: return nullptr;
+        case 7: {
+            cout << "Insert airport's id" << endl;
+            unsigned int id1;
+            cin >> id1;
+            cout << "Insert local's id" << endl;
+            unsigned int id2;
+            cin >> id2;
+            bool done = false;
+            for(Airport airport : app.getAirports()){
+                if(airport.getId() == id1){
+                    for(auto it = airport.getLocals().beginItr(); it != airport.getLocals().endItr(); it++) {
+                        if((*it).getId() == id2){
+                            airport.getLocals().removeGroundTransportation((*it));
+                            done = true;
+                            break;
+                        }
+                    }
+                    if(!done)
+                        cout << "There's no such local" << endl;
+                    break;
+                }
+                cout << "There's no such airport" << endl;
+            }
+            return this;
+        }
         case 0: return nullptr;
         default: return invalidInput();
     }
@@ -355,15 +397,12 @@ Menu *PassengerAndBaggageMenu::nextMenu() {
             }
             else
                 passenger = Passenger(name, nullptr,false);
-            bool done = false;
             for(Flight &flight : app.getAirline().getFlights()){
-                if(flight.getNumber() == number){
-                    flight.addPassenger(passenger);
-                    done = true;
+                if(flight.getNumber() == number) {
+                    app.getAirline().addPassengerToFlight(flight, passenger);
+                    break;
                 }
             }
-            if(!done)
-                cout << "Invalid Flight Number!!" << endl;
             return this;
         }
         case 2: {

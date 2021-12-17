@@ -18,8 +18,8 @@ TEST(test_1, addBaggage){
     Airline airline = Airline();
     airline.addFlight(f);
     airline.addPlane(plane);
-    airline.addPassengerToFlight(*f,plane,passenger1);
-    airline.addPassengerToFlight(*f,plane,passenger2);
+    airline.addPassengerToFlight(*f,passenger1);
+    airline.addPassengerToFlight(*f,passenger2);
 
     EXPECT_EQ(f->getNumberPassengers(), 2);
     EXPECT_EQ(f->getNumberBaggages(), 1);
@@ -34,14 +34,14 @@ TEST(test_1, addPassengerToFlight){
     Airline airline = Airline();
    // airline.addFlight(f); --> NOT MANDATORY
     try {
-        airline.addPassengerToFlight(f,plane,passenger1);
+        airline.addPassengerToFlight(f,passenger1);
     } catch(PlaneNotFoundException &e){
 
         EXPECT_EQ(e.getPlate(),"A999");
     }
 
     airline.addPlane(plane);
-    airline.addPassengerToFlight(f,plane,passenger2);
+    airline.addPassengerToFlight(f,passenger2);
 
     EXPECT_EQ(airline.validPlane(plane), true); // if true, plane was added to AIRLINE PLANES
 
@@ -57,10 +57,10 @@ TEST(test_1, planeCapacity){
     Airline airline = Airline();
     airline.addFlight(f);
     airline.addPlane(plane);
-    airline.addPassengerToFlight(*f,plane,passenger1);
-    airline.addPassengerToFlight(*f,plane,passenger2);
+    airline.addPassengerToFlight(*f,passenger1);
+    airline.addPassengerToFlight(*f,passenger2);
     try{
-        airline.addPassengerToFlight(*f,plane,passenger2);
+        airline.addPassengerToFlight(*f,passenger2);
     }catch(FullPlaneException &e){
 
         EXPECT_EQ(e.getCapacity(),2);

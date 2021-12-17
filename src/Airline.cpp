@@ -55,15 +55,24 @@ std::vector<Plane> &Airline::getPlanes() {
     return planes;
 }
 
-void Airline::addPassengerToFlight(Flight &flight, const Plane &plane, const Passenger &passenger) {
-    if(!validPlane(plane))
-        throw PlaneNotFoundException(plane.getPlate());
-    addFlight(&flight);
-    if(plane.getCapacity() > flight.getNumberPassengers()){
-        flight.addPassenger(passenger);
+void Airline::addPassengerToFlight(Flight &flight, const Passenger &passenger) {
+    bool done = false;
+    for(Plane plane : getPlanes()) {
+        for (Flight flight1: plane.getFlightPlan()) {
+            if (flight1 == flight) {
+                if (plane.getCapacity() > flight.getNumberPassengers()) {
+                    flight.addPassenger(passenger);
+                    done = true;
+                } else
+                    throw FullPlaneException(plane.getCapacity());
+                break;
+            }
+        }
+        if (done)
+            break;
     }
-    else
-        throw FullPlaneException(plane.getCapacity());
+    if(!done)
+        throw InvalidFlightException(flight.getNumber());
 }
 
 void Airline::checkInPassengers(Flight &flight) {
