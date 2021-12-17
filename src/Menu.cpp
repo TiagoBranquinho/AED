@@ -592,22 +592,20 @@ ViewPlanes::ViewPlanes(App &app, std::string duty): Menu(app) /*, choice(choice)
         onDuty = true;
     else if (choice == "off")
         onDuty = false;
-    else{
-        if(choice == "plate")
-            sort(app.getAirline().getPlanes().begin(), app.getAirline().getPlanes().end(), [](const Plane &lhs, const Plane &rhs) {
-                return lhs.getPlate() < rhs.getPlate();
-            });
-        if(choice == "capacity")
-            sort(app.getAirline().getPlanes().begin(), app.getAirline().getPlanes().end(), [](const Plane &lhs, const Plane &rhs) {
-                return lhs.getCapacity() < rhs.getCapacity();
-            });
-    }
+    else if(choice == "plate")
+        sort(app.getAirline().getPlanes().begin(), app.getAirline().getPlanes().end(), [](const Plane &lhs, const Plane &rhs) {
+            return lhs.getPlate() < rhs.getPlate();
+        });
+    else if(choice == "capacity")
+        sort(app.getAirline().getPlanes().begin(), app.getAirline().getPlanes().end(), [](const Plane &lhs, const Plane &rhs) {
+            return lhs.getCapacity() < rhs.getCapacity();
+        });
 
 }
 
 void ViewPlanes::display() {
-    for (Plane &plane: app.getAirline().getPlanes()){
-        if(choice.empty())
+    for (const Plane &plane: app.getAirline().getPlanes()){
+        if(choice.empty() || choice == "plate" || choice == "capacity")
             cout << plane;
         else if(plane.getOnDuty() == onDuty)
             cout << plane;
