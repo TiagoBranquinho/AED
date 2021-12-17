@@ -25,7 +25,7 @@ public:
     std::string getDate() const;
     bool validDate(unsigned int day, unsigned int month, unsigned int year);
     bool validDate(std::string date);
-    bool operator<(Date &d) const;
+    bool operator<(const Date &d) const;
     bool leapYear(unsigned int year);
 };
 

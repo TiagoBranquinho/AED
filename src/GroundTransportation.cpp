@@ -26,7 +26,7 @@ string GroundTransportation::getType() const {
     return type;
 }
 
-unsigned int GroundTransportation::getDistance() {
+unsigned int GroundTransportation::getDistance() const{
     return distance;
 }
 

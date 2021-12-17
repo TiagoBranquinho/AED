@@ -44,6 +44,7 @@ public:
     unsigned int getNumberBaggages() const;
     queue<Baggage> getTreadmill();
     void addPassenger(const Passenger &passenger);
+    void removePassenger(const Passenger &passenger);
     void closeCheckIn();
     void openCheckIn();
     bool getCheckInStatus() const;

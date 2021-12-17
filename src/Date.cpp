@@ -93,7 +93,7 @@ bool Date::validDate(string date) {
     return false;
 }
 
-bool Date::operator<(Date &d) const {
+bool Date::operator<(const Date &d) const {
     return getDate() < d.getDate();
 }
 

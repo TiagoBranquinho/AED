@@ -25,7 +25,7 @@ public:
     void setType(std::string type);
     void setDistance(unsigned int distance);
     std::string getType() const;
-    unsigned int getDistance();
+    unsigned int getDistance() const;
     void setSchedules(std::vector<Schedule> &schedules);
     std::vector<Schedule> getSchedules();
     void addSchedule(const Schedule &schedule);

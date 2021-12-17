@@ -115,3 +115,8 @@ std::ostream &operator<<(ostream &os, const Flight &flight) {
     return os;
 }
 
+void Flight::removePassenger(const Passenger &passenger) {
+    auto passengerItr = find(passengers.begin(), passengers.end(), passenger);
+    if (passengerItr != passengers.end()) passengers.erase(passengerItr);
+}
+
