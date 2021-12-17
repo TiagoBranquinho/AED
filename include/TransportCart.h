@@ -28,6 +28,8 @@ public:
     unsigned int getM() const;
     unsigned int getId() const;
     unsigned int getNumber();
+    void setNumber(unsigned int num);
+    unsigned int getNumBaggs();
     std::list<std::list<std::stack<Baggage>>> getSlots();
     void addCarriage();
     void addStack();

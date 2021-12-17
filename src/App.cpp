@@ -40,6 +40,7 @@ void App::readFile(int file) {
         case 1: readEmployeesFile(); break;
         case 2: readFlightsFile(); break;
         case 3: readPlanesFile(); break;
+        case 4: readCartsFile(); break;
         default: break;
     }
 }
@@ -50,6 +51,7 @@ void App::writeFile(int file) {
         case 1: writeEmployeesFile();break;
         case 2: writeFlightsFile();break;
         case 3: writePlanesFile();break;
+        case 4: writeCartsFile(); break;
         default: break;
     }
 }
@@ -146,7 +148,7 @@ void App::writePlanesFile() {
             }
             file << plane.getTrunk().size() << endl;
             list<Baggage> bgs = plane.getTrunk();
-            for ( Baggage bg : bgs){
+            for ( Baggage &bg : bgs){
                 file << bg.getWeight() << endl;
             }
         }
@@ -155,7 +157,30 @@ void App::writePlanesFile() {
 }
 
 void App::writeCartsFile() {
-
+    std::ofstream file(dataFolder + files.names.at(3), ofstream::trunc);
+    if(file.is_open()){
+        file << airline.getCarts().size();
+        for (TransportCart &cart : airline.getCarts()){
+            file << cart.getNumBaggs() << endl;
+            file << cart.getNumber() << endl;
+            file << cart.getC() << " " << cart.getN() << " " << cart.getM() << endl;
+            stack<Baggage> aux;
+            auto slots = cart.getSlots();
+            for (auto carriage = slots.rbegin(); carriage != slots.rend(); carriage++){
+                for (auto stack = (*carriage).rbegin(); stack != (*carriage).rend(); stack++){
+                    while(!(*stack).empty()){
+                        aux.push((*stack).top());
+                        (*stack).pop();
+                    }
+                }
+            }
+            while (!aux.empty()){
+                file << aux.top().getWeight() << endl;
+                aux.pop();
+            }
+        }
+    }
+    file.close();
 }
 
 void App::readAirportsFile() {
@@ -296,5 +321,22 @@ void App::readPlanesFile() {
 }
 
 void App::readCartsFile() {
-
+    std::ifstream file(dataFolder + files.names.at(3));
+    int ncarts, numbgs, numcart, c, n, m, weight;
+    if(file.is_open()){
+        file >> ncarts;
+        for (int i = 0; i < ncarts; i++){
+            file >> numbgs;
+            file >> numcart;
+            file >> c >> n >> m;
+            TransportCart cart(c, n, m);
+            cart.setNumber(numcart);
+            for (int j = 0; j < numbgs; j++){
+                file >> weight;
+                cart.addBaggage(Baggage(weight));
+            }
+            airline.getCarts().push_back(cart);
+        }
+    }
+    file.close();
 }

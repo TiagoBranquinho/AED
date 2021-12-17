@@ -83,3 +83,11 @@ unsigned int TransportCart::getId() const {
 unsigned int TransportCart::getNumber() {
     return number;
 }
+
+unsigned int TransportCart::getNumBaggs() {
+    return numBaggages;
+}
+
+void TransportCart::setNumber(unsigned int num) {
+    number = num;
+}

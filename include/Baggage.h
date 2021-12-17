@@ -13,7 +13,6 @@ private:
     double MAX_WEIGHT = 25;
     double weight;
     bool overweight;
-    bool special;
     static unsigned int ID;
 
 public:
