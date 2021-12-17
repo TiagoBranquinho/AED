@@ -29,6 +29,10 @@ void Plane::setCapacity(unsigned int capacity) {
     this->capacity = capacity;
 }
 
+void Plane::setOnDuty(bool duty) {
+    this->onDuty = duty;
+}
+
 void Plane::addFlight(const Flight &flight) {
     flightPlan.push_back(flight);
 }
@@ -80,6 +84,10 @@ list<Baggage> Plane::getTrunk() const {
     return planeTrunk;
 }
 
+bool Plane::getOnDuty() const{
+    return onDuty;
+}
+
 void Plane::setServicesToDo(queue<Service> &services) {
     servicesTODO = services;
 }
@@ -91,5 +99,6 @@ void Plane::setPlaneTrunk(list<Baggage> &baggages) {
 void Plane::setServicesDone(vector<Service> &services) {
     servicesDONE = services;
 }
+
 
 

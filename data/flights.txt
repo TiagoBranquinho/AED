@@ -3,8 +3,8 @@
 2020/04/23
 00:00
 00:00
-Airport1
-Airport2
+lisboa
+porto
 0
 3
 joase
@@ -21,8 +21,8 @@ maria
 2020/04/30
 00:00
 00:00
-Airport2
-Airport1
+porto
+lisboa
 0
 2
 joase

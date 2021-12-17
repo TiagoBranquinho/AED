@@ -14,6 +14,7 @@ class Plane {
 private:
     std::string plate;
     unsigned int capacity;
+    bool onDuty = false;
     std::list<Flight> flightPlan;
     std::queue<Service> servicesTODO;
     std::vector<Service> servicesDONE;
@@ -27,8 +28,10 @@ public:
     std::vector<Service> getServicesDone() const;
     std::queue<Service> getServicesToDo() const;
     list<Baggage> getTrunk() const;
+    bool getOnDuty() const;
     void setPlate(std::string plate);
     void setCapacity(unsigned int capacity);
+    void setOnDuty(bool duty);
     void addFlight(const Flight &flight);
     void addService(const Service &service);
     void addBaggage(const Baggage &baggage);

@@ -323,6 +323,7 @@ Menu *FlightMenu::nextMenu() {
                     if(flight.getNumber() == number) {
                         flight.openCheckIn();
                         app.getAirline().checkInPassengers(flight);
+                        plane.setOnDuty(true);
                         done = true;
                         break;
                     }
@@ -349,6 +350,7 @@ Menu *FlightMenu::nextMenu() {
                                        [&number](Flight &flight) { return number == flight.getNumber(); });
                         std::remove_if(app.getAirline().getFlights().begin(), app.getAirline().getFlights().end(),
                                        [&number](Flight &flight) { return number == flight.getNumber(); });
+                        plane.setOnDuty(false);
                         done = true;
                         break;
                     }
