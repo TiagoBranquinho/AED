@@ -81,13 +81,13 @@ Menu *AirportMenu::nextMenu() {
             break;
         }
         case 5: {
-            cout << "Insert airport's name" << endl;
-            std::string name;
-            cin >> name;
+            cout << "Insert airport's id" << endl;
+            unsigned int id;
+            cin >> id;
             bool done = false;
             for (Airport &airport : app.getAirports()){
-                if(airport.getName() == name){
-                    //std::remove(app.getAirports().begin(), app.getAirports().end(), airport);  ERROS
+                if(airport.getId() == id){
+                    std::remove(app.getAirports().begin(), app.getAirports().end(), airport);
                     done = true;
                     break;
                 }
@@ -230,20 +230,20 @@ Menu *FlightMenu::nextMenu() {
             cin >> month;
             cin >> year;
             Date date (day, month, year);
-            cout << "Insert the airport of origin of the flight" << endl;
-            std::string name1;
-            cin >> name1;
-            cout << "Insert the airport of destiny of the flight" << endl;
-            std::string name2;
-            cin >> name2;
+            cout << "Insert the id of the airport of origin of the flight" << endl;
+            unsigned int id1;
+            cin >> id1;
+            cout << "Insert the id of the airport of destiny of the flight" << endl;
+            unsigned int id2;
+            cin >> id2;
             bool originExists = false;
             bool destinyExists = false;
             for (Airport &airport : app.getAirports()){
-                if(airport.getName() == name1) {
+                if(airport.getId() == id1) {
                     Airport origin = airport;
                     originExists = true;
                 }
-                else if(airport.getName() == name2) {
+                else if(airport.getId() == id2) {
                     Airport destiny = airport;
                     destinyExists = true;
                 }
@@ -358,12 +358,10 @@ Menu *PassengerAndBaggageMenu::nextMenu() {
             cin >> weight;
             Passenger passenger;
             if(weight > 0){
-                cout << "Is the baggage special? Insert true or false" << endl;
-                bool special;
-                cin >> special;
+                Baggage baggage(weight);
                 cout << "Does the passenger want automatic check in? Insert true or false" << endl;
                 cin >> wantsAutomaticCheckIn;
-                passenger = Passenger(name,new Baggage(weight,special),wantsAutomaticCheckIn);
+                passenger = Passenger(name, &baggage,wantsAutomaticCheckIn);
             }
             else
                 passenger = Passenger(name, nullptr,false);
@@ -391,12 +389,10 @@ Menu *PassengerAndBaggageMenu::nextMenu() {
             cin >> weight;
             Passenger passenger;
             if(weight > 0){
-                cout << "Is the baggage special? Insert true or false" << endl;
-                bool special;
-                cin >> special;
+                Baggage baggage;
                 cout << "Does the passenger want automatic check in? Insert true or false" << endl;
                 cin >> wantsAutomaticCheckIn;
-                passenger = Passenger(name,new Baggage(weight,special),wantsAutomaticCheckIn);
+                passenger = Passenger(name, &baggage, wantsAutomaticCheckIn);
             }
             else
                 passenger = Passenger(name, nullptr,false);

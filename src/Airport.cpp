@@ -12,6 +12,10 @@ Airport::Airport(std::string name, std::string city) {
     id = ID++;
 }
 
+unsigned int Airport::getId() const {
+    return id;
+}
+
 std::string Airport::getName() const{
     return name;
 }
@@ -51,6 +55,7 @@ iteratorBST<GroundTransportation> Airport::localsEndItr() {
 TransportationLocals &Airport::getLocals() {
     return locals;
 }
+
 /*
 std::ostream &operator<<(ostream &os, const Airport &airport) {
    // os << airport.getName() << " " << airport.getCity() <<

@@ -20,6 +20,7 @@ private:
 
 public:
     Airport(std::string name, std::string city);
+    unsigned int getId() const;
     std::string getName() const;
     std::string getCity() const;
     void setName(std::string name);
