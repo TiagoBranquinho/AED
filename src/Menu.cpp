@@ -282,7 +282,15 @@ Menu *FlightMenu::nextMenu() {
             auto destiny = find_if(app.getAirports().begin(), app.getAirports().end(),
                                    [&name2](const Airport &air){return air.getName()==name2;});
             if (origin != app.getAirports().end() && destiny != app.getAirports().end()){
-                app.getAirline().addFlight(new Flight(number, &date, origin.base(), destiny.base()));
+                auto *f = new Flight(number, &date, origin.base(), destiny.base());
+                cout << "Select a plane to realize this flight" << endl;
+                ViewPlanes vp(app);
+                vp.display();
+                string plate;
+                cin >> plate;
+                auto plane = find_if(app.getAirline().getPlanes().begin(), app.getAirline().getPlanes().end(),[&plate](Plane &p){return p.getPlate()==plate;});
+                (*plane).addFlight(*f);
+                app.getAirline().addFlight(f);
                 cout << "Flight added successfully." << endl;
             }
             else {
