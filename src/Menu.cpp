@@ -84,17 +84,19 @@ Menu *AirportMenu::nextMenu() {
         case 5: {
             cout << "Insert airport's id" << endl;
             unsigned int id;
+            cin.ignore(1000,'\n');
             cin >> id;
             auto it = std::find_if(app.getAirports().begin(), app.getAirports().end(), [&id](const auto &airport){return airport.getId() == id;});
             if(it != app.getAirports().end())
                 app.getAirports().erase(it);
             else
-                cout << "There's no such plane";
+                cout << "There's no such airport" << endl;
             return this;
        }
         case 6: {
             cout << "Insert airport's id" << endl;
             unsigned int id;
+            cin.ignore(1000,'\n');
             cin >> id;
             cout << "Insert local's transportations service type" << endl;
             std::string type;
@@ -112,11 +114,14 @@ Menu *AirportMenu::nextMenu() {
             if(!done){
                 cout << "There's no such airport" << endl;
             }
+            else
+                cout << "Local added successfully" << endl;
             return this;
         }
         case 7: {
             cout << "Insert airport's id" << endl;
             unsigned int id1;
+            cin.ignore(1000,'\n');
             cin >> id1;
             cout << "Insert local's id" << endl;
             unsigned int id2;
@@ -174,6 +179,7 @@ Menu *PlaneMenu::nextMenu() {
         case 6: {
             cout << "Insert plane plate" << endl;
             std::string plate;
+            cin.ignore(1000,'\n');
             cin >> plate;
             for(Plane plane : app.getAirline().getPlanes()){
                 if(plane.getPlate() == plate){
@@ -211,16 +217,24 @@ Menu *PlaneMenu::nextMenu() {
         case 9: {
             cout << "Insert new plane's plate" << endl;
             std::string plate;
+            cin.ignore(1000,'\n');
             cin >> plate;
             cout << "Insert new plane's capacity" << endl;
             unsigned int capacity;
             cin >> capacity;
-            app.getAirline().addPlane(Plane(plate, capacity));
+            try {
+                app.getAirline().addPlane(Plane(plate, capacity));
+            }
+            catch(InvalidPlateException) {
+                cout << "Inserted invalid plane plate" << endl;
+                return this;
+            }
             return this;
         }
         case 10: {
             cout << "Insert plane's plate" << endl;
             std::string plate;
+            cin.ignore(1000,'\n');
             cin >> plate;
             bool done = false;
             for (Plane plane : app.getAirline().getPlanes()){
@@ -272,6 +286,7 @@ Menu *FlightMenu::nextMenu() {
         case 6: {
             cout << "Insert flight's number" << endl;
             unsigned int number;
+            cin.ignore(1000,'\n');
             cin >> number;
             cout << "Insert date of flight (year/month/day)" << endl;
             string dt;
@@ -307,6 +322,7 @@ Menu *FlightMenu::nextMenu() {
         case 7: {
             cout << "Insert flight's number" << endl;
             unsigned int number;
+            cin.ignore(1000,'\n');
             cin >> number;
             auto flight = find_if(app.getAirline().getFlights().begin(), app.getAirline().getFlights().end(),[&number](Flight &f){return f.getNumber() == number;});
             if (flight != app.getAirline().getFlights().end()){
@@ -320,6 +336,7 @@ Menu *FlightMenu::nextMenu() {
         case 8: {
             cout << "Insert flight's number" << endl;
             unsigned int number;
+            cin.ignore(1000,'\n');
             cin >> number;
             bool done = false;
             for(Plane &plane : app.getAirline().getPlanes()){
@@ -344,6 +361,7 @@ Menu *FlightMenu::nextMenu() {
         case 9: {
             cout << "Insert flight's number" << endl;
             unsigned int number;
+            cin.ignore(1000,'\n');
             cin >> number;
             bool done = false;
             for(Plane &plane : app.getAirline().getPlanes()) {
@@ -396,6 +414,7 @@ Menu *EmployeesMenu::nextMenu() {
         case 4: {
             cout << "Insert employee's name" << endl;
             std::string name;
+            cin.ignore(1000,'\n');
             cin >> name;
             cout << "Insert employee's type" << endl;
             std::string type;
@@ -406,6 +425,7 @@ Menu *EmployeesMenu::nextMenu() {
         case 5: {
             cout << "Insert employee's id" << endl;
             unsigned int id;
+            cin.ignore(1000,'\n');
             cin >> id;
             bool done = false;
             for (const Employee& employee : app.getAirline().getEmployees()){
@@ -444,6 +464,7 @@ Menu *PassengerAndBaggageMenu::nextMenu() {
         case 1: {
             cout << "Insert flight's number" << endl;
             unsigned int number;
+            cin.ignore(1000,'\n');
             cin >> number;
             cout << "Insert passenger's name" << endl;
             string name;
@@ -472,6 +493,7 @@ Menu *PassengerAndBaggageMenu::nextMenu() {
         case 2: {
             cout << "Insert flight's number" << endl;
             unsigned int number;
+            cin.ignore(1000,'\n');
             cin >> number;
             cout << "Insert passenger's id" << endl;
             unsigned int id;
