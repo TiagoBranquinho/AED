@@ -61,7 +61,7 @@ public:
 class ViewAirports: public Menu{
     std::string sortedBy;
 public:
-    ViewAirports(App &app, std::string sortedBy="");
+    ViewAirports(App &app, std::string sortedBy = "");
     void display() override;
     Menu *nextMenu() override;
 };

@@ -58,9 +58,9 @@ void AirportMenu::display() {
     cout << "2 - View Airports sorted by city" << endl;
     cout << "3 - View Airport Ground Locals sorted by distance" << endl;
     cout << "4 - Add Airport" << endl;
-    cout << "6 - Remove Airport" << endl;
-    cout << "5 - Add Ground Local to Airport" << endl;
-    cout << "6 - Remove Ground Local from Airport" << endl;
+    cout << "5 - Remove Airport" << endl;
+    cout << "6 - Add Ground Local to Airport" << endl;
+    cout << "7 - Remove Ground Local from Airport" << endl;
     cout << "0 - Exit" << endl;
     cout << endl;
 }
@@ -73,10 +73,11 @@ Menu *AirportMenu::nextMenu() {
         case 4: {
             cout << "Insert new airport's name" << endl;
             std::string name;
-            cin >> name;
+            cin.ignore(1000,'\n');
+            getline(cin,name,'\n');
             cout << "Insert new airport's city" << endl;
             std::string city;
-            cin >> city;
+            getline(cin,city,'\n');
             app.addAirport(Airport(name, city));
             return this;
         }
@@ -85,21 +86,17 @@ Menu *AirportMenu::nextMenu() {
             unsigned int id;
             cin >> id;
             bool done = false;
-            for (Airport &airport : app.getAirports()){
-                if(airport.getId() == id){
-                    //std::remove(app.getAirports().begin(), app.getAirports().end(), airport); ERRO
-                    done = true;
-                    break;
-                }
-            }
-            if(done){
-
-            }
+            auto it = std::find_if(app.getAirports().begin(), app.getAirports().end(), [&id](const auto &airport){return airport.getId() == id;});
+            if(it != app.getAirports().end())
+                app.getAirports().erase(it);
             else
                 cout << "There's no such plane";
             return this;
+       }
+        case 6: {
+            return this;
         }
-        case 6: return nullptr;
+        case 7: return nullptr;
         case 0: return nullptr;
         default: return invalidInput();
     }
@@ -251,8 +248,7 @@ Menu *FlightMenu::nextMenu() {
             cout << "Insert flight's number" << endl;
             unsigned int number;
             cin >> number;
-            auto flight = find_if(app.getAirline().getFlights().begin(), app.getAirline().getFlights().end(),
-                    [&number](Flight &f){return f.getNumber() == number;});
+            auto flight = find_if(app.getAirline().getFlights().begin(), app.getAirline().getFlights().end(),[&number](Flight &f){return f.getNumber() == number;});
             if (flight != app.getAirline().getFlights().end()){
                 app.getAirline().getFlights().erase(flight);
                 cout << "Flight removed successfully." << endl;
@@ -399,7 +395,7 @@ Menu *PassengerAndBaggageMenu::nextMenu() {
     }
 }
 
-ViewAirports::ViewAirports(App &app, std::string sortedBy): Menu(app), sortedBy(sortedBy) {
+ViewAirports::ViewAirports(App &app, std::string sortedBy): Menu(app), sortedBy(sortedBy) {;
     if (sortedBy == "name")
         sort(app.getAirports().begin(), app.getAirports().end(), [](const Airport &lhs, const Airport &rhs) {
             return lhs.getName() < rhs.getName();
@@ -408,12 +404,12 @@ ViewAirports::ViewAirports(App &app, std::string sortedBy): Menu(app), sortedBy(
         sort(app.getAirports().begin(), app.getAirports().end(), [](const Airport &lhs, const Airport &rhs) {
             return lhs.getCity() < rhs.getCity();
         });
-    display();
 }
 
 void ViewAirports::display() {
     for(Airport &airport : app.getAirports())
-        cout << airport << endl;
+        cout << airport;
+    cout << endl;
 }
 
 Menu *ViewAirports::nextMenu() {
@@ -426,7 +422,6 @@ ViewGroundLocals::ViewGroundLocals(App &app, std::string sortedBy): Menu(app), s
             return lhs.getDistance() < rhs.getDistance();
         });
     }
-    display();
      */
 }
 void ViewGroundLocals::display() {
@@ -440,17 +435,17 @@ Menu *ViewGroundLocals::nextMenu() {
 }
 
 ViewServicesTODO::ViewServicesTODO(App &app) : Menu(app) {
-    display(); // nao ha ordem de ordenacao especificada no menu
+     // nao ha ordem de ordenacao especificada no menu
 }
 
 void ViewServicesTODO::display() {
     for(const Plane &plane : app.getAirline().getPlanes()){
+        cout << endl <<  "Plane: " << plane.getPlate() << endl;    
         auto aux = plane.getServicesToDo();
         while(!aux.empty()){
             cout << aux.front() << endl;
             aux.pop();
         }
-        cout << endl <<  "Plane: " << plane.getPlate() << endl;
     }
 }
 
@@ -459,15 +454,15 @@ Menu *ViewServicesTODO::nextMenu() {
 }
 
 ViewServicesDONE::ViewServicesDONE(App &app) : Menu(app) {
-    display();  // nao ha ordem de ordenacao especificada no menu
+      // nao ha ordem de ordenacao especificada no menu
 }
 
 void ViewServicesDONE::display() {
     for(const Plane &plane : app.getAirline().getPlanes()){
+        cout << endl << "Plane: " << plane.getPlate() << endl;
         for(Service &service : plane.getServicesDone()){
             cout << service;
         }
-        cout << endl << "Plane: " << plane.getPlate() << endl;
     }
 }
 
@@ -477,7 +472,7 @@ Menu *ViewServicesDONE::nextMenu() {
 
 ViewPlanes::ViewPlanes(App &app, std::string duty): Menu(app), duty(duty){
     // duty?
-    display();
+
 }
 
 void ViewPlanes::display() {
@@ -510,7 +505,6 @@ ViewFlights::ViewFlights(App &app, std::string sortedBy): Menu(app), sortedBy(so
         sort(app.getAirline().getFlights().begin(), app.getAirline().getFlights().end(), [](const Flight &lhs, const Flight &rhs) {
             return lhs.getNumber() < rhs.getNumber();
         });
-    display();
 }
 
 void ViewFlights::display() {
