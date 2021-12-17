@@ -252,6 +252,8 @@ void FlightMenu::display() {
     cout << "5 - View Flight's Passengers by Name" << endl;
     cout << "6 - Add Flight" << endl;
     cout << "7 - Remove Flight" << endl;
+    cout << "8 - Start flight" << endl;
+    cout << "9 - End flight" << endl;
     cout << "0 - Exit" << endl;
     cout << endl;
 }
@@ -310,6 +312,54 @@ Menu *FlightMenu::nextMenu() {
             else
                 cout << "There's no such flight";
             return this;
+        }
+        case 8: {
+            cout << "Insert flight's number" << endl;
+            unsigned int number;
+            cin >> number;
+            bool done = false;
+            for(Plane &plane : app.getAirline().getPlanes()){
+                for (Flight &flight : plane.getFlightPlan()){
+                    if(flight.getNumber() == number) {
+                        flight.openCheckIn();
+                        app.getAirline().checkInPassengers(flight);
+                        done = true;
+                        break;
+                    }
+                }
+                if(done){
+                    break;
+                }
+            }
+            if(done)
+                cout << "Flight started successfully" << endl;
+            else
+                cout << "There's no such flight" << endl;
+        }
+        case 9: {
+            cout << "Insert flight's number" << endl;
+            unsigned int number;
+            cin >> number;
+            bool done = false;
+            for(Plane &plane : app.getAirline().getPlanes()) {
+                for (Flight &flight: plane.getFlightPlan()) {
+                    if (flight.getNumber() == number && flight.getCheckInStatus()) {
+                        flight.closeCheckIn();
+                        std::remove_if(plane.getFlightPlan().begin(), plane.getFlightPlan().end(),
+                                       [&number](Flight &flight) { return number == flight.getNumber(); });
+                        std::remove_if(app.getAirline().getFlights().begin(), app.getAirline().getFlights().end(),
+                                       [&number](Flight &flight) { return number == flight.getNumber(); });
+                        done = true;
+                        break;
+                    }
+                }
+                if(done)
+                    break;
+            }
+            if(done)
+                cout << "Flight ended successfully" << endl;
+            else
+                cout << "There's no such flight occurring" << endl;
         }
         case 0: return nullptr;
         default: return invalidInput();
