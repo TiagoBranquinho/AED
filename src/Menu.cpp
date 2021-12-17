@@ -626,12 +626,12 @@ ViewPlanes::ViewPlanes(App &app, std::string choice): Menu(app) /*, choice(choic
 }
 
 void ViewPlanes::display() {
-    if(choice == "on")
+    if(onDuty == true)
         for(const Plane &plane : app.getAirline().getPlanes()){
             if(plane.getOnDuty())
                 cout << plane;
         }
-    if(choice == "off")
+    else if(onDuty == false)
         for(const Plane &plane : app.getAirline().getPlanes()){
             if(!plane.getOnDuty())
                 cout << plane;
