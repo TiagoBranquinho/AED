@@ -73,9 +73,9 @@ void TransportCart::checkCartFull() {
 }
 
 bool TransportCart::operator==(const TransportCart &cart) const{
-    return this->getNumber() == cart.getNumber();
+    return this->getId() == cart.getId();
 }
 
-unsigned int TransportCart::getNumber() const {
-    return number;
+unsigned int TransportCart::getId() const {
+    return id;
 }

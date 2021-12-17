@@ -14,7 +14,6 @@ private:
     std::vector<Plane> planes = {Plane("A123", 89), Plane("F032", 13)};
     std::vector<Flight> flights;
     std::vector<Employee> employees;
-    std::vector<Airport> airports;
     std::vector<TransportCart> carts;
 public:
     Airline();
