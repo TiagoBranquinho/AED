@@ -26,6 +26,7 @@ public:
     std::list<Flight> getFlightPlan() const;
     std::vector<Service> getServicesDone() const;
     std::queue<Service> getServicesToDo() const;
+    list<Baggage> getTrunk() const;
     void setPlate(std::string plate);
     void setCapacity(unsigned int capacity);
     void addFlight(const Flight &flight);
@@ -33,6 +34,9 @@ public:
     void addBaggage(const Baggage &baggage);
     void removeServiceDONE(); // removes service from serviceTODO queue and adds it to serviceDONE vector
     bool validPlate(std::string plate);
+    void setServicesToDo(queue<Service> &services);
+    void setServicesDone(vector<Service> &services);
+    void setPlaneTrunk(list<Baggage> &baggages);
     bool operator==(const Plane &plane);
     friend std::ostream& operator<<(std::ostream& os, const Plane &plane);
 };

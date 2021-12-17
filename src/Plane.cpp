@@ -76,4 +76,20 @@ std::queue<Service> Plane::getServicesToDo() const{
     return servicesTODO;
 }
 
+list<Baggage> Plane::getTrunk() const {
+    return planeTrunk;
+}
+
+void Plane::setServicesToDo(queue<Service> &services) {
+    servicesTODO = services;
+}
+
+void Plane::setPlaneTrunk(list<Baggage> &baggages) {
+    planeTrunk = baggages;
+}
+
+void Plane::setServicesDone(vector<Service> &services) {
+    servicesDONE = services;
+}
+
 
