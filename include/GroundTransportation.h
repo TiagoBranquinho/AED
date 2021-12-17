@@ -31,6 +31,7 @@ public:
     void addSchedule(const Schedule &schedule);
     void removeSchedule(const Schedule &schedule);
     void sortSchedules();
+    void printSchedules();
     bool operator<(const GroundTransportation &local) const;
     friend std::ostream &operator<<(std::ostream &os, GroundTransportation &local);
 };

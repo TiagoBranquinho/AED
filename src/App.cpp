@@ -3,11 +3,11 @@
 using namespace std;
 
 App::App() {
-    loadData();
+    //loadData();
 }
 
 App::~App() {
-    saveData();
+    //saveData();
 }
 
 Airline App::getAirline() const{
@@ -64,11 +64,24 @@ void App::writeFile(int file) {
 }
 
 void App::writeAirportsFile() {
-    std::ofstream file(dataFolder + files.names.at(0));
-    file.clear();
+    std::ofstream file(dataFolder + files.names.at(0), ofstream::trunc);
     if(file.is_open()){
-       // for(const Airport &airport : airline.get()){
-     }
+        file << airports.size() << endl;
+        for(Airport &airport : airports){
+           file << airport.getName() << endl << airport.getCity() << endl;
+           file << airport.getLocals().size() << endl;
+           auto it = airport.localsBeginItr();
+           while (it != airport.localsEndItr()){
+               file << (*it).getType() << " " << (*it).getDistance() << endl;
+               file << (*it).getSchedules().size() << endl;
+               for (auto sch : (*it).getSchedules()){
+                   file << sch.getTime() << endl;
+               }
+               it++;
+           }
+           file << endl;
+       }
+    }
 }
 
 
@@ -152,7 +165,30 @@ void App::writeTranspLocalsFile() {
 }
 
 void App::readAirportsFile() {
+    std::ifstream file(dataFolder + files.names.at(0));
+    int airs, locals, distance, schs;
+    string name, city, type, schedule;
 
+    if(file.is_open()){
+        file >> airs;
+        for(int i = 0; i < airs; i++){
+            file >> name;
+            file >> city;
+            file >> locals;
+            Airport air(name, city);
+            for(int j = 0; j < locals; j++){
+                file >> type >> distance;
+                file >> schs;
+                GroundTransportation gd(type, distance);
+                for(int k = 0; k < schs; k++){
+                    file >> schedule;
+                    gd.addSchedule(Schedule(schedule));
+                }
+                air.addGroundTransportation(gd);
+            }
+            airports.push_back(air);
+        }
+    }
 }
 
 void App::readBaggagesFile() {

@@ -1,0 +1,26 @@
+2
+Airport1
+lisboa
+2
+Bus 7
+1
+11:00
+Train 10
+4
+03:20
+11:00
+20:20
+20:20
+
+Airport2
+porto
+3
+Uber 1
+0
+Taxi 2
+1
+03:20
+Uber 4
+1
+21:20
+

@@ -6,10 +6,12 @@ void TransportationLocals::print() {
 
 void TransportationLocals::addGroundTransportation(const GroundTransportation &groundTransportation) {
     locals.insert(groundTransportation);
+    sz++;
 }
 
 void TransportationLocals::removeGroundTransportation(const GroundTransportation &groundTransportation) {
     locals.remove(groundTransportation);
+    sz--;
 }
 
 vector<GroundTransportation> TransportationLocals::asVector() {
@@ -32,4 +34,8 @@ iteratorBST<GroundTransportation> TransportationLocals::beginItr() {
 
 iteratorBST<GroundTransportation> TransportationLocals::endItr() {
     return locals.end();
+}
+
+unsigned int TransportationLocals::size() {
+    return sz;
 }

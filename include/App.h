@@ -17,7 +17,7 @@ struct Filesname{
 
 class App {
 
-private:
+public:
     std::string dataFolder = "../data/";
     Filesname files;
     Airline airline;

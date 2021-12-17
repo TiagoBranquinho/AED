@@ -3,6 +3,7 @@
 //
 
 #include "../include/GroundTransportation.h"
+#include <iostream>
 
 using namespace std;
 
@@ -64,6 +65,12 @@ bool GroundTransportation::operator<(const GroundTransportation &local) const {
 ostream &operator<<(ostream &os, GroundTransportation &local) {
     os << local.getType() << endl;
     return os;
+}
+
+void GroundTransportation::printSchedules() {
+    for (auto sch : schedules){
+        cout << sch.getTime() << endl;
+    }
 }
 
 

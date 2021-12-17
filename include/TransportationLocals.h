@@ -7,9 +7,11 @@
 class TransportationLocals {
 private:
     BST<GroundTransportation> locals;
+    unsigned int sz = 0;
 public:
     TransportationLocals(): locals(GroundTransportation("", 0)){};
     void print();
+    unsigned int size();
     void addGroundTransportation(const GroundTransportation &groundTransportation);
     void removeGroundTransportation(const GroundTransportation &groundTransportation);
     vector<GroundTransportation> asVector();
