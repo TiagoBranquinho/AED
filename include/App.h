@@ -10,9 +10,8 @@
 #include "Airline.h"
 
 struct Filesname{
-    std::vector<std::string> names = {"airports.txt", "baggages.txt", "employees.txt",
-                                      "flights.txt", "passengers.txt", "planes.txt",
-                                      "servicesDone.txt", "servicesToDo.txt", "transp_locals.txt"};
+    std::vector<std::string> names = {"airports.txt", "employees.txt",
+                                      "flights.txt", "planes.txt"};
 };
 
 class App {
@@ -30,7 +29,6 @@ public:
     Airline &getAirline();
     vector<Airport> &getAirports();
     void addAirport(Airport airport);
-    void writePlanesFile();
 
 public:
     void displayMenu();
@@ -40,23 +38,14 @@ public:
     void writeFile(int file);
 
     void writeAirportsFile();
-    void writeBaggagesFile();
     void writeEmployeesFile();
     void writeFlightsFile();
-    void writePassengersFile();
-    //
-    void writeServicesDoneFile();
-    void writeServicesToDoFile();
-    void writeTranspLocalsFile();
+    void writePlanesFile();
 
     void readAirportsFile();
-    void readBaggagesFile();
     void readEmployeesFile();
     void readFlightsFile();
-    void readPassengersFile();
     void readPlanesFile();
-    void readServicesFile();
-    void readTranspLocalsFile();
 };
 
 

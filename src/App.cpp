@@ -37,13 +37,9 @@ void App::saveData() {
 void App::readFile(int file) {
     switch (file) {
         case 0: readAirportsFile(); break;
-        case 1: readBaggagesFile(); break;
-        case 2: readEmployeesFile(); break;
-        case 3: readFlightsFile(); break;
-        case 4: readPassengersFile(); break;
-        case 5: readPlanesFile(); break;
-        case 6: readServicesFile(); break;
-        case 7: readTranspLocalsFile(); break;
+        case 1: readEmployeesFile(); break;
+        case 2: readFlightsFile(); break;
+        case 3: readPlanesFile(); break;
         default: break;
     }
 }
@@ -51,14 +47,9 @@ void App::readFile(int file) {
 void App::writeFile(int file) {
     switch (file) {
         case 0: writeAirportsFile();break;
-        case 1: writeBaggagesFile();break;
-        case 2: writeEmployeesFile();break;
-        case 3: writeFlightsFile();break;
-        case 4: writePassengersFile();break;
-        case 5: writePlanesFile();break;
-        case 6: writeServicesDoneFile();break;
-        case 7: writeServicesToDoFile();break;
-        case 8: writeTranspLocalsFile();break;
+        case 1: writeEmployeesFile();break;
+        case 2: writeFlightsFile();break;
+        case 3: writePlanesFile();break;
         default: break;
     }
 }
@@ -84,10 +75,6 @@ void App::writeAirportsFile() {
     }
 }
 
-
-void App::writeBaggagesFile() {
-
-}
 
 void App::writeEmployeesFile() {
     std::ofstream file(dataFolder + files.names.at(2));
@@ -130,18 +117,6 @@ void App::writeFlightsFile() {
     file.close();
 }
 
-void App::writePassengersFile() {
-    std::ofstream file(dataFolder + files.names.at(4));
-    file.clear();
-    if(file.is_open()){
-        for(const auto &flight : airline.getFlights()){
-            for(const auto &passenger: flight.getPassengers())
-                file << passenger;
-        }
-        file.close();
-    }
-}
-
 void App::writePlanesFile() {
     std::ofstream file(dataFolder + files.names.at(5));
     file.clear();
@@ -151,36 +126,6 @@ void App::writePlanesFile() {
         }
     }
     file.close();
-}
-
-void App::writeServicesToDoFile() {
-    std::ofstream file(dataFolder + files.names.at(6));
-    file.clear();
-    if(file.is_open()){
-        for(const Plane &plane : airline.getPlanes()){
-            while(!plane.getServicesToDo().empty()){
-                file << plane.getServicesToDo().front();
-                plane.getServicesToDo().pop();
-            }
-        }
-    }
-    file.close();
-}
-
-void App::writeServicesDoneFile() {
-    std::ofstream file(dataFolder + files.names.at(6));
-    file.clear();
-    if(file.is_open()){
-        for(const Plane &plane : airline.getPlanes()){
-            for(const Service &service : plane.getServicesDone())
-                file << service;
-        }
-    }
-    file.close();
-}
-
-void App::writeTranspLocalsFile() {
-
 }
 
 void App::readAirportsFile() {
@@ -208,10 +153,6 @@ void App::readAirportsFile() {
             airports.push_back(air);
         }
     }
-}
-
-void App::readBaggagesFile() {
-
 }
 
 void App::readEmployeesFile() {
@@ -260,10 +201,6 @@ void App::readFlightsFile() {
     file.close();
 }
 
-void App::readPassengersFile() {
-
-}
-
 void App::readPlanesFile() {
     std::string plate;
     unsigned int capacity;
@@ -272,13 +209,3 @@ void App::readPlanesFile() {
         airline.addPlane(Plane(plate,capacity));
     }
 }
-
-void App::readServicesFile() {
-
-}
-
-void App::readTranspLocalsFile() {
-
-}
-
-
