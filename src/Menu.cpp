@@ -609,7 +609,7 @@ Menu *ViewServicesDONE::nextMenu() {
     return nullptr;
 }
 
-ViewPlanes::ViewPlanes(App &app, std::string duty): Menu(app) /*, choice(choice)*/{
+ViewPlanes::ViewPlanes(App &app, std::string choice): Menu(app) /*, choice(choice)*/{
     if(choice == "on")
         onDuty = true;
     else if (choice == "off")
@@ -626,13 +626,23 @@ ViewPlanes::ViewPlanes(App &app, std::string duty): Menu(app) /*, choice(choice)
 }
 
 void ViewPlanes::display() {
-    for (const Plane &plane: app.getAirline().getPlanes()){
-        if(choice.empty() || choice == "plate" || choice == "capacity")
+    if(choice == "on")
+        for(const Plane &plane : app.getAirline().getPlanes()){
+            if(plane.getOnDuty())
+                cout << plane;
+        }
+    if(choice == "off")
+        for(const Plane &plane : app.getAirline().getPlanes()){
+            if(!plane.getOnDuty())
+                cout << plane;
+        }
+    else{
+        for (const Plane &plane: app.getAirline().getPlanes()){
             cout << plane;
-        else if(plane.getOnDuty() == onDuty)
-            cout << plane;
+        }
     }
 }
+
 
 Menu *ViewPlanes::nextMenu() {
     return nullptr;
