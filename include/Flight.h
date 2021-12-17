@@ -25,7 +25,7 @@ private:
     std::queue<Baggage> treadmill;
 public:
     Flight();
-    Flight(unsigned int number, const Date &date, Airport* origin, Airport* destiny);
+    Flight(unsigned int number, const Date *date, Airport* origin, Airport* destiny);
     void setNumber(unsigned int number);
     unsigned int getNumber() const;
     void setDate(const Date &date);
@@ -43,11 +43,16 @@ public:
     unsigned int getNumberPassengers() const;
     unsigned int getNumberBaggages() const;
     queue<Baggage> getTreadmill();
+    void setTreadmill(queue<Baggage> &q);
+    vector<Baggage> getTreadmillVect();
     void addPassenger(const Passenger &passenger);
     void removePassenger(const Passenger &passenger);
     void closeCheckIn();
     void openCheckIn();
+    void setCheckIn(bool var);
     bool getCheckInStatus() const;
+    Airport* getOriginAir() const;
+    Airport* getDestinyAir() const;
     bool operator==(const Flight &flight) const;
     bool operator<(const Flight &flight) const;
     friend std::ostream& operator<<(std::ostream& os, const Flight &flight);

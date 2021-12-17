@@ -12,7 +12,7 @@ using namespace std;
 Date::Date() = default;
 
 Date::Date(std::string date) {
-    setDate(std::move(date));
+    setDate(date);
 }
 
 Date::Date(unsigned int day, unsigned int month, unsigned int year) {

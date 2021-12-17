@@ -9,9 +9,9 @@ using namespace std;
 
 Flight::Flight() = default;
 
-Flight::Flight(unsigned int number, const Date &date, Airport* origin, Airport* destiny) {
+Flight::Flight(unsigned int number, const Date *date, Airport* origin, Airport* destiny) {
     this->number = number;
-    this->date = date;
+    this->date = *date;
     this->origin = origin;
     this->destiny = destiny;
 }
@@ -119,4 +119,31 @@ void Flight::removePassenger(const Passenger &passenger) {
     auto passengerItr = find(passengers.begin(), passengers.end(), passenger);
     if (passengerItr != passengers.end()) passengers.erase(passengerItr);
 }
+
+Airport* Flight::getOriginAir() const {
+    return origin;
+}
+
+Airport *Flight::getDestinyAir() const {
+    return destiny;
+}
+
+vector<Baggage> Flight::getTreadmillVect() {
+    vector<Baggage> v;
+    queue<Baggage> q = getTreadmill();
+    while (!q.empty()) {
+        v.push_back(q.front());
+        q.pop();
+    }
+    return v;
+}
+
+void Flight::setCheckIn(bool var) {
+    checkIn = var;
+}
+
+void Flight::setTreadmill(queue<Baggage> &q) {
+    treadmill = q;
+}
+
 

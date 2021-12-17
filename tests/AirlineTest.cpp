@@ -11,7 +11,7 @@ using testing::Eq;
 
 TEST(test_1, addBaggage){
     Date date = Date(12,3,2020);
-    Flight *f = new Flight(23, date, new Airport("air1", "Porto"), new Airport("air2", "Lisboa"));
+    Flight *f = new Flight(23, &date, new Airport("air1", "Porto"), new Airport("air2", "Lisboa"));
     Plane plane("A213", 81);
     Passenger passenger1 = Passenger("Alberto",new Baggage(14), true);
     Passenger passenger2 = Passenger("Toze", nullptr, true);
@@ -27,7 +27,7 @@ TEST(test_1, addBaggage){
 
 TEST(test_1, addPassengerToFlight){
     Date date = Date(12,3,2020);
-    Flight f = Flight(23, date, new Airport("air1", "Porto"), new Airport("air2", "Lisboa"));
+    Flight f = Flight(23, &date, new Airport("air1", "Porto"), new Airport("air2", "Lisboa"));
     Plane plane("A999", 81);
     Passenger passenger1 = Passenger("Alberto",new Baggage(14), true);
     Passenger passenger2 = Passenger("Toze", nullptr, true);
@@ -49,7 +49,7 @@ TEST(test_1, addPassengerToFlight){
 
 TEST(test_1, planeCapacity){
     Date date = Date(12,3,2020);
-    Flight *f = new Flight(23, date, new Airport("air1", "Porto"), new Airport("air2", "Lisboa"));
+    Flight *f = new Flight(23, &date, new Airport("air1", "Porto"), new Airport("air2", "Lisboa"));
     Plane plane("A778", 2);
     Passenger passenger1 = Passenger("Alberto",new Baggage(14), true);
     Passenger passenger2 = Passenger("Toze", nullptr, true);
@@ -113,7 +113,7 @@ TEST(test_1, addFlight){
     Plane plane1("A778", 2);
     Airline airline;
 
-    auto *f = new Flight(32, Date(), nullptr, nullptr);
+    auto *f = new Flight(32, new Date(), nullptr, nullptr);
     airline.addFlight(f);
     airline.removeFlight(*f);
 

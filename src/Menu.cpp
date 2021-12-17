@@ -224,7 +224,7 @@ Menu *FlightMenu::nextMenu() {
             cout << "Insert flight's number" << endl;
             unsigned int number;
             cin >> number;
-            cout << "Insert date of flight (day/month/year)" << endl;
+            cout << "Insert date of flight (year/month/day)" << endl;
             string dt;
             cin >> dt;
             Date date (dt);
@@ -239,7 +239,7 @@ Menu *FlightMenu::nextMenu() {
             auto destiny = find_if(app.getAirports().begin(), app.getAirports().end(),
                                    [&name2](const Airport &air){return air.getName()==name2;});
             if (origin != app.getAirports().end() && destiny != app.getAirports().end()){
-                app.getAirline().addFlight(new Flight(number, date, origin.base(), destiny.base()));
+                app.getAirline().addFlight(new Flight(number, &date, origin.base(), destiny.base()));
                 cout << "Flight added successfully." << endl;
             }
             else {
