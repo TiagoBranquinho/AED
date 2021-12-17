@@ -8,9 +8,9 @@
 using namespace std;
 using testing::Eq;
 TEST(test_1, createCart) {
-    TransportCart tc = TransportCart(2,3,4,1);
-    Baggage bg1(20, false);
-    Baggage bg2(12, false);
+    TransportCart tc = TransportCart(2,3,4);
+    Baggage bg1(20);
+    Baggage bg2(12);
 
     EXPECT_EQ(tc.getC(), 2);
     EXPECT_EQ(tc.getN(), 3);

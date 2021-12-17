@@ -21,7 +21,7 @@ private:
     static unsigned int ID;
 public:
     TransportCart();
-    TransportCart(unsigned int c, unsigned int n,unsigned int m, unsigned int number);
+    TransportCart(unsigned int c, unsigned int n,unsigned int m);
     unsigned int getC() const;
     unsigned int getN() const;
     unsigned int getM() const;

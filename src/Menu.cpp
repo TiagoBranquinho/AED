@@ -87,7 +87,7 @@ Menu *AirportMenu::nextMenu() {
             bool done = false;
             for (Airport &airport : app.getAirports()){
                 if(airport.getId() == id){
-                    std::remove(app.getAirports().begin(), app.getAirports().end(), airport);
+                    //std::remove(app.getAirports().begin(), app.getAirports().end(), airport); ERRO
                     done = true;
                     break;
                 }
@@ -249,7 +249,7 @@ Menu *FlightMenu::nextMenu() {
                 }
             }
             if(originExists && destinyExists)
-                app.getAirline().addFlight(Flight(number, date, &origin, &destiny));
+                //app.getAirline().addFlight(Flight(number, date, &origin, &destiny)); ERRO
             break;
         }
         case 5: {
@@ -323,7 +323,7 @@ Menu *EmployeesMenu::nextMenu() {
 
             }
             else
-                cout << "There's no such flight";
+                cout << "There's no such employee";
             break;
         }
         case 0: return nullptr;
@@ -353,7 +353,7 @@ Menu *PassengerAndBaggageMenu::nextMenu() {
             string name;
             cin >> name;
             bool wantsAutomaticCheckIn = false;
-            cout << "Insert passenger's baggage weight (0 if there insn't any)" << endl;
+            cout << "Insert passenger's baggage weight (0 if there isn't any)" << endl;
             double weight;
             cin >> weight;
             Passenger passenger;
@@ -380,31 +380,26 @@ Menu *PassengerAndBaggageMenu::nextMenu() {
             cout << "Insert flight's number" << endl;
             unsigned int number;
             cin >> number;
-            cout << "Insert passenger's name" << endl;
-            string name;
-            cin >> name;
-            bool wantsAutomaticCheckIn = false;
-            cout << "Insert passenger's baggage weight (0 if there insn't any)" << endl;
-            double weight;
-            cin >> weight;
-            Passenger passenger;
-            if(weight > 0){
-                Baggage baggage;
-                cout << "Does the passenger want automatic check in? Insert true or false" << endl;
-                cin >> wantsAutomaticCheckIn;
-                passenger = Passenger(name, &baggage, wantsAutomaticCheckIn);
-            }
-            else
-                passenger = Passenger(name, nullptr,false);
+            cout << "Insert passenger's id" << endl;
+            unsigned int id;
+            cin >> id;
             bool done = false;
-            for(Flight &flight : app.getAirline().getFlights()){
-                if(flight.getNumber() == number){
-                    flight.removePassenger(passenger);
-                    done = true;
+            for (const Flight &flight: app.getAirline().getFlights()) {
+                if (flight.getNumber() == number) {
+                    for (const Passenger &passenger: flight.getPassengers()) {
+                        if (passenger.getId() == id) {
+                            std::remove(app.getAirline().getEmployees().begin(), app.getAirline().getEmployees().end(), passenger);
+                            done = true;
+                            break;
+                        }
+                    }
+                    if (done) {
+
+                    } else
+                        cout << "There's no such flight";
+                    break;
                 }
             }
-            if(!done)
-                cout << "Invalid Flight Number!!" << endl;
             break;
         }
         case 0: return nullptr;

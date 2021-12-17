@@ -13,7 +13,7 @@ TEST(test_1, addBaggage){
     Date date = Date(12,3,2020);
     Flight f = Flight(23, date, new Airport("air1", "Porto"), new Airport("air2", "Lisboa"));
     Plane plane("A213", 81);
-    Passenger passenger1 = Passenger("Alberto",new Baggage(14,false), true);
+    Passenger passenger1 = Passenger("Alberto",new Baggage(14), true);
     Passenger passenger2 = Passenger("Toze", nullptr, true);
     Airline airline = Airline();
     airline.addFlight(f);
@@ -29,7 +29,7 @@ TEST(test_1, addPassengerToFlight){
     Date date = Date(12,3,2020);
     Flight f = Flight(23, date, new Airport("air1", "Porto"), new Airport("air2", "Lisboa"));
     Plane plane("A999", 81);
-    Passenger passenger1 = Passenger("Alberto",new Baggage(14,false), true);
+    Passenger passenger1 = Passenger("Alberto",new Baggage(14), true);
     Passenger passenger2 = Passenger("Toze", nullptr, true);
     Airline airline = Airline();
    // airline.addFlight(f); --> NOT MANDATORY
@@ -51,9 +51,9 @@ TEST(test_1, planeCapacity){
     Date date = Date(12,3,2020);
     Flight f = Flight(23, date, new Airport("air1", "Porto"), new Airport("air2", "Lisboa"));
     Plane plane("A778", 2);
-    Passenger passenger1 = Passenger("Alberto",new Baggage(14,false), true);
+    Passenger passenger1 = Passenger("Alberto",new Baggage(14), true);
     Passenger passenger2 = Passenger("Toze", nullptr, true);
-    Passenger passenger3 = Passenger("Vaca que ri",new Baggage(8, true), true);
+    Passenger passenger3 = Passenger("Vaca que ri",new Baggage(8), true);
     Airline airline = Airline();
     airline.addFlight(f);
     airline.addPlane(plane);
@@ -122,7 +122,7 @@ TEST(test_1, addFlight){
 
 TEST(test_1, addCart_removeCart){
     Airline airline;
-    TransportCart c1 (3,3,3,99);
+    TransportCart c1 (3,3,3);
 
     airline.addCart(c1);
 
