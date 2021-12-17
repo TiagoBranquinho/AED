@@ -24,6 +24,7 @@ public:
     GroundTransportation(std::string type, unsigned int distance);
     void setType(std::string type);
     void setDistance(unsigned int distance);
+    unsigned int getId() const;
     std::string getType() const;
     unsigned int getDistance() const;
     void setSchedules(std::vector<Schedule> &schedules);

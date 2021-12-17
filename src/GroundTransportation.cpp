@@ -23,6 +23,10 @@ void GroundTransportation::setDistance(unsigned int distance) {
     this->distance = distance;
 }
 
+unsigned int GroundTransportation::getId() const{
+    return id;
+}
+
 string GroundTransportation::getType() const {
     return type;
 }
