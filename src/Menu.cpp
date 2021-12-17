@@ -111,7 +111,7 @@ void PlaneMenu::display() {
     cout << "3 - View Planes off duty" << endl;
     cout << "4 - Add Service to Plane" << endl;
     cout << "5 - View ServicesTODO of Plane" << endl;
-    cout << "6 - View ServicesDONE of Plane" << endl;
+    cout << "6 - View ServicesDONE of Plane by Date" << endl;
     cout << "7 - Add Plane" << endl;
     cout << "8 - Remove Plane" << endl;
     cout << "9 - View Plane's Flights by Date" << endl;
@@ -161,7 +161,7 @@ Menu *PlaneMenu::nextMenu() {
             return this;
         }
         case 5: return new ViewServicesTODO(app);
-        case 6: return new ViewServicesDONE(app);
+        case 6: return new ViewServicesDONE(app, "date");
         case 7: {
             cout << "Insert new plane's plate" << endl;
             std::string plate;
@@ -206,8 +206,10 @@ void FlightMenu::display() {
     cout << "1 - View all Flights" << endl;
     cout << "2 - View Flights sorted by Date" << endl;
     cout << "3 - View Flights sorted by Id" << endl;
-    cout << "4 - Add Flight" << endl;
-    cout << "5 - Remove Flight" << endl;
+    cout << "4 - View Flight's Passengers by Id" << endl;
+    cout << "5 - View Flight's Passengers by Name" << endl;
+    cout << "6 - Add Flight" << endl;
+    cout << "7 - Remove Flight" << endl;
     cout << "0 - Exit" << endl;
     cout << endl;
 }
@@ -217,7 +219,9 @@ Menu *FlightMenu::nextMenu() {
         case 1: return new ViewFlights(app);
         case 2: return new ViewFlights(app,"date");
         case 3: return new ViewFlights(app,"id");
-        case 4: {
+        case 4: return new ViewFlightPassengers(app,"id");
+        case 5: return new ViewFlightPassengers(app,"name");
+        case 6: {
             cout << "Insert flight's number" << endl;
             unsigned int number;
             cin >> number;
@@ -244,7 +248,7 @@ Menu *FlightMenu::nextMenu() {
             }
             return this;
         }
-        case 5: {
+        case 7: {
             cout << "Insert flight's number" << endl;
             unsigned int number;
             cin >> number;
@@ -370,9 +374,9 @@ Menu *PassengerAndBaggageMenu::nextMenu() {
             unsigned int id;
             cin >> id;
             bool done = false;
-            for (const Flight &flight: app.getAirline().getFlights()) {
+            for (Flight &flight: app.getAirline().getFlights()) {
                 if (flight.getNumber() == number) {
-                    for (const Passenger &passenger: flight.getPassengers()) {
+                    for (Passenger &passenger: flight.getPassengers()) {
                         if (passenger.getId() == id) {
                             std::remove(app.getAirline().getEmployees().begin(), app.getAirline().getEmployees().end(), passenger);
                             done = true;
@@ -421,8 +425,7 @@ ViewGroundLocals::ViewGroundLocals(App &app, std::string sortedBy): Menu(app), s
         sort(airport.localsBeginItr(), airport.localsEndItr(), [](const GroundTransportation &lhs, const GroundTransportation &rhs) {
             return lhs.getDistance() < rhs.getDistance();
         });
-    }
-     */
+    }*/
 }
 void ViewGroundLocals::display() {
     for(Airport &airport : app.getAirports()){
@@ -435,16 +438,20 @@ Menu *ViewGroundLocals::nextMenu() {
 }
 
 ViewServicesTODO::ViewServicesTODO(App &app) : Menu(app) {
-     // nao ha ordem de ordenacao especificada no menu
+    cout << "Insert plane's plate" << endl;
+    std::string plate;
+    cin >> plate;
+    this->plate = plate;
 }
 
 void ViewServicesTODO::display() {
     for(const Plane &plane : app.getAirline().getPlanes()){
-        cout << endl <<  "Plane: " << plane.getPlate() << endl;    
-        auto aux = plane.getServicesToDo();
-        while(!aux.empty()){
-            cout << aux.front() << endl;
-            aux.pop();
+        if(plane.getPlate() == plate){
+            auto aux = plane.getServicesToDo();
+            while(!aux.empty()){
+                cout << aux.front();
+                aux.pop();
+            }
         }
     }
 }
@@ -453,17 +460,24 @@ Menu *ViewServicesTODO::nextMenu() {
     return nullptr;
 }
 
-ViewServicesDONE::ViewServicesDONE(App &app) : Menu(app) {
-      // nao ha ordem de ordenacao especificada no menu
+ViewServicesDONE::ViewServicesDONE(App &app, std::string sortedBy) : Menu(app),sortedBy(sortedBy) {
+    cout << "Insert plane's plate" << endl;
+    cin >> plate;
+    for(const Plane &plane : app.getAirline().getPlanes()){
+        if(plane.getPlate() == plate){
+            if(sortedBy == "date")
+                sort(plane.getServicesDone().begin(), plane.getServicesDone().end(), [](const Service &lhs, const Service &rhs) {
+                    return lhs.getDate() < rhs.getDate();
+                });
+        }
+    }
 }
 
 void ViewServicesDONE::display() {
-    for(const Plane &plane : app.getAirline().getPlanes()){
-        cout << endl << "Plane: " << plane.getPlate() << endl;
-        for(Service &service : plane.getServicesDone()){
-            cout << service;
-        }
-    }
+    for (const Plane &plane: app.getAirline().getPlanes())
+        if (plane.getPlate() == plate)
+            for (Service &service: plane.getServicesDone())
+                cout << service;
 }
 
 Menu *ViewServicesDONE::nextMenu() {
@@ -485,11 +499,27 @@ Menu *ViewPlanes::nextMenu() {
 }
 
 ViewPlaneFlights::ViewPlaneFlights(App &app, std::string sortedBy): Menu(app), sortedBy(sortedBy) {
-
+    cout << "Insert plane's plate" << endl;
+    cin >> plate;
+    for(const Plane &plane : app.getAirline().getPlanes()){
+        if(plane.getPlate() == plate){
+            for(const Flight &flight : plane.getFlightPlan())
+                aux_vector.push_back(flight);
+            if (sortedBy == "number")
+                sort(aux_vector.begin(), aux_vector.end(), [](const Flight &lhs, const Flight &rhs) {
+                    return lhs.getNumber() < rhs.getNumber();
+                });
+            if (sortedBy == "date")
+                sort(aux_vector.begin(), aux_vector.end(), [](Flight &lhs, Flight &rhs) {
+                    return lhs.getDate() < rhs.getDate();
+                });
+        }
+    }
 }
 
 void ViewPlaneFlights::display() {
-
+    for(const Flight &flight : aux_vector)
+        cout << flight;
 }
 
 Menu *ViewPlaneFlights::nextMenu() {
@@ -517,11 +547,31 @@ Menu *ViewFlights::nextMenu() {
 }
 
 ViewFlightPassengers::ViewFlightPassengers(App &app, std::string sortedBy): Menu(app), sortedBy(sortedBy) {
-
+    cout << "Insert flight's number" << endl;
+    cin >> number;
+    for (const Flight &flight: app.getAirline().getFlights()) {
+        if (flight.getNumber() == number) {
+            if (sortedBy == "id") {
+                for (const Passenger &p: flight.getPassengers())
+                    aux_vector.push_back(p);
+                sort(aux_vector.begin(), aux_vector.end(), [](const Passenger &lhs, const Passenger &rhs) {
+                    return lhs.getId() < rhs.getId();
+                });
+            }
+            if (sortedBy == "name") {
+                for (const Passenger &p: flight.getPassengers())
+                    aux_vector.push_back(p);
+                sort(aux_vector.begin(), aux_vector.end(), [](const Passenger &lhs, const Passenger &rhs) {
+                    return lhs.getName() < rhs.getName();
+                });
+            }
+        }
+    }
 }
 
 void ViewFlightPassengers::display() {
-
+    for(const Passenger &passenger : aux_vector)
+        cout << passenger;
 }
 
 Menu *ViewFlightPassengers::nextMenu() {
@@ -529,11 +579,19 @@ Menu *ViewFlightPassengers::nextMenu() {
 }
 
 ViewEmployees::ViewEmployees(App &app, std::string sortedBy): Menu(app), sortedBy(sortedBy) {
-
+    if (sortedBy == "id")
+        sort(app.getAirline().getEmployees().begin(), app.getAirline().getEmployees().end(), [](const Employee &lhs, const Employee &rhs) {
+            return lhs.getId() < rhs.getId();
+        });
+    if (sortedBy == "name")
+        sort(app.getAirline().getEmployees().begin(), app.getAirline().getEmployees().end(), [](const Employee &lhs, const Employee &rhs) {
+            return lhs.getName() < rhs.getName();
+        });
 }
 
 void ViewEmployees::display() {
-
+    for(const Employee &employee : app.getAirline().getEmployees())
+        cout << employee;
 }
 
 Menu *ViewEmployees::nextMenu() {

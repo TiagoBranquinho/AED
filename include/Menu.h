@@ -75,6 +75,7 @@ public:
 };
 
 class ViewServicesTODO: public Menu{
+    std::string plate;
 public:
     ViewServicesTODO(App &app);
     void display() override;
@@ -82,8 +83,10 @@ public:
 };
 
 class ViewServicesDONE: public Menu{
+    std::string sortedBy;
+    std::string plate;
 public:
-    ViewServicesDONE(App &app);
+    ViewServicesDONE(App &app, std::string sortedBy = "");
     void display() override;
     Menu *nextMenu() override;
 };
@@ -97,7 +100,10 @@ public:
 };
 
 class ViewPlaneFlights: public Menu{
+private:
+    std::string plate;
     std::string sortedBy;
+    std::vector<Flight> aux_vector;
 public:
     ViewPlaneFlights(App &app, std::string sortedBy="");
     void display() override;
@@ -114,6 +120,8 @@ public:
 
 class ViewFlightPassengers: public Menu{
     std::string sortedBy;
+    unsigned int number;
+    std::vector<Passenger> aux_vector;
 public:
     ViewFlightPassengers(App &app, std::string sortedBy="");
     void display() override;

@@ -54,7 +54,6 @@ public:
     Airport* getOriginAir() const;
     Airport* getDestinyAir() const;
     bool operator==(const Flight &flight) const;
-    bool operator<(const Flight &flight) const;
     friend std::ostream& operator<<(std::ostream& os, const Flight &flight);
 };
 
