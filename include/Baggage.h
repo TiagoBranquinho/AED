@@ -12,17 +12,15 @@ private:
     unsigned int id;
     double MAX_WEIGHT = 25;
     double weight;
-    bool special;
     bool overweight;
     static unsigned int ID;
 
 public:
     Baggage();
-    Baggage(double weight, bool special);
+    Baggage(double weight);
+    unsigned int getId() const;
     double getWeight() const;
     void setWeight(double weight);
-    bool isSpecial() const;
-    void setSpecial(bool special);
     bool isOverweight() const;
     void checkWeight();
     bool operator==(const Baggage &baggage);

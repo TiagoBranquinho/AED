@@ -10,11 +10,14 @@ unsigned Baggage::ID = 0;
 
 Baggage::Baggage() = default;
 
-Baggage::Baggage(double weight, bool special) {
+Baggage::Baggage(double weight) {
     this->weight = weight;
-    this->special = special;
     id = ID++;
     checkWeight();
+}
+
+unsigned int Baggage::getId() const {
+    return id;
 }
 
 double Baggage::getWeight() const{
@@ -24,15 +27,6 @@ double Baggage::getWeight() const{
 void Baggage::setWeight(double weight) {
     this->weight = weight;
     checkWeight();
-
-}
-
-bool Baggage::isSpecial() const{
-    return special;
-}
-
-void Baggage::setSpecial(bool special) {
-    this->special = special;
 
 }
 
@@ -48,5 +42,5 @@ void Baggage::checkWeight() {
 }
 
 bool Baggage::operator==(const Baggage &baggage) {
-    return(this->getWeight() == baggage.getWeight() && this->isSpecial() == baggage.isSpecial());
+    return(this->id == baggage.getId());
 }
