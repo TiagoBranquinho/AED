@@ -70,8 +70,33 @@ Menu *AirportMenu::nextMenu() {
         case 1: return new ViewAirports(app, "name");
         case 2: return new ViewAirports(app, "city");
         case 3: return new ViewGroundLocals(app, "distance");
-        case 4: return nullptr;
-        case 5: return nullptr;
+        case 4: {
+            cout << "Insert new airport's name" << endl;
+            std::string name;
+            cin >> name;
+            cout << "Insert new airport's city" << endl;
+            std::string city;
+            cin >> city;
+            app.addAirport(Airport(name, city));
+        }
+        case 5: {
+            cout << "Insert airport's name" << endl;
+            std::string name;
+            cin >> name;
+            bool done = false;
+            for (Airport airport : app.getAirports()){
+                if(airport.getName() == name){
+                    std::remove(app.getAirports().begin(), app.getAirports().end(), airport);
+                    done = true;
+                    break;
+                }
+            }
+            if(done){
+
+            }
+            else
+                cout << "There's no such plane";
+        }
         case 6: return nullptr;
         case 0: return nullptr;
         default: return invalidInput();
@@ -196,13 +221,26 @@ Menu *FlightMenu::nextMenu() {
             cin >> month;
             cin >> year;
             Date date (day, month, year);
-            cout << "Insert origin of flight" << endl;
-            //Airport origin;
-            //cin >> origin;
-            cout << "Insert destiny of flight" << endl;
-            //Airport destiny;
-            //cin >> destiny;
-            //app.getAirline().addFlight(Flight(number, date, origin, destiny));
+            cout << "Insert the airport of origin of the flight" << endl;
+            std::string name1;
+            cin >> name1;
+            cout << "Insert the airport of destiny of the flight" << endl;
+            std::string name2;
+            cin >> name2;
+            bool originExists = false;
+            bool destinyExists = false;
+            for (Airport &airport : app.getAirports()){
+                if(airport.getName() == name1) {
+                    Airport origin = airport;
+                    originExists = true;
+                }
+                else if(airport.getName() == name2) {
+                    Airport destiny = airport;
+                    destinyExists = true;
+                }
+            }
+            if(originExists && destinyExists)
+                app.getAirline().addFlight(Flight(number, date, &origin, &destiny));
         }
         case 5: {
             cout << "Insert flight's number" << endl;

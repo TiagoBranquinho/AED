@@ -10,8 +10,16 @@ App::~App() {
     saveData();
 }
 
-Airline App::getAirline() {
+Airline App::getAirline() const{
     return airline;
+}
+
+vector<Airport> App::getAirports() const{
+    return airports;
+}
+
+void App::addAirport(Airport airport) {
+    airports.push_back(airport);
 }
 
 void App::loadData() {

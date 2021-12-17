@@ -21,12 +21,15 @@ private:
     std::string dataFolder = "../data/";
     Filesname files;
     Airline airline;
+    vector<Airport> airports;
 
 public:
     App();
     ~App();
     void start();
-    Airline getAirline();
+    Airline getAirline() const;
+    vector<Airport> getAirports() const;
+    void addAirport(Airport airport);
     void writePlanesFile();
 
 private:
