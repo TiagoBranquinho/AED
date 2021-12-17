@@ -149,15 +149,17 @@ PlaneMenu::PlaneMenu(App &app): Menu(app){}
 void PlaneMenu::display() {
     cout << "Plane menu:" << endl;
     cout << "1 - View all Planes" << endl;
-    cout << "2 - View Planes on duty" << endl;
-    cout << "3 - View Planes off duty" << endl;
-    cout << "4 - Add Service to Plane" << endl;
-    cout << "5 - View ServicesTODO of Plane" << endl;
-    cout << "6 - View ServicesDONE of Plane by Date" << endl;
-    cout << "7 - Add Plane" << endl;
-    cout << "8 - Remove Plane" << endl;
-    cout << "9 - View Plane's Flights by Date" << endl;
-    cout << "10 - View Plane's Flights by Number" << endl;
+    cout << "2 - View all Planes by plate" << endl;
+    cout << "3 - View all Planes by capacity" << endl;
+    cout << "4 - View Planes on duty" << endl;
+    cout << "5 - View Planes off duty" << endl;
+    cout << "6 - Add Service to Plane" << endl;
+    cout << "7 - View ServicesTODO of Plane" << endl;
+    cout << "8 - View ServicesDONE of Plane by Date" << endl;
+    cout << "9 - Add Plane" << endl;
+    cout << "10 - Remove Plane" << endl;
+    cout << "11 - View Plane's Flights by Date" << endl;
+    cout << "12 - View Plane's Flights by Number" << endl;
     cout << "0 - Exit" << endl;
     cout << endl;
 }
@@ -165,9 +167,11 @@ void PlaneMenu::display() {
 Menu *PlaneMenu::nextMenu() {
     switch (readOpt()) {
         case 1: return new ViewPlanes(app);
-        case 2: return new ViewPlanes(app,"on");
-        case 3: return new ViewPlanes(app, "off");
-        case 4: {
+        case 2: return new ViewPlanes(app,"plate");
+        case 3: return new ViewPlanes(app,"capacity");
+        case 4: return new ViewPlanes(app,"on");
+        case 5: return new ViewPlanes(app, "off");
+        case 6: {
             cout << "Insert plane plate" << endl;
             std::string plate;
             cin >> plate;
@@ -202,9 +206,9 @@ Menu *PlaneMenu::nextMenu() {
             }
             return this;
         }
-        case 5: return new ViewServicesTODO(app);
-        case 6: return new ViewServicesDONE(app, "date");
-        case 7: {
+        case 7: return new ViewServicesTODO(app);
+        case 8: return new ViewServicesDONE(app, "date");
+        case 9: {
             cout << "Insert new plane's plate" << endl;
             std::string plate;
             cin >> plate;
@@ -214,7 +218,7 @@ Menu *PlaneMenu::nextMenu() {
             app.getAirline().addPlane(Plane(plate, capacity));
             return this;
         }
-        case 8: {
+        case 10: {
             cout << "Insert plane's plate" << endl;
             std::string plate;
             cin >> plate;
@@ -233,8 +237,8 @@ Menu *PlaneMenu::nextMenu() {
                 cout << "There's no such plane";
             return this;
         }
-        case 9:  return new ViewPlaneFlights(app,"date");
-        case 10: return new ViewPlaneFlights(app,"number");
+        case 11:  return new ViewPlaneFlights(app,"date");
+        case 12: return new ViewPlaneFlights(app,"number");
         case 0: return nullptr;
         default: return invalidInput();
     }
@@ -559,7 +563,7 @@ Menu *ViewServicesTODO::nextMenu() {
     return nullptr;
 }
 
-ViewServicesDONE::ViewServicesDONE(App &app, std::string sortedBy) : Menu(app),sortedBy(sortedBy) {
+ViewServicesDONE::ViewServicesDONE(App &app, std::string sortedBy) : Menu(app)/*,sortedBy(sortedBy)*/ {
     cout << "Insert plane's plate" << endl;
     cin >> plate;
     for(const Plane &plane : app.getAirline().getPlanes()){
@@ -583,14 +587,31 @@ Menu *ViewServicesDONE::nextMenu() {
     return nullptr;
 }
 
-ViewPlanes::ViewPlanes(App &app, std::string duty): Menu(app), duty(duty){
-    // duty?
+ViewPlanes::ViewPlanes(App &app, std::string duty): Menu(app) /*, choice(choice)*/{
+    if(choice == "on")
+        onDuty = true;
+    else if (choice == "off")
+        onDuty = false;
+    else{
+        if(choice == "plate")
+            sort(app.getAirline().getPlanes().begin(), app.getAirline().getPlanes().end(), [](const Plane &lhs, const Plane &rhs) {
+                return lhs.getPlate() < rhs.getPlate();
+            });
+        if(choice == "capacity")
+            sort(app.getAirline().getPlanes().begin(), app.getAirline().getPlanes().end(), [](const Plane &lhs, const Plane &rhs) {
+                return lhs.getCapacity() < rhs.getCapacity();
+            });
+    }
 
 }
 
 void ViewPlanes::display() {
-    for (Plane &plane: app.getAirline().getPlanes())
-        cout << plane;
+    for (Plane &plane: app.getAirline().getPlanes()){
+        if(choice.empty())
+            cout << plane;
+        else if(plane.getOnDuty() == onDuty)
+            cout << plane;
+    }
 }
 
 Menu *ViewPlanes::nextMenu() {

@@ -92,9 +92,10 @@ public:
 };
 
 class ViewPlanes: public Menu{
-    std::string duty;
+    std::string choice;
+    bool onDuty;
 public:
-    ViewPlanes(App &app, std::string duty="");
+    ViewPlanes(App &app, std::string choice="");
     void display() override;
     Menu *nextMenu() override;
 };
