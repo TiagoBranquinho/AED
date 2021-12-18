@@ -24,10 +24,6 @@ Baggage* Passenger::getBaggage() const{
     return baggage;
 }
 
-std::string Passenger::getName() const {
-    return name;
-}
-
 void Passenger::checkIn(){
     checkedIn = true;
 }

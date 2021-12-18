@@ -134,22 +134,6 @@ public:
     Menu *nextMenu() override;
 };
 
-class ViewPassengers: public Menu{
-    std::string sortedBy;
-public:
-    ViewPassengers(App &app, const std::string& sortedBy="");
-    void display() override;
-    Menu *nextMenu() override;
-};
-
-class ViewBaggages: public Menu{
-    std::string sortedBy;
-public:
-    ViewBaggages(App &app, std::string sortedBy="");
-    void display() override;
-    Menu *nextMenu() override;
-};
-
 class ViewSchedules: public Menu{
     GroundTransportation groundTransp;
 public:

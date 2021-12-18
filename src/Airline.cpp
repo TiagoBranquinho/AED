@@ -126,7 +126,7 @@ void Airline::baggageToPlane(Flight &flight) {
         if(find(plane.getFlightPlan().begin(), plane.getFlightPlan().end(), flight) != plane.getFlightPlan().end()) {
             for(TransportCart &cart : carts){
                 if(cart.getId() == flight.getNumber()){
-                    for(list<stack<Baggage>> carriage : cart.getSlots()){
+                    for(list<stack<Baggage>> &carriage : cart.getSlots()){
                         for(stack<Baggage> stack : carriage){
                             while(!stack.empty()){
                                 plane.addBaggage(stack.top());
@@ -147,7 +147,7 @@ void Airline::addToTreadmill(const Baggage &baggage, Flight &flight) {
 }
 
 bool Airline::validPlane(const Plane &plane) {
-    for(Plane p : planes){
+    for(Plane &p : planes){
         if (p == plane)
             return true;
     }

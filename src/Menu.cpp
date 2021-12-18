@@ -940,23 +940,6 @@ Menu *ViewEmployees::nextMenu() {
     return nullptr;
 }
 
-void ViewPassengers::display() {
-
-}
-
-Menu *ViewPassengers::nextMenu() {
-    return nullptr;
-}
-
-
-void ViewBaggages::display() {
-
-}
-
-Menu *ViewBaggages::nextMenu() {
-    return nullptr;
-}
-
 ViewSchedules::ViewSchedules(App &app): Menu(app) {
     cout << "Insert Airport's id " << endl;
     int airId = readInt();

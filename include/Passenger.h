@@ -20,7 +20,6 @@ public:
     Passenger(std::string name, Baggage *baggage, bool wantsAutomaticCheckIn);
     void setBaggage(Baggage *baggage);
     Baggage* getBaggage() const;
-    std::string getName() const;
     void checkIn();
     bool isCheckedIn() const;
     bool wantsAutomaticCheckIn() const;
