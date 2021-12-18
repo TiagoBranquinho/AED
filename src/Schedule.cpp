@@ -96,3 +96,9 @@ Schedule Schedule::convertToSchedule(int min) {
     res.setTime(h, m);
     return res;
 }
+
+std::ostream &operator<<(ostream &os, Schedule &schedule) {
+    os << schedule.getTime();
+    return os;
+}
+

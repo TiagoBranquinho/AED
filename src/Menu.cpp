@@ -74,6 +74,9 @@ void AirportMenu::display() {
     cout << "6 - Remove Airport" << endl;
     cout << "7 - Add Ground Local to Airport" << endl;
     cout << "8 - Remove Ground Local from Airport" << endl;
+    cout << "9 - View Schedules from Ground Local from Airport" << endl;
+    cout << "10 - Add Schedule to Ground Locals of Airport" << endl;
+    cout << "11 - Remove Schedule from Ground Locals of Airport" << endl;
     cout << "0 - Exit" << endl;
     cout << endl;
 }
@@ -147,6 +150,56 @@ Menu *AirportMenu::nextMenu() {
                 }
             }
             return this;
+        }
+        case 9: return new ViewSchedules(app);
+        case 10:{
+            cout << "Insert airport id " << endl;
+            int airId = readInt();
+            cout << "Insert Ground Local id" << endl;
+            int gdId = readInt();
+            cout << "Insert schedule in format (HH:MM) " << endl;
+            string schedule = readStr();
+            if (schedule.empty()) return this;
+            auto airp = find_if(app.getAirports().begin(), app.getAirports().end(), [&airId](const Airport &air){return air.getId() == airId;});
+            if (airp != app.getAirports().end()){
+                auto gd = airp->getLocals().beginItr();
+                while (gd != airp->getLocals().endItr()){
+                    if ((*gd).getId() == gdId){
+                        (*gd).addSchedule(Schedule(schedule));
+                        cout << "Schedule added successfully " << endl;
+                        return nullptr;
+                    }
+                    gd++;
+                }
+                cout << "Ground Local not found! " << endl;
+            }
+            return nullptr;
+        }
+        case 11:{
+            cout << "Confirm Airport id " << endl;
+            int airId = readInt();
+            cout << "Insert Ground Local id" << endl;
+            int gdId = readInt();
+            cout << "Insert schedule in format (HH:MM) " << endl;
+            string schedule = readStr();
+            if (schedule.empty()) return this;
+            auto airp = find_if(app.getAirports().begin(), app.getAirports().end(),
+                                [&airId](const Airport &air){return air.getId() == airId;});
+
+            auto gd = airp->getLocals().beginItr();
+            while (gd != airp->getLocals().endItr()){
+                if ((*gd).getId() == gdId){
+                    auto done = remove_if((*gd).getSchedules().begin(), (*gd).getSchedules().end(),
+                                          [&schedule](const Schedule &sch) { return sch.getTime() == schedule; });
+                    if (done != (*gd).getSchedules().end()){
+                        cout << "Successfully schedule removed." << endl;
+                        return nullptr;
+                    }
+                }
+                gd++;
+            }
+            cout << "Schedule not found!" << endl;
+            return nullptr;
         }
         case 0: return nullptr;
         default: return invalidInput();
@@ -778,5 +831,37 @@ void ViewBaggages::display() {
 }
 
 Menu *ViewBaggages::nextMenu() {
+    return nullptr;
+}
+
+ViewSchedules::ViewSchedules(App &app): Menu(app) {
+    cout << "Insert Airport's id " << endl;
+    int airId = readInt();
+    cout << "Insert Ground Local id" << endl;
+    int gdId = readInt();
+    auto airp = find_if(app.getAirports().begin(), app.getAirports().end(), [&airId](const Airport &air){return air.getId() == airId;});
+    if (airp == app.getAirports().end()){
+        cout << "Airport not found!" << endl;
+        return;
+    }
+    auto gd = airp->getLocals().beginItr();
+    while (gd != airp->getLocals().endItr()){
+        if ((*gd).getId() == gdId){
+            groundTransp = (*gd);
+            return;
+        }
+        gd++;
+    }
+    cout << "Ground Local not found!" << endl;
+}
+
+void ViewSchedules::display() {
+    for(Schedule &sch : groundTransp.getSchedules()){
+        cout << sch << endl;
+    }
+    waitForKey();
+}
+
+Menu *ViewSchedules::nextMenu() {
     return nullptr;
 }

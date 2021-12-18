@@ -21,6 +21,7 @@ private:
     static unsigned int ID;
 
 public:
+    GroundTransportation();
     GroundTransportation(std::string type, unsigned int distance);
     void setType(std::string type);
     void setDistance(unsigned int distance);

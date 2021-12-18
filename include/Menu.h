@@ -150,4 +150,12 @@ public:
     Menu *nextMenu() override;
 };
 
+class ViewSchedules: public Menu{
+    GroundTransportation groundTransp;
+public:
+    ViewSchedules(App &app);
+    void display() override;
+    Menu *nextMenu() override;
+};
+
 #endif //PROJETOAEROPORTO_MENU_H

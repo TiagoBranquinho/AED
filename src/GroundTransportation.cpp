@@ -9,6 +9,8 @@ using namespace std;
 
 unsigned GroundTransportation::ID = 0;
 
+GroundTransportation::GroundTransportation() = default;
+
 GroundTransportation::GroundTransportation(string type, unsigned int distance) {
     this->type = type;
     this->distance = distance;

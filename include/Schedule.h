@@ -30,6 +30,7 @@ public:
     int getMin() const;
     bool invalidSchedule(unsigned int hour, unsigned int min);
     bool operator<(const Schedule &s) const;
+    friend std::ostream &operator<<(std::ostream &os, Schedule &schedule);
     Schedule diffTime(const Schedule& sch);
     Schedule addTime(const Schedule& sch) const;
 private:
