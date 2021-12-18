@@ -33,13 +33,11 @@ public:
     void saveData();
     void readFile(int file);
     void writeFile(int file);
-
     void writeAirportsFile();
     void writeEmployeesFile();
     void writeFlightsFile();
     void writePlanesFile();
     void writeCartsFile();
-
     void readAirportsFile();
     void readEmployeesFile();
     void readFlightsFile();

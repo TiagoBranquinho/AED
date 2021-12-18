@@ -11,7 +11,9 @@ public:
     virtual ~Menu();
     virtual void display()=0;
     virtual Menu *nextMenu()=0;
-    int readOpt();
+    int readInt();
+    std::string readStr();
+    void waitForKey();
     Menu *invalidInput();
 };
 

@@ -27,6 +27,6 @@ Uber 4
 sacarneiro
 porto
 1
-train 10
+train 3
 0
 
