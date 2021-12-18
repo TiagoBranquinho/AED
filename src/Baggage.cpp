@@ -41,6 +41,11 @@ void Baggage::checkWeight() {
         overweight = true;
 }
 
-bool Baggage::operator==(const Baggage &baggage) {
+bool Baggage::operator==(const Baggage &baggage) const{
     return(this->id == baggage.getId());
+}
+
+std::ostream &operator<<(ostream &os, const Baggage &baggage) {
+    os << "id: " << baggage.getId() << " " << baggage.getWeight();
+    return os;
 }

@@ -23,7 +23,7 @@ public:
     void setWeight(double weight);
     bool isOverweight() const;
     void checkWeight();
-    bool operator==(const Baggage &baggage);
+    bool operator==(const Baggage &baggage) const;
     friend std::ostream& operator<<(std::ostream& os, const Baggage &baggage);
 };
 
