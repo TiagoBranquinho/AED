@@ -8,8 +8,9 @@ Menu::~Menu() = default;
 Menu::Menu(App &app): app(app) {}
 
 int Menu::readInt() {
-    int opt; string optstr; stringstream ss;
+    int opt; string optstr;
     while (true){
+        stringstream ss;
         ss << readStr(); ss >> opt;
         if(!ss.fail() && ss.eof() && opt>=0) break;
         cout << "Invalid input. Try a valid integer..." << endl;
