@@ -1,15 +1,21 @@
 4
 Airport1
 lisboa
-2
+3
+Bus 3
+0
+Train 4
+0
 Bus 7
 1
 11:00
+
 Train 10
 3
 03:20
 11:00
 20:20
+
 
 Airport2
 porto

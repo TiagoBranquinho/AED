@@ -254,12 +254,14 @@ Menu *PlaneMenu::nextMenu() {
             cout << "Insert plane plate" << endl;
             std::string plate = readStr();
             if (plate.empty()) return this;
-            for(Plane plane : app.getAirline().getPlanes()){
+            bool employeeExists = false;
+            bool done = false;
+            for(Plane &plane : app.getAirline().getPlanes()){
                 if(plane.getPlate() == plate){
                     cout << "Insert type of service" << endl;
                     std::string type = readStr();
                     if (type.empty()) return this;
-                    cout << "Insert date of service (day/month/year)" << endl;
+                    cout << "Insert date of service (day then month then year)" << endl;
                     unsigned int day, month, year;
                     day = readInt();
                     month = readInt();
@@ -271,17 +273,23 @@ Menu *PlaneMenu::nextMenu() {
                     for (Employee &employee : app.getAirline().getEmployees()){
                         if(employee.getId() == id){
                             service = Service (type, date, &employee);
+                            employeeExists = true;
                             break;
                         }
-                        else
-                            cout << "There's no such employee";
                     }
-                    plane.addService(service);
-                    break;
+                    if(!employeeExists)
+                        cout << "There's no such employee" << endl;
+                    else {
+                        plane.addService(service);
+                        done = true;
+                        break;
+                    }
                 }
-                else
-                    cout << "There's no such plane";
             }
+            if(!done)
+                cout << "There's no such plane" << endl;
+            else
+                cout << "Service added successfully" << endl;
             return this;
         }
         case 7: return new ViewServicesTODO(app);
