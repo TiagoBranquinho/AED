@@ -20,7 +20,7 @@ private:
     Schedule duration;
     Airport *origin, *destiny;
     std::list<Passenger> passengers;
-    bool checkIn = false;
+    bool checkIn;
     unsigned int numberOfBaggages = 0;
     std::queue<Baggage> treadmill;
 public:

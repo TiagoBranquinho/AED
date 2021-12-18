@@ -490,6 +490,7 @@ Menu *FlightMenu::nextMenu() {
                         std::remove_if(app.getAirline().getFlights().begin(), app.getAirline().getFlights().end(),
                                        [&number](Flight &flight) { return number == flight.getNumber(); });
                         plane.setOnDuty(false);
+                        plane.getTrunk().clear();
                         done = true;
                         break;
                     }
@@ -594,15 +595,17 @@ Menu *PassengerAndBaggageMenu::nextMenu() {
                 passenger = Passenger(name, nullptr,false);
             for(Flight &flight : app.getAirline().getFlights()){
                 if(flight.getNumber() == number) {
-                    try {
-                        app.getAirline().addPassengerToFlight(flight, passenger);
+                    if (!flight.getCheckInStatus()) {
+                        try {
+                            app.getAirline().addPassengerToFlight(flight, passenger);
+                        }
+                        catch (InvalidFlightException &) {
+                            cout << "There's no such flight" << endl;
+                            return this;
+                        }
+                        cout << "Added passenger successfully" << endl;
+                        break;
                     }
-                    catch(InvalidFlightException&) {
-                        cout << "There's no such flight" << endl;
-                        return this;
-                    }
-                    cout << "Added passenger successfully" << endl;
-                    break;
                 }
             }
             return this;
@@ -616,18 +619,24 @@ Menu *PassengerAndBaggageMenu::nextMenu() {
             bool flightExists = false;
             for (Flight &flight: app.getAirline().getFlights()) {
                 if (flight.getNumber() == number) {
-                    flightExists = true;
-                    for (auto it = flight.getPassengers().begin(); it != flight.getPassengers().end(); it++) {
-                        if ((*it).getId() == id) {
-                            flight.getPassengers().erase(it);
-                            it--;
-                            cout << "Passenger removed successfully" << endl;
-                            done = true;
-                            break;
+                    if(!flight.getCheckInStatus()) {
+                        flightExists = true;
+                        for (auto it = flight.getPassengers().begin(); it != flight.getPassengers().end(); it++) {
+                            if ((*it).getId() == id) {
+                                flight.getPassengers().erase(it);
+                                it--;
+                                cout << "Passenger removed successfully" << endl;
+                                done = true;
+                                break;
+                            }
+                        }
+                        if (!done) {
+                            cout << "There's no such passenger on this flight" << endl;
+                            return this;
                         }
                     }
-                    if(!done){
-                        cout << "There's no such passenger on this flight" << endl;
+                    else{
+                        cout << "That flight took off already" << endl;
                         return this;
                     }
                 }
