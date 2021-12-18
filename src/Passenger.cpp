@@ -9,12 +9,9 @@ using namespace std;
 
 Passenger::Passenger() = default;
 
-Passenger::Passenger(string name) {
-    this->name = name;
-}
+Passenger::Passenger(string name): Person(name){}
 
-Passenger::Passenger(string name, Baggage *baggage, bool automaticCheckIn) {
-    this->name = name;
+Passenger::Passenger(string name, Baggage *baggage, bool automaticCheckIn): Person(name) {
     this->baggage = baggage;
     this->automaticCheckIn = automaticCheckIn;
 }
