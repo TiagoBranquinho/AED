@@ -4,7 +4,7 @@
 00:00
 00:00
 Airport1
-Airport2
+Bus
 0
 3
 joase
@@ -21,7 +21,7 @@ maria
 2020/04/30
 00:00
 00:00
-Airport2
+Bus
 Airport1
 0
 2

@@ -9,32 +9,22 @@ Train 4
 Bus 7
 1
 11:00
-Train 10
+
+Train
+10
 3
-03:20
-11:00
-20:20
-
-
-Airport2
-porto
-3
-Uber 1
-0
-Taxi 2
-1
-03:20
-Uber 4
-1
-21:20
-
-sacarneiro
-porto
-1
-train 3
+03:20 11
 0
 
-Ovar
-r
+Train
+10
+3
+03:20 11
+0
+
+Train
+10
+3
+03:20 11
 0
 

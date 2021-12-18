@@ -339,18 +339,20 @@ Menu *PlaneMenu::nextMenu() {
             bool done = false;
             for (Plane &plane : app.getAirline().getPlanes()){
                 if(plane.getPlate() == plate){
-                    std::remove(app.getAirline().getPlanes().begin(), app.getAirline().getPlanes().end(), plane);
-                    done = true;
-                    break;
+                    for(auto it = app.getAirline().getPlanes().begin(); it != app.getAirline().getPlanes().end(); it++){
+                        if((*it) == plane){
+                            app.getAirline().getPlanes().erase(it);
+                            done = true;
+                            break;
+                        }
+                    }
                 }
             }
-            if(done){
-
-            }
-            else
+            if(!done)
                 cout << "There's no such plane";
             return this;
         }
+
         case 12:  return new ViewPlaneFlights(app,"date");
         case 13: return new ViewPlaneFlights(app,"number");
         case 0: return nullptr;
@@ -632,7 +634,6 @@ ViewAirports::ViewAirports(App &app, const std::string& sortedBy): Menu(app){
 void ViewAirports::display() {
     for(Airport &airport : app.getAirports())
         cout << airport;
-    cout << endl;
     waitForKey();
 }
 
