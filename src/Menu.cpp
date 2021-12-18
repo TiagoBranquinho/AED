@@ -98,7 +98,7 @@ Menu *AirportMenu::nextMenu() {
         case 7: {
             cout << "Insert airport's id" << endl;
             unsigned int id;
-            cin.ignore(1000,'\n');
+            //cin.ignore(1000,'\n');
             cin >> id;
             cout << "Insert local's transportations service type" << endl;
             std::string type;
@@ -142,7 +142,6 @@ Menu *AirportMenu::nextMenu() {
                         cout << "There's no such local" << endl;
                     break;
                 }
-                cout << "There's no such airport" << endl;
             }
             return this;
         }
