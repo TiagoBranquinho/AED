@@ -576,13 +576,11 @@ Menu *PassengerAndBaggageMenu::nextMenu() {
                 if(flight.getNumber() == number) {
                     try {
                         app.getAirline().addPassengerToFlight(flight, passenger);
-                        cout << "adicionou" << endl;
                     }
                     catch(InvalidFlightException) {
                         cout << "There's no such flight" << endl;
                         return this;
                     }
-                    done = true;
                     cout << "Added passenger successfully" << endl;
                     break;
                 }
