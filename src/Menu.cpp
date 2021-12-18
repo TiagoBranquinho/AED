@@ -164,15 +164,22 @@ Menu *AirportMenu::nextMenu() {
             auto airp = find_if(app.getAirports().begin(), app.getAirports().end(), [&airId](const Airport &air){return air.getId() == airId;});
             if (airp != app.getAirports().end()){
                 auto gd = airp->getLocals().beginItr();
+                GroundTransportation newgd;
+                bool done = false;
                 while (gd != airp->getLocals().endItr()){
                     if ((*gd).getId() == gdId){
-                        (*gd).addSchedule(Schedule(schedule));
-                        cout << "Schedule added successfully " << endl;
-                        return this;
+                        newgd = (*gd);
+                        newgd.addSchedule(Schedule(schedule));
+                        done = true; break;
                     }
                     gd++;
                 }
-                cout << "Ground Local not found! " << endl;
+                if (done){
+                    airp->getLocals().removeGroundTransportation(*gd);
+                    airp->getLocals().addGroundTransportation(newgd);
+                    cout << "Successfully added Schedule" << endl;
+                }
+                else cout << "Ground Local not found! " << endl;
             }
             waitForKey();
             return this;
@@ -189,18 +196,25 @@ Menu *AirportMenu::nextMenu() {
                                 [&airId](const Airport &air){return air.getId() == airId;});
 
             auto gd = airp->getLocals().beginItr();
+            GroundTransportation newgd;
+            bool done = false;
             while (gd != airp->getLocals().endItr()){
                 if ((*gd).getId() == gdId){
-                    auto done = remove_if((*gd).getSchedules().begin(), (*gd).getSchedules().end(),
-                                          [&schedule](const Schedule &sch) { return sch.getTime() == schedule; });
-                    if (done != (*gd).getSchedules().end()){
+                    newgd = (*gd);
+                    auto rm = find_if(newgd.getSchedules().begin(), newgd.getSchedules().end(),[&schedule](const Schedule &sch) { return sch.getTime() == schedule; });
+                    if (rm != (*gd).getSchedules().end()){
+                        newgd.removeSchedule(*rm);
                         cout << "Successfully schedule removed." << endl;
-                        return this;
+                        done = true; break;
                     }
                 }
                 gd++;
             }
-            cout << "Schedule not found!" << endl;
+            if (done){
+                airp->getLocals().removeGroundTransportation(*gd);
+                airp->getLocals().addGroundTransportation(newgd);
+            }
+            else cout << "Schedule not found!" << endl;
             waitForKey();
             return this;
         }
