@@ -439,13 +439,18 @@ Menu *FlightMenu::nextMenu() {
         case 7: {
             cout << "Insert flight's number" << endl;
             unsigned int number = readInt();
-            auto flight = find_if(app.getAirline().getFlights().begin(), app.getAirline().getFlights().end(),[&number](Flight &f){return f.getNumber() == number;});
-            if (flight != app.getAirline().getFlights().end()){
-                app.getAirline().getFlights().erase(flight);
-                cout << "Flight removed successfully." << endl;
+            bool done = false;
+            for(auto it = app.getAirline().getFlights().begin(); it != app.getAirline().getFlights().end(); it++) {
+                if ((*it).getNumber() == number) {
+                    app.getAirline().getFlights().erase(it);
+                    cout << "Flight removed successfully." << endl;
+                    done = true;
+                    break;
+                }
             }
-            else
-                cout << "There's no such flight";
+            if(!done){
+                cout << "There's no such flight" << endl;
+            }
             return this;
         }
         case 8: {
