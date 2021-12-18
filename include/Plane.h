@@ -34,6 +34,7 @@ public:
     void setOnDuty(bool duty);
     void addFlight(const Flight &flight);
     void addService(const Service &service);
+    void serviceDone(const Service &service);
     void addBaggage(const Baggage &baggage);
     void removeServiceDONE(); // removes service from serviceTODO queue and adds it to serviceDONE vector
     bool validPlate(std::string plate);

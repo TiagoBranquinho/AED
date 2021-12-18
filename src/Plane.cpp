@@ -41,6 +41,10 @@ void Plane::addService(const Service &service) {
     servicesTODO.push(service);
 }
 
+void Plane::serviceDone(const Service & service) {
+    servicesDONE.push_back(service);
+}
+
 void Plane::addBaggage(const Baggage &baggage) {
     planeTrunk.push_back(baggage);
 }

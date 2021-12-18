@@ -25,11 +25,11 @@ public:
     friend std::ostream& operator<<(std::ostream& os, const Service &service);
 };
 
-class InvalidEmplpoyeeException: public std::exception{
+class InvalidEmployeeException: public std::exception{
 private:
     Employee *emp;
 public:
-    InvalidEmplpoyeeException(Employee *employee): emp(employee){};
+    InvalidEmployeeException(Employee *employee): emp(employee){};
     Employee *getEmployee(){ return emp; };
     const char * what () const noexcept override {
         return "The employee selected is not qualified for the service!";

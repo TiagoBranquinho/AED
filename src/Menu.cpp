@@ -233,12 +233,13 @@ void PlaneMenu::display() {
     cout << "4 - View Planes on duty" << endl;
     cout << "5 - View Planes off duty" << endl;
     cout << "6 - Add Service to Plane" << endl;
-    cout << "7 - View ServicesTODO of Plane" << endl;
-    cout << "8 - View ServicesDONE of Plane by Date" << endl;
-    cout << "9 - Add Plane" << endl;
-    cout << "10 - Remove Plane" << endl;
-    cout << "11 - View Plane's Flights by Date" << endl;
-    cout << "12 - View Plane's Flights by Number" << endl;
+    cout << "7 - Mark Plane's Service as DONE" << endl;
+    cout << "8 - View ServicesTODO of Plane" << endl;
+    cout << "9 - View ServicesDONE of Plane by Date" << endl;
+    cout << "10 - Add Plane" << endl;
+    cout << "11 - Remove Plane" << endl;
+    cout << "12 - View Plane's Flights by Date" << endl;
+    cout << "13 - View Plane's Flights by Number" << endl;
     cout << "0 - Exit" << endl;
     cout << endl;
 }
@@ -292,9 +293,31 @@ Menu *PlaneMenu::nextMenu() {
                 cout << "Service added successfully" << endl;
             return this;
         }
-        case 7: return new ViewServicesTODO(app);
-        case 8: return new ViewServicesDONE(app, "date");
-        case 9: {
+        case 7: {
+            cout << "Insert plane plate" << endl;
+            std::string plate = readStr();
+            if (plate.empty()) return this;
+            bool done = true;
+            for(Plane &plane : app.getAirline().getPlanes()) {
+                if (plane.getPlate() == plate) {
+                    if(plane.getServicesToDo().empty()){
+                        cout << "There's no services to do in this plane" << endl;
+                        return this;
+                    }
+                    plane.serviceDone(plane.getServicesToDo().front());
+                    plane.getServicesToDo().pop();
+                    done = true;
+                    cout << "Service successfully marked as done" << endl;
+                    break;
+                }
+            }
+            if(!done)
+                cout << "There's no such plane" << endl;
+            return this;
+        }
+        case 8: return new ViewServicesTODO(app);
+        case 9: return new ViewServicesDONE(app, "date");
+        case 10: {
             cout << "Insert new plane's plate" << endl;
             std::string plate = readStr();
             if (plate.empty()) return this;
@@ -309,7 +332,7 @@ Menu *PlaneMenu::nextMenu() {
             }
             return this;
         }
-        case 10: {
+        case 11: {
             cout << "Insert plane's plate" << endl;
             std::string plate = readStr();
             if (plate.empty()) return this;
@@ -328,8 +351,8 @@ Menu *PlaneMenu::nextMenu() {
                 cout << "There's no such plane";
             return this;
         }
-        case 11:  return new ViewPlaneFlights(app,"date");
-        case 12: return new ViewPlaneFlights(app,"number");
+        case 12:  return new ViewPlaneFlights(app,"date");
+        case 13: return new ViewPlaneFlights(app,"number");
         case 0: return nullptr;
         default: return invalidInput();
     }
@@ -551,13 +574,18 @@ Menu *PassengerAndBaggageMenu::nextMenu() {
                 passenger = Passenger(name, nullptr,false);
             for(Flight &flight : app.getAirline().getFlights()){
                 if(flight.getNumber() == number) {
-                    app.getAirline().addPassengerToFlight(flight, passenger);
+                    try {
+                        app.getAirline().addPassengerToFlight(flight, passenger);
+                        cout << "adicionou" << endl;
+                    }
+                    catch(InvalidFlightException) {
+                        cout << "There's no such flight" << endl;
+                        return this;
+                    }
+                    done = true;
                     cout << "Added passenger successfully" << endl;
                     break;
                 }
-            }
-            if(!done){
-                cout << "There's no such flight" << endl;
             }
             return this;
         }
