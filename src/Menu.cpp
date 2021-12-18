@@ -167,13 +167,14 @@ Menu *AirportMenu::nextMenu() {
                     if ((*gd).getId() == gdId){
                         (*gd).addSchedule(Schedule(schedule));
                         cout << "Schedule added successfully " << endl;
-                        return nullptr;
+                        return this;
                     }
                     gd++;
                 }
                 cout << "Ground Local not found! " << endl;
             }
-            return nullptr;
+            waitForKey();
+            return this;
         }
         case 11:{
             cout << "Confirm Airport id " << endl;
@@ -193,13 +194,14 @@ Menu *AirportMenu::nextMenu() {
                                           [&schedule](const Schedule &sch) { return sch.getTime() == schedule; });
                     if (done != (*gd).getSchedules().end()){
                         cout << "Successfully schedule removed." << endl;
-                        return nullptr;
+                        return this;
                     }
                 }
                 gd++;
             }
             cout << "Schedule not found!" << endl;
-            return nullptr;
+            waitForKey();
+            return this;
         }
         case 0: return nullptr;
         default: return invalidInput();
