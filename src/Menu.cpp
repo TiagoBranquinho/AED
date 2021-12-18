@@ -204,7 +204,7 @@ Menu *AirportMenu::nextMenu() {
                     auto rm = find_if(newgd.getSchedules().begin(), newgd.getSchedules().end(),[&schedule](const Schedule &sch) { return sch.getTime() == schedule; });
                     if (rm != (*gd).getSchedules().end()){
                         newgd.removeSchedule(*rm);
-                        cout << "Successfully schedule removed." << endl;
+                        cout << "Schedule successfully schedule removed." << endl;
                         done = true; break;
                     }
                 }
