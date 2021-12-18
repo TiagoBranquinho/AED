@@ -1,7 +1,7 @@
 #include "../include/AppStarter.h"
 
 AppStarter::AppStarter() {
-    app.loadData();
+    //app.loadData();
     menuStack.push(new MainMenu(app));
 }
 
@@ -19,5 +19,5 @@ void AppStarter::start() {
             menuStack.pop();
         }
     }
-    app.saveData();
+    //app.saveData();
 }
