@@ -548,12 +548,12 @@ Menu *ViewAirports::nextMenu() {
 }
 
 ViewGroundLocals::ViewGroundLocals(App &app, const std::string& sortedBy): Menu(app), sortedBy(sortedBy){
-    cout << "Insert Airport name: " << endl;
-    string name;
+    cout << "Insert Airport's id: " << endl;
+    unsigned int id;
     cin.ignore(1000,'\n');
-    getline(cin,name,'\n');
+    cin >> id;
     for(Airport &airport : app.getAirports()){
-        if(airport.getName() == name){
+        if(airport.getId() == id){
             locals = airport.getLocals();
             locals_vector = locals.asVector();
         }
