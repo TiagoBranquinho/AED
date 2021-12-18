@@ -415,12 +415,24 @@ Menu *FlightMenu::nextMenu() {
                 cout << "Select a plane to realize this flight" << endl;
                 string plate = readStr();
                 auto plane = find_if(app.getAirline().getPlanes().begin(), app.getAirline().getPlanes().end(),[&plate](Plane &p){return p.getPlate()==plate;});
-                (*plane).addFlight(*f);
-                app.getAirline().addFlight(f);
-                cout << "Flight added successfully." << endl;
+                if(plane != app.getAirline().getPlanes().end()) {
+                    if((*plane).getOnDuty()){
+                        cout << "That plane is already on duty" << endl;
+                        return this;
+                    }
+                    else {
+                        (*plane).addFlight(*f);
+                        app.getAirline().addFlight(f);
+                        cout << "Flight added successfully." << endl;
+                    }
+                }
+                else{
+                    cout << "There's no such plane" << endl;
+                    return this;
+                }
             }
             else {
-                cout << "Invalid airport names!" << endl;
+                cout << "Invalid airport ids!" << endl;
             }
             return this;
         }
@@ -443,7 +455,6 @@ Menu *FlightMenu::nextMenu() {
             for(Plane &plane : app.getAirline().getPlanes()){
                 for (Flight &flight : plane.getFlightPlan()){
                     if(flight.getNumber() == number) {
-                        flight.openCheckIn();
                         app.getAirline().checkInPassengers(flight);
                         plane.setOnDuty(true);
                         done = true;
