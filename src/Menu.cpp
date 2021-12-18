@@ -278,8 +278,10 @@ Menu *PlaneMenu::nextMenu() {
                             break;
                         }
                     }
-                    if(!employeeExists)
+                    if(!employeeExists) {
                         cout << "There's no such employee" << endl;
+                        return this;
+                    }
                     else {
                         plane.addService(service);
                         done = true;
@@ -304,8 +306,7 @@ Menu *PlaneMenu::nextMenu() {
                         cout << "There's no services to do in this plane" << endl;
                         return this;
                     }
-                    plane.serviceDone(plane.getServicesToDo().front());
-                    plane.getServicesToDo().pop();
+                    plane.removeServiceDONE();
                     done = true;
                     cout << "Service successfully marked as done" << endl;
                     break;
@@ -698,7 +699,8 @@ ViewServicesDONE::ViewServicesDONE(App &app, const std::string& sortedBy) : Menu
     plate = readStr();
     for(const Plane &plane : app.getAirline().getPlanes()){
         if(plane.getPlate() == plate){
-            if(sortedBy == "date")
+            if(plane.getServicesDone().size() <= 1){}
+            else if(sortedBy == "date")
                 sort(plane.getServicesDone().begin(), plane.getServicesDone().end(), [](const Service &lhs, const Service &rhs) {
                     return lhs.getDate() < rhs.getDate();
                 });
@@ -723,15 +725,24 @@ ViewPlanes::ViewPlanes(App &app, const std::string& choice): Menu(app){
         onDuty = true;
     else if (choice == "off")
         onDuty = false;
-    else if(choice == "plate")
-        sort(app.getAirline().getPlanes().begin(), app.getAirline().getPlanes().end(), [](const Plane &lhs, const Plane &rhs) {
-            return lhs.getPlate() < rhs.getPlate();
-        });
-    else if(choice == "capacity")
-        sort(app.getAirline().getPlanes().begin(), app.getAirline().getPlanes().end(), [](const Plane &lhs, const Plane &rhs) {
-            return lhs.getCapacity() < rhs.getCapacity();
-        });
-
+    else if(choice == "plate") {
+        if (app.getAirline().getPlanes().size() <= 1) {}
+        else {
+            sort(app.getAirline().getPlanes().begin(), app.getAirline().getPlanes().end(),
+                 [](const Plane &lhs, const Plane &rhs) {
+                     return lhs.getPlate() < rhs.getPlate();
+                 });
+        }
+    }
+    else if(choice == "capacity") {
+        if (app.getAirline().getPlanes().size() <= 1) {}
+        else {
+            sort(app.getAirline().getPlanes().begin(), app.getAirline().getPlanes().end(),
+                 [](const Plane &lhs, const Plane &rhs) {
+                     return lhs.getCapacity() < rhs.getCapacity();
+                 });
+        }
+    }
 }
 
 void ViewPlanes::display() {
