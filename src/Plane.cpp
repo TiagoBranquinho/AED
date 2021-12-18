@@ -72,7 +72,7 @@ bool Plane::operator==(const Plane &plane) const{
 }
 
 std::ostream &operator<<(ostream &os, const Plane &plane) {
-    os << plane.getPlate() << " " << plane.getCapacity() << '\n';
+    os << plane.getPlate() << " " << plane.getCapacity() << " " << to_string(plane.onDuty) << endl;
     return os;
 }
 

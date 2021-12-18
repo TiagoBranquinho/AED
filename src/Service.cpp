@@ -49,6 +49,6 @@ bool Service::validType(string type, Employee *employee) {
 }
 
 std::ostream &operator<<(ostream &os, const Service &service) {
-    os << service.type << " " << service.getDate().getDate() << " " << service.getEmployee() << '\n';
+    os << service.type << " " << service.getDate().getDate() << " id: " << service.getEmployee()->getId() << " name: " << service.getEmployee()->getName() << '\n';
     return os;
 }
