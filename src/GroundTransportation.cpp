@@ -67,7 +67,7 @@ bool GroundTransportation::operator<(const GroundTransportation &local) const {
 }
 
 ostream &operator<<(ostream &os, GroundTransportation &local) {
-    os << local.getType() << endl;
+    os << local.getType() << " " << local.getDistance() << endl;
     return os;
 }
 

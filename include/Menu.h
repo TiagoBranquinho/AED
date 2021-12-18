@@ -59,17 +59,18 @@ public:
 
 
 class ViewAirports: public Menu{
-    std::string sortedBy;
 public:
-    ViewAirports(App &app, std::string sortedBy = "");
+    ViewAirports(App &app, const std::string& sortedBy = "");
     void display() override;
     Menu *nextMenu() override;
 };
 
 class ViewGroundLocals: public Menu{
     std::string sortedBy;
+    TransportationLocals locals;
+    std::vector<GroundTransportation> locals_vector;
 public:
-    ViewGroundLocals(App &app, std::string sortedBy="");
+    ViewGroundLocals(App &app, const std::string& sortedBy="");
     void display() override;
     Menu *nextMenu() override;
 };
@@ -83,19 +84,17 @@ public:
 };
 
 class ViewServicesDONE: public Menu{
-    std::string sortedBy;
     std::string plate;
 public:
-    ViewServicesDONE(App &app, std::string sortedBy = "");
+    ViewServicesDONE(App &app, const std::string& sortedBy = "");
     void display() override;
     Menu *nextMenu() override;
 };
 
 class ViewPlanes: public Menu{
-    std::string choice;
     bool onDuty;
 public:
-    ViewPlanes(App &app, std::string choice="");
+    ViewPlanes(App &app, const std::string& choice="");
     void display() override;
     Menu *nextMenu() override;
 };
@@ -103,24 +102,21 @@ public:
 class ViewPlaneFlights: public Menu{
 private:
     std::string plate;
-    std::string sortedBy;
     std::vector<Flight> aux_vector;
 public:
-    ViewPlaneFlights(App &app, std::string sortedBy="");
+    ViewPlaneFlights(App &app, const std::string& sortedBy="");
     void display() override;
     Menu *nextMenu() override;
 };
 
 class ViewFlights: public Menu{
-    std::string sortedBy;
 public:
-    ViewFlights(App &app, std::string sortedBy="");
+    ViewFlights(App &app, const std::string& sortedBy="");
     void display() override;
     Menu *nextMenu() override;
 };
 
 class ViewFlightPassengers: public Menu{
-    std::string sortedBy;
     unsigned int number;
     std::vector<Passenger> aux_vector;
 public:
@@ -130,9 +126,8 @@ public:
 };
 
 class ViewEmployees: public Menu{
-    std::string sortedBy;
 public:
-    ViewEmployees(App &app, std::string sortedBy="");
+    ViewEmployees(App &app, const std::string& sortedBy="");
     void display() override;
     Menu *nextMenu() override;
 };
@@ -140,7 +135,7 @@ public:
 class ViewPassengers: public Menu{
     std::string sortedBy;
 public:
-    ViewPassengers(App &app, std::string sortedBy="");
+    ViewPassengers(App &app, const std::string& sortedBy="");
     void display() override;
     Menu *nextMenu() override;
 };
