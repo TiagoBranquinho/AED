@@ -739,7 +739,7 @@ void ViewPlanes::display() {
             if(plane.getOnDuty())
                 cout << plane;
         }
-    if(!onDuty)
+    else if(!onDuty)
         for(const Plane &plane : app.getAirline().getPlanes()){
             if(!plane.getOnDuty())
                 cout << plane;
