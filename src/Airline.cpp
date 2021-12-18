@@ -85,6 +85,7 @@ void Airline::checkInPassengers(Flight &flight) {
             baggageTransportation(flight, *p.getBaggage());
     }
     baggageToPlane(flight);
+    flight.closeCheckIn();
 }
 
 void Airline::checkInPassenger(Flight &flight, Passenger &passenger) {
@@ -99,7 +100,6 @@ void Airline::checkInPassenger(Flight &flight, Passenger &passenger) {
         }
     }
     throw(NoTicketException(passenger.getName(),flight.getNumber()));
-    //baggageToPlane(flight);
 }
 
 void Airline::baggageTransportation(Flight &flight, const Baggage &baggage) {
@@ -147,7 +147,7 @@ void Airline::addToTreadmill(const Baggage &baggage, Flight &flight) {
 }
 
 bool Airline::validPlane(const Plane &plane) {
-    for(Plane &p : planes){
+    for(const Plane& p : planes){
         if (p == plane)
             return true;
     }

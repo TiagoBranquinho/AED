@@ -14,12 +14,14 @@ private:
     Baggage *baggage;
     bool checkedIn = false;
     bool automaticCheckIn;
+    int baggageWgh;
 public:
     Passenger();
     Passenger(std::string name);
     Passenger(std::string name, Baggage *baggage, bool wantsAutomaticCheckIn);
     void setBaggage(Baggage *baggage);
     Baggage* getBaggage() const;
+    int baggageWeight() const;
     void checkIn();
     bool isCheckedIn() const;
     bool wantsAutomaticCheckIn() const;

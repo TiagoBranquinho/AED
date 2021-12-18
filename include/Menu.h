@@ -94,7 +94,7 @@ public:
 };
 
 class ViewPlanes: public Menu{
-    bool onDuty = NULL;
+    int onDuty;
 public:
     ViewPlanes(App &app, const std::string& choice="");
     void display() override;

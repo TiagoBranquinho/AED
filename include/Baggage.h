@@ -10,16 +10,16 @@
 class Baggage {
 private:
     unsigned int id;
-    double MAX_WEIGHT = 25;
-    double weight;
+    int MAX_WEIGHT = 25;
+    int weight;
     bool overweight;
     static unsigned int ID;
 
 public:
     Baggage();
-    Baggage(double weight);
+    Baggage(int weight);
     unsigned int getId() const;
-    double getWeight() const;
+    int getWeight() const;
     void setWeight(double weight);
     bool isOverweight() const;
     void checkWeight();

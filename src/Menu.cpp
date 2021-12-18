@@ -483,12 +483,12 @@ Menu *FlightMenu::nextMenu() {
             bool done = false;
             for(Plane &plane : app.getAirline().getPlanes()) {
                 for (Flight &flight: plane.getFlightPlan()) {
-                    if (flight.getNumber() == number && flight.getCheckInStatus()) {
-                        flight.closeCheckIn();
-                        std::remove_if(plane.getFlightPlan().begin(), plane.getFlightPlan().end(),
-                                       [&number](Flight &flight) { return number == flight.getNumber(); });
-                        std::remove_if(app.getAirline().getFlights().begin(), app.getAirline().getFlights().end(),
-                                       [&number](Flight &flight) { return number == flight.getNumber(); });
+                    if (flight.getNumber() == number && !flight.getCheckInStatus()) {
+                        flight.openCheckIn();
+                        plane.removeFlight(flight);
+                        auto rm = find_if(app.getAirline().getFlights().begin(), app.getAirline().getFlights().end(),
+                                          [&number](Flight &flight) { return number == flight.getNumber(); });
+                        app.getAirline().getFlights().erase(rm);
                         plane.setOnDuty(false);
                         plane.getTrunk().clear();
                         done = true;
@@ -764,9 +764,9 @@ Menu *ViewServicesDONE::nextMenu() {
 
 ViewPlanes::ViewPlanes(App &app, const std::string& choice): Menu(app){
     if(choice == "on")
-        onDuty = true;
+        onDuty = 1;
     else if (choice == "off")
-        onDuty = false;
+        onDuty = 0;
     else if(choice == "plate") {
         if (app.getAirline().getPlanes().size() <= 1) {}
         else {
@@ -785,20 +785,23 @@ ViewPlanes::ViewPlanes(App &app, const std::string& choice): Menu(app){
                  });
         }
     }
+    else if(choice.empty()){
+        onDuty = 2;
+    }
 }
 
 void ViewPlanes::display() {
-    if(onDuty)
+    if(onDuty==1)
         for(const Plane &plane : app.getAirline().getPlanes()){
             if(plane.getOnDuty())
                 cout << plane;
         }
-    else if(!onDuty)
+    else if(onDuty==0)
         for(const Plane &plane : app.getAirline().getPlanes()){
             if(!plane.getOnDuty())
                 cout << plane;
         }
-    else{
+    else if(onDuty==2){
         for (const Plane &plane: app.getAirline().getPlanes()){
             cout << plane;
         }
@@ -814,9 +817,9 @@ Menu *ViewPlanes::nextMenu() {
 ViewPlaneFlights::ViewPlaneFlights(App &app, const std::string& sortedBy): Menu(app){
     cout << "Insert plane's plate" << endl;
     plate = readStr();
-    for(const Plane &plane : app.getAirline().getPlanes()){
+    for(Plane &plane : app.getAirline().getPlanes()){
         if(plane.getPlate() == plate){
-            for(const Flight &flight : plane.getFlightPlan())
+            for(Flight &flight : plane.getFlightPlan())
                 aux_vector.push_back(flight);
             if (sortedBy == "number") {
                 if(aux_vector.size() <= 1){}

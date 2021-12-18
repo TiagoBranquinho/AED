@@ -10,7 +10,7 @@ unsigned Baggage::ID = 0;
 
 Baggage::Baggage() = default;
 
-Baggage::Baggage(double weight) {
+Baggage::Baggage(int weight) {
     this->weight = weight;
     id = ID++;
     checkWeight();
@@ -20,7 +20,7 @@ unsigned int Baggage::getId() const {
     return id;
 }
 
-double Baggage::getWeight() const{
+int Baggage::getWeight() const{
     return weight;
 }
 

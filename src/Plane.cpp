@@ -17,7 +17,7 @@ unsigned int Plane::getCapacity() const{
     return capacity;
 }
 
-std::list<Flight> Plane::getFlightPlan() const {
+std::list<Flight> &Plane::getFlightPlan() {
     return flightPlan;
 }
 
@@ -102,6 +102,10 @@ void Plane::setPlaneTrunk(list<Baggage> &baggages) {
 
 void Plane::setServicesDone(vector<Service> &services) {
     servicesDONE = services;
+}
+
+void Plane::removeFlight(const Flight &flight) {
+    flightPlan.remove(flight);
 }
 
 

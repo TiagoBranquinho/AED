@@ -24,7 +24,7 @@ public:
     Plane(std::string plate, unsigned int capacity);
     std::string getPlate() const;
     unsigned int getCapacity() const;
-    std::list<Flight> getFlightPlan() const;
+    std::list<Flight> &getFlightPlan();
     std::vector<Service> getServicesDone() const;
     std::queue<Service> getServicesToDo() const;
     list<Baggage> getTrunk() const;
@@ -33,6 +33,7 @@ public:
     void setCapacity(unsigned int capacity);
     void setOnDuty(bool duty);
     void addFlight(const Flight &flight);
+    void removeFlight(const Flight &flight);
     void addService(const Service &service);
     void serviceDone(const Service &service);
     void addBaggage(const Baggage &baggage);
