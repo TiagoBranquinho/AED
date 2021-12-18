@@ -20,7 +20,7 @@ Passenger::Passenger(string name, Baggage *baggage, bool automaticCheckIn) {
 }
 
 void Passenger::setBaggage(Baggage *baggage) {
-    this->baggage = baggage;      // if MAX_WEIGHT == const --> ERROR!
+    this->baggage = baggage;
 }
 
 Baggage* Passenger::getBaggage() const{
@@ -44,7 +44,7 @@ bool Passenger::wantsAutomaticCheckIn() const{
 }
 
 std::ostream &operator<<(ostream &os, const Passenger &passenger) {
-    os << passenger.getName() << " " << passenger.getId() << " " << passenger.getBaggage() << " " << passenger.wantsAutomaticCheckIn() << '\n';
+    os << passenger.getName() << " " << passenger.getId() << " " << passenger.getBaggage()->getWeight() << " " << passenger.wantsAutomaticCheckIn() << '\n';
     return os;
 }
 
