@@ -129,7 +129,7 @@ Menu *AirportMenu::nextMenu() {
             unsigned int id2;
             cin >> id2;
             bool done = false;
-            for(Airport airport : app.getAirports()){
+            for(Airport &airport : app.getAirports()){
                 if(airport.getId() == id1){
                     for(auto it = airport.getLocals().beginItr(); it != airport.getLocals().endItr(); it++) {
                         if((*it).getId() == id2){
