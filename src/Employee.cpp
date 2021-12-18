@@ -10,10 +10,7 @@ using namespace std;
 Employee::Employee() = default;
 
 
-Employee::Employee(string name, string type) {
-    this->name = name;
-    this->type = type;
-}
+Employee::Employee(string name, string type): Person(name), type(type) {}
 
 void Employee::setType(string type) {
     this->type = type;

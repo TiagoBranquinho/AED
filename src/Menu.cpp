@@ -529,24 +529,24 @@ Menu *EmployeesMenu::nextMenu() {
             std::string type = readStr();
             if (type.empty()) return this;
             app.getAirline().addEmployee(Employee(name, type));
+            waitForKey();
             return this;
         }
         case 5: {
             cout << "Insert employee's id" << endl;
             unsigned int id = readInt();
             bool done = false;
-            for (const Employee& employee : app.getAirline().getEmployees()){
-                if(employee.getId() == id){
-                    std::remove(app.getAirline().getEmployees().begin(), app.getAirline().getEmployees().end(), employee);
-                    done = true;
-                    break;
-                }
-            }
-            if(done){
 
+            auto rm = find_if(app.getAirline().getEmployees().begin(), app.getAirline().getEmployees().end(),
+                                    [&id](Employee &emp){return emp.getId() == id;});
+            if (rm != app.getAirline().getEmployees().end()){
+                app.getAirline().removeEmployee(*rm);
+                done = true;
             }
+            if(done)
+                cout << "Employee removes successfully." << endl;
             else
-                cout << "There's no such employee";
+                cout << "There's no such employee" << endl;
             return this;
         }
         case 0: return nullptr;

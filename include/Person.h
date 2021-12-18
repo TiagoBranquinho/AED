@@ -20,7 +20,7 @@ public:
 
     virtual std::string getName() const;
     virtual unsigned int getId() const;
-    bool operator==(const Person& person) const;
+    virtual bool operator==(const Person& person) const;
 };
 
 

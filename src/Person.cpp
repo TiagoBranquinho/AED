@@ -13,8 +13,7 @@ unsigned int Person::ID = 0;
 
 Person::Person(string name) {
     this->name = name;
-    id = ID;
-    ID++;
+    id = ID++;
 }
 
 void Person::setName(string name) {
