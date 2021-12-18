@@ -14,6 +14,7 @@ Flight::Flight(unsigned int number, const Date *date, Airport* origin, Airport* 
     this->date = *date;
     this->origin = origin;
     this->destiny = destiny;
+    openCheckIn();
 }
 
 void Flight::setNumber(unsigned int number) {
