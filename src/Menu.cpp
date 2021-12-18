@@ -395,7 +395,7 @@ Menu *FlightMenu::nextMenu() {
             try {
                 Date date(dt);
             }
-            catch(InvalidDateException){
+            catch(InvalidDateException&){
                 cout << "Inserted an invalid date format" << endl;
                 return this;
             }
@@ -597,7 +597,7 @@ Menu *PassengerAndBaggageMenu::nextMenu() {
                     try {
                         app.getAirline().addPassengerToFlight(flight, passenger);
                     }
-                    catch(InvalidFlightException) {
+                    catch(InvalidFlightException&) {
                         cout << "There's no such flight" << endl;
                         return this;
                     }
@@ -613,10 +613,10 @@ Menu *PassengerAndBaggageMenu::nextMenu() {
             cout << "Insert passenger's id" << endl;
             unsigned int id = readInt();
             bool done = false;
-            bool flighExists = false;
+            bool flightExists = false;
             for (Flight &flight: app.getAirline().getFlights()) {
                 if (flight.getNumber() == number) {
-                    flighExists = true;
+                    flightExists = true;
                     for (auto it = flight.getPassengers().begin(); it != flight.getPassengers().end(); it++) {
                         if ((*it).getId() == id) {
                             flight.getPassengers().erase(it);
@@ -632,7 +632,7 @@ Menu *PassengerAndBaggageMenu::nextMenu() {
                     }
                 }
             }
-            if(!flighExists)
+            if(!flightExists)
                 cout << "Invalid Flight Number!!" << endl;
             return this;
         }
@@ -940,10 +940,6 @@ Menu *ViewEmployees::nextMenu() {
     return nullptr;
 }
 
-ViewPassengers::ViewPassengers(App &app, const std::string& sortedBy): Menu(app) {
-
-}
-
 void ViewPassengers::display() {
 
 }
@@ -952,9 +948,6 @@ Menu *ViewPassengers::nextMenu() {
     return nullptr;
 }
 
-ViewBaggages::ViewBaggages(App &app, std::string sortedBy): Menu(app), sortedBy(sortedBy) {
-
-}
 
 void ViewBaggages::display() {
 
