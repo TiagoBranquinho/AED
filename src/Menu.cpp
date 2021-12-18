@@ -443,6 +443,7 @@ Menu *FlightMenu::nextMenu() {
             for(auto it = app.getAirline().getFlights().begin(); it != app.getAirline().getFlights().end(); it++) {
                 if ((*it).getNumber() == number) {
                     app.getAirline().getFlights().erase(it);
+                    it--;
                     cout << "Flight removed successfully." << endl;
                     done = true;
                     break;
@@ -619,6 +620,8 @@ Menu *PassengerAndBaggageMenu::nextMenu() {
                     for (auto it = flight.getPassengers().begin(); it != flight.getPassengers().end(); it++) {
                         if ((*it).getId() == id) {
                             flight.getPassengers().erase(it);
+                            it--;
+                            cout << "Passenger removed successfully" << endl;
                             done = true;
                             break;
                         }
