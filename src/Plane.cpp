@@ -63,7 +63,7 @@ bool Plane::validPlate(std::string plate) {
     return true;
 }
 
-bool Plane::operator==(const Plane &plane) {
+bool Plane::operator==(const Plane &plane) const{
     return this->getPlate() == plane.getPlate();
 }
 

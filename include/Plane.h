@@ -40,7 +40,7 @@ public:
     void setServicesToDo(queue<Service> &services);
     void setServicesDone(vector<Service> &services);
     void setPlaneTrunk(list<Baggage> &baggages);
-    bool operator==(const Plane &plane);
+    bool operator==(const Plane &plane) const;
     friend std::ostream& operator<<(std::ostream& os, const Plane &plane);
 };
 
