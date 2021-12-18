@@ -611,9 +611,9 @@ Menu *PassengerAndBaggageMenu::nextMenu() {
             for (Flight &flight: app.getAirline().getFlights()) {
                 if (flight.getNumber() == number) {
                     flighExists = true;
-                    for (Passenger &passenger: flight.getPassengers()) {
-                        if (passenger.getId() == id) {
-                            std::remove(app.getAirline().getEmployees().begin(), app.getAirline().getEmployees().end(), passenger);
+                    for (auto it = flight.getPassengers().begin(); it != flight.getPassengers().end(); it++) {
+                        if ((*it).getId() == id) {
+                            flight.getPassengers().erase(it);
                             done = true;
                             break;
                         }
