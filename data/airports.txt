@@ -1,13 +1,16 @@
-4
-Airport1
-lisboa
 3
-Bus 3
-0
-Train 4
-0
-Bus 7
+air1
+porto
 1
-11:00
-
-
+train
+10
+0
+air2
+lisboa
+0
+air3
+faro
+1
+bus
+2
+0

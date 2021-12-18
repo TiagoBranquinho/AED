@@ -56,18 +56,19 @@ void App::writeAirportsFile() {
     if(file.is_open()){
         file << airports.size() << endl;
         for(Airport airport : airports){
-           file << airport.getName() << endl << airport.getCity() << endl;
+           file << airport.getName() << endl;
+           file << airport.getCity() << endl;
            file << airport.getLocals().size() << endl;
            auto it = airport.localsBeginItr();
            while (it != airport.localsEndItr()){
-               file << (*it).getType() << " " << (*it).getDistance() << endl;
+               file << (*it).getType() << endl;
+               file << (*it).getDistance() << endl;
                file << (*it).getSchedules().size() << endl;
                for (auto sch : (*it).getSchedules()){
                    file << sch.getTime() << endl;
                }
                it++;
            }
-           file << endl;
        }
     }
     file.close();
@@ -120,6 +121,7 @@ void App::writeFlightsFile() {
 void App::writePlanesFile() {
     std::ofstream file(dataFolder + files.names.at(3), ofstream::trunc);
     if(file.is_open()){
+        file << airline.getPlanes().size() << endl;
         for(const Plane &plane : airline.getPlanes()){
             file << plane.getPlate() << endl;
             file << plane.getCapacity() << endl;
@@ -182,7 +184,6 @@ void App::readAirportsFile() {
     std::ifstream file(dataFolder + files.names.at(0));
     int airs, locals, distance, schs;
     string name, city, type, schedule;
-
     if(file.is_open()){
         file >> airs;
         for(int i = 0; i < airs; i++){
@@ -191,7 +192,8 @@ void App::readAirportsFile() {
             file >> locals;
             Airport air(name, city);
             for(int j = 0; j < locals; j++){
-                file >> type >> distance;
+                file >> type;
+                file >> distance;
                 file >> schs;
                 GroundTransportation gd(type, distance);
                 for(int k = 0; k < schs; k++){
