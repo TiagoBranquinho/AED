@@ -607,8 +607,10 @@ Menu *PassengerAndBaggageMenu::nextMenu() {
             cout << "Insert passenger's id" << endl;
             unsigned int id = readInt();
             bool done = false;
+            bool flighExists = false;
             for (Flight &flight: app.getAirline().getFlights()) {
                 if (flight.getNumber() == number) {
+                    flighExists = true;
                     for (Passenger &passenger: flight.getPassengers()) {
                         if (passenger.getId() == id) {
                             std::remove(app.getAirline().getEmployees().begin(), app.getAirline().getEmployees().end(), passenger);
@@ -616,14 +618,13 @@ Menu *PassengerAndBaggageMenu::nextMenu() {
                             break;
                         }
                     }
-                    if (done) {
-
-                    } else
-                        cout << "There's no such flight";
-                    break;
+                    if(!done){
+                        cout << "There's no such passenger on this flight" << endl;
+                        return this;
+                    }
                 }
             }
-            if(!done)
+            if(!flighExists)
                 cout << "Invalid Flight Number!!" << endl;
             return this;
         }
