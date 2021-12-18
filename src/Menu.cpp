@@ -622,14 +622,23 @@ Menu *PassengerAndBaggageMenu::nextMenu() {
 }
 
 ViewAirports::ViewAirports(App &app, const std::string& sortedBy): Menu(app){
-    if (sortedBy == "name")
-        sort(app.getAirports().begin(), app.getAirports().end(), [](const Airport &lhs, const Airport &rhs) {
-            return lhs.getName() < rhs.getName();
-        });
-    if (sortedBy == "city")
-        sort(app.getAirports().begin(), app.getAirports().end(), [](const Airport &lhs, const Airport &rhs) {
-            return lhs.getCity() < rhs.getCity();
-        });
+    if (sortedBy == "name") {
+        if (app.getAirports().size() <= 1) {}
+        else {
+            sort(app.getAirports().begin(), app.getAirports().end(), [](const Airport &lhs, const Airport &rhs) {
+                return lhs.getName() < rhs.getName();
+            });
+        }
+    }
+    if (sortedBy == "city") {
+        if (app.getAirports().size() <= 1){}
+        else {
+            sort(app.getAirports().begin(), app.getAirports().end(), [](const Airport &lhs, const Airport &rhs) {
+                return lhs.getCity() < rhs.getCity();
+            });
+        }
+    }
+
 }
 
 void ViewAirports::display() {
@@ -652,10 +661,14 @@ ViewGroundLocals::ViewGroundLocals(App &app, const std::string& sortedBy): Menu(
         }
     }
     if(sortedBy == "type"){
-        sort(locals_vector.begin(), locals_vector.end(), [](const GroundTransportation &lhs, const GroundTransportation &rhs) {
-            return lhs.getType() < rhs.getType();
-        });
+        if(locals_vector.size() <= 1){}
+        else {
+            sort(locals_vector.begin(), locals_vector.end(),
+                 [](const GroundTransportation &lhs, const GroundTransportation &rhs) {
+                     return lhs.getType() < rhs.getType();
+                 });
         }
+    }
 }
 
 void ViewGroundLocals::display() {
@@ -776,14 +789,22 @@ ViewPlaneFlights::ViewPlaneFlights(App &app, const std::string& sortedBy): Menu(
         if(plane.getPlate() == plate){
             for(const Flight &flight : plane.getFlightPlan())
                 aux_vector.push_back(flight);
-            if (sortedBy == "number")
-                sort(aux_vector.begin(), aux_vector.end(), [](const Flight &lhs, const Flight &rhs) {
-                    return lhs.getNumber() < rhs.getNumber();
-                });
-            if (sortedBy == "date")
-                sort(aux_vector.begin(), aux_vector.end(), [](Flight &lhs, Flight &rhs) {
-                    return lhs.getDate() < rhs.getDate();
-                });
+            if (sortedBy == "number") {
+                if(aux_vector.size() <= 1){}
+                else {
+                    sort(aux_vector.begin(), aux_vector.end(), [](const Flight &lhs, const Flight &rhs) {
+                        return lhs.getNumber() < rhs.getNumber();
+                    });
+                }
+            }
+            if (sortedBy == "date") {
+                if(aux_vector.size() <= 1){}
+                else {
+                    sort(aux_vector.begin(), aux_vector.end(), [](Flight &lhs, Flight &rhs) {
+                        return lhs.getDate() < rhs.getDate();
+                    });
+                }
+            }
         }
     }
 }
@@ -799,14 +820,24 @@ Menu *ViewPlaneFlights::nextMenu() {
 }
 
 ViewFlights::ViewFlights(App &app, const std::string& sortedBy): Menu(app) {
-    if (sortedBy == "date")
-        sort(app.getAirline().getFlights().begin(), app.getAirline().getFlights().end(), [](const Flight &lhs, const Flight &rhs) {
-            return lhs.getDate() < rhs.getDate();
-        });
-    if (sortedBy == "number")
-        sort(app.getAirline().getFlights().begin(), app.getAirline().getFlights().end(), [](const Flight &lhs, const Flight &rhs) {
-            return lhs.getNumber() < rhs.getNumber();
-        });
+    if (sortedBy == "date") {
+        if(app.getAirline().getFlights().size() <= 1){}
+        else {
+            sort(app.getAirline().getFlights().begin(), app.getAirline().getFlights().end(),
+                 [](const Flight &lhs, const Flight &rhs) {
+                     return lhs.getDate() < rhs.getDate();
+            });
+        }
+    }
+    if (sortedBy == "number") {
+        if(app.getAirline().getFlights().size() <= 1){}
+        else {
+            sort(app.getAirline().getFlights().begin(), app.getAirline().getFlights().end(),
+                 [](const Flight &lhs, const Flight &rhs) {
+                     return lhs.getNumber() < rhs.getNumber();
+            });
+        }
+    }
 }
 
 void ViewFlights::display() {
@@ -827,16 +858,22 @@ ViewFlightPassengers::ViewFlightPassengers(App &app, std::string sortedBy): Menu
             if (sortedBy == "id") {
                 for (const Passenger &p: flight.getPassengers())
                     aux_vector.push_back(p);
-                sort(aux_vector.begin(), aux_vector.end(), [](const Passenger &lhs, const Passenger &rhs) {
-                    return lhs.getId() < rhs.getId();
-                });
+                if(aux_vector.size() <= 1){}
+                else {
+                    sort(aux_vector.begin(), aux_vector.end(), [](const Passenger &lhs, const Passenger &rhs) {
+                        return lhs.getId() < rhs.getId();
+                    });
+                }
             }
             if (sortedBy == "name") {
                 for (const Passenger &p: flight.getPassengers())
                     aux_vector.push_back(p);
-                sort(aux_vector.begin(), aux_vector.end(), [](const Passenger &lhs, const Passenger &rhs) {
-                    return lhs.getName() < rhs.getName();
-                });
+                if(aux_vector.size() <= 1){}
+                else {
+                    sort(aux_vector.begin(), aux_vector.end(), [](const Passenger &lhs, const Passenger &rhs) {
+                        return lhs.getName() < rhs.getName();
+                    });
+                }
             }
         }
     }
@@ -853,14 +890,24 @@ Menu *ViewFlightPassengers::nextMenu() {
 }
 
 ViewEmployees::ViewEmployees(App &app, const std::string& sortedBy): Menu(app) {
-    if (sortedBy == "id")
-        sort(app.getAirline().getEmployees().begin(), app.getAirline().getEmployees().end(), [](const Employee &lhs, const Employee &rhs) {
-            return lhs.getId() < rhs.getId();
-        });
-    if (sortedBy == "name")
-        sort(app.getAirline().getEmployees().begin(), app.getAirline().getEmployees().end(), [](const Employee &lhs, const Employee &rhs) {
-            return lhs.getName() < rhs.getName();
-        });
+    if (sortedBy == "id") {
+        if(app.getAirline().getEmployees().size() <= 1){}
+        else {
+            sort(app.getAirline().getEmployees().begin(), app.getAirline().getEmployees().end(),
+                 [](const Employee &lhs, const Employee &rhs) {
+                     return lhs.getId() < rhs.getId();
+            });
+        }
+    }
+    if (sortedBy == "name") {
+        if (app.getAirline().getEmployees().size() <= 1) {}
+        else {
+            sort(app.getAirline().getEmployees().begin(), app.getAirline().getEmployees().end(),
+                 [](const Employee &lhs, const Employee &rhs) {
+                     return lhs.getName() < rhs.getName();
+            });
+        }
+    }
 }
 
 void ViewEmployees::display() {
