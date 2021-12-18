@@ -57,8 +57,8 @@ std::vector<Plane> &Airline::getPlanes() {
 
 void Airline::addPassengerToFlight(Flight &flight, const Passenger &passenger) {
     bool done = false;
-    for(Plane plane : getPlanes()) {
-        for (Flight flight1: plane.getFlightPlan()) {
+    for(Plane &plane : getPlanes()) {
+        for (Flight &flight1: plane.getFlightPlan()) {
             if (flight1 == flight) {
                 if (plane.getCapacity() > flight.getNumberPassengers()) {
                     flight.addPassenger(passenger);

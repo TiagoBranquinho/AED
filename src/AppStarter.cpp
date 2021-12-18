@@ -1,7 +1,7 @@
 #include "../include/AppStarter.h"
 
 AppStarter::AppStarter() {
-    app.writePlanesFile();
+    app.loadData();
     menuStack.push(new MainMenu(app));
 }
 
@@ -19,4 +19,5 @@ void AppStarter::start() {
             menuStack.pop();
         }
     }
+    app.saveData();
 }

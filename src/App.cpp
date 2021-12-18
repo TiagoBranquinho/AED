@@ -2,13 +2,8 @@
 
 using namespace std;
 
-App::App() {
-    //loadData();
-}
-
-App::~App() {
-    //saveData();
-}
+App::App() = default;
+App::~App() = default;
 
 Airline &App::getAirline(){
     return airline;
@@ -60,7 +55,7 @@ void App::writeAirportsFile() {
     std::ofstream file(dataFolder + files.names.at(0), ofstream::trunc);
     if(file.is_open()){
         file << airports.size() << endl;
-        for(Airport &airport : airports){
+        for(Airport airport : airports){
            file << airport.getName() << endl << airport.getCity() << endl;
            file << airport.getLocals().size() << endl;
            auto it = airport.localsBeginItr();
@@ -101,8 +96,8 @@ void App::writeFlightsFile() {
             file << flight.getDate().getDate() << endl;
             file << flight.getDeparture() << endl;
             file << flight.getDuration() << endl;
-            file << flight.getOrigin() << endl;
-            file << flight.getDestiny() << endl;
+            file << flight.getOriginAir()->getName() << endl;
+            file << flight.getDestinyAir()->getName() << endl;
             file << flight.getCheckInStatus() << endl;
             file << flight.getNumberPassengers() << endl;
             for (auto &p : flight.getPassengers()){
@@ -274,10 +269,11 @@ void App::readFlightsFile() {
 void App::readPlanesFile() {
     std::ifstream file(dataFolder + files.names.at(3));
     string plate, name, date, type;
-    int capacity, size, weight;
+    int capacity, numplanes, weight, size;
     bool duty;
     if(file.is_open()){
-        for(const Plane &plane : airline.getPlanes()){
+        file >> numplanes;
+        for(int l = 0; l < numplanes; l++){
             file >> plate;
             file >> capacity;
             file >> size;
