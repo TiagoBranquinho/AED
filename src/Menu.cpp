@@ -292,17 +292,24 @@ Menu *FlightMenu::nextMenu() {
             cout << "Insert date of flight (year/month/day)" << endl;
             string dt;
             cin >> dt;
-            Date date (dt);
-            cout << "Insert the airport of origin of the flight" << endl;
-            std::string name1;
-            cin >> name1;
-            cout << "Insert the airport of destiny of the flight" << endl;
-            std::string name2;
-            cin >> name2;
+            try {
+                Date date(dt);
+            }
+            catch(InvalidDateException){
+                cout << "Inserted an invalid date format" << endl;
+                return this;
+            }
+            Date date(dt);
+            cout << "Insert the id of the airport of origin of the flight" << endl;
+            unsigned int id1;
+            cin >> id1;
+            cout << "Insert the id of the airport of destiny of the flight" << endl;
+            unsigned int id2;
+            cin >> id2;
             auto origin = find_if(app.getAirports().begin(), app.getAirports().end(),
-                                  [&name1](const Airport &air){return air.getName()==name1;});
+                                  [&id1](const Airport &air){return air.getId()==id1;});
             auto destiny = find_if(app.getAirports().begin(), app.getAirports().end(),
-                                   [&name2](const Airport &air){return air.getName()==name2;});
+                                   [&id2](const Airport &air){return air.getId()==id2;});
             if (origin != app.getAirports().end() && destiny != app.getAirports().end()){
                 auto *f = new Flight(number, &date, origin.base(), destiny.base());
                 cout << "Select a plane to realize this flight" << endl;
@@ -358,6 +365,7 @@ Menu *FlightMenu::nextMenu() {
                 cout << "Flight started successfully" << endl;
             else
                 cout << "There's no such flight" << endl;
+            return this;
         }
         case 9: {
             cout << "Insert flight's number" << endl;
@@ -385,6 +393,7 @@ Menu *FlightMenu::nextMenu() {
                 cout << "Flight ended successfully" << endl;
             else
                 cout << "There's no such flight occurring" << endl;
+            return this;
         }
         case 0: return nullptr;
         default: return invalidInput();
@@ -401,8 +410,6 @@ void EmployeesMenu::display() {
     cout << "3 - View Employees sorted by id" << endl;
     cout << "4 - Add Employ" << endl;
     cout << "5 - Remove Employ" << endl;
-    cout << "6 - Add Employee to Service" << endl;
-    cout << "7 - Remove Employee of Service" << endl;
     cout << "0 - Exit" << endl;
     cout << endl;
 }
@@ -456,7 +463,7 @@ void PassengerAndBaggageMenu::display() {
     cout << "Passengers and Baggage menu:" << endl;
     cout << "1 - Add to Flight" << endl;
     cout << "2 - Remove from Flight" << endl;
-    cout << "3 - ...........";  // not finished
+    cout << "0 - Exit" << endl;
     cout << endl;
 }
 
@@ -474,10 +481,11 @@ Menu *PassengerAndBaggageMenu::nextMenu() {
             cout << "Insert passenger's baggage weight (0 if there isn't any)" << endl;
             double weight;
             cin >> weight;
+            bool done = false;
             Passenger passenger;
             if(weight > 0){
                 Baggage baggage(weight);
-                cout << "Does the passenger want automatic check in? Insert true or false" << endl;
+                cout << "Does the passenger want automatic check in? Insert 1 for yes and 0 for no" << endl;
                 cin >> wantsAutomaticCheckIn;
                 passenger = Passenger(name, &baggage,wantsAutomaticCheckIn);
             }
@@ -486,8 +494,12 @@ Menu *PassengerAndBaggageMenu::nextMenu() {
             for(Flight &flight : app.getAirline().getFlights()){
                 if(flight.getNumber() == number) {
                     app.getAirline().addPassengerToFlight(flight, passenger);
+                    cout << "Added passenger successfully" << endl;
                     break;
                 }
+            }
+            if(!done){
+                cout << "There's no such flight" << endl;
             }
             return this;
         }
