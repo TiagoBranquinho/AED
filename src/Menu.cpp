@@ -107,7 +107,7 @@ Menu *AirportMenu::nextMenu() {
             unsigned int distance;
             cin >> distance;
             bool done = false;
-            for(Airport airport : app.getAirports()){
+            for(Airport &airport : app.getAirports()){
                 if(airport.getId() == id){
                     airport.addGroundTransportation(GroundTransportation(type, distance));
                     done = true;
