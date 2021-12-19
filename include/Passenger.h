@@ -14,7 +14,7 @@ private:
     Baggage *baggage;
     bool checkedIn = false;
     bool automaticCheckIn;
-    int baggageWgh;
+    int baggageWgh = -1;
 public:
     Passenger();
     Passenger(std::string name);

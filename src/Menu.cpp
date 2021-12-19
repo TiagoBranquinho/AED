@@ -602,7 +602,7 @@ Menu *PassengerAndBaggageMenu::nextMenu() {
                 passenger = Passenger(name, &baggage,wantsAutomaticCheckIn);
             }
             else
-                passenger = Passenger(name, nullptr,false);
+                passenger = Passenger(name);
             for(Flight &flight : app.getAirline().getFlights()){
                 if(flight.getNumber() == number) {
                     if (flight.getCheckInStatus()) {
@@ -923,8 +923,14 @@ ViewFlightPassengers::ViewFlightPassengers(App &app, std::string sortedBy): Menu
 }
 
 void ViewFlightPassengers::display() {
-    for(const Passenger &passenger : aux_vector)
-        cout << passenger;
+    for(const Passenger &passenger : aux_vector) {
+        if (passenger.baggageWeight() == -1) {
+            cout << passenger.getName() << endl;
+        }
+        else {
+            cout << passenger;
+        }
+    }
     waitForKey();
 }
 
