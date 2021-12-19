@@ -39,7 +39,7 @@ public:
     std::string getOrigin() const;
     void setDestiny(Airport* destiny);
     std::string getDestiny() const;
-    std::list<Passenger> getPassengers() const;
+    std::list<Passenger> &getPassengers();
     unsigned int getNumberPassengers() const;
     unsigned int getNumberBaggages() const;
     queue<Baggage> getTreadmill();

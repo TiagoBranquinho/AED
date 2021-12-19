@@ -458,6 +458,10 @@ Menu *FlightMenu::nextMenu() {
             cout << "Insert flight's number" << endl;
             unsigned int number = readInt();
             bool done = false;
+            auto flightAir = find_if(app.getAirline().getFlights().begin(), app.getAirline().getFlights().end(),
+                                     [&number](const Flight &f){return  f.getNumber() == number;});
+            if (flightAir != app.getAirline().getFlights().end())
+                flightAir->closeCheckIn();
             for(Plane &plane : app.getAirline().getPlanes()){
                 for (Flight &flight : plane.getFlightPlan()){
                     if(flight.getNumber() == number) {
@@ -484,7 +488,7 @@ Menu *FlightMenu::nextMenu() {
             for(Plane &plane : app.getAirline().getPlanes()) {
                 for (Flight &flight: plane.getFlightPlan()) {
                     if (flight.getNumber() == number && !flight.getCheckInStatus()) {
-                        flight.openCheckIn();
+                        //flight.openCheckIn();
                         plane.removeFlight(flight);
                         auto rm = find_if(app.getAirline().getFlights().begin(), app.getAirline().getFlights().end(),
                                           [&number](Flight &flight) { return number == flight.getNumber(); });
@@ -604,10 +608,11 @@ Menu *PassengerAndBaggageMenu::nextMenu() {
                             return this;
                         }
                         cout << "Added passenger successfully" << endl;
-                        break;
+                        return this;
                     }
                 }
             }
+            cout << "That flight took off already" << endl;
             return this;
         }
         case 2: {
@@ -623,7 +628,7 @@ Menu *PassengerAndBaggageMenu::nextMenu() {
                         flightExists = true;
                         for (auto it = flight.getPassengers().begin(); it != flight.getPassengers().end(); it++) {
                             if ((*it).getId() == id) {
-                                flight.getPassengers().erase(it);
+                                it = flight.getPassengers().erase(it);
                                 it--;
                                 cout << "Passenger removed successfully" << endl;
                                 done = true;
@@ -885,7 +890,7 @@ Menu *ViewFlights::nextMenu() {
 ViewFlightPassengers::ViewFlightPassengers(App &app, std::string sortedBy): Menu(app) {
     cout << "Insert flight's number" << endl;
     number = readInt();
-    for (const Flight &flight: app.getAirline().getFlights()) {
+    for (Flight &flight: app.getAirline().getFlights()) {
         if (flight.getNumber() == number) {
             if (sortedBy == "id") {
                 for (const Passenger &p: flight.getPassengers())

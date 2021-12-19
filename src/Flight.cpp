@@ -69,7 +69,7 @@ string Flight::getDestiny() const{
     return destiny->getCity();
 }
 
-std::list<Passenger> Flight::getPassengers() const{
+std::list<Passenger> &Flight::getPassengers(){
     return passengers;
 }
 
