@@ -7,8 +7,7 @@ using namespace std;
 Service::Service() = default;
 
 Service::Service(string type, const Date &date, Employee *employee) {
-    if (validType(type, employee))
-        throw InvalidEmployeeException(employee);
+    validType(type, employee);
     this->date = date;
     this->type = type;
     this->employee = employee;

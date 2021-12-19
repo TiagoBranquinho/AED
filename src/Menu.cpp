@@ -273,7 +273,13 @@ Menu *PlaneMenu::nextMenu() {
                     Service service;
                     for (Employee &employee : app.getAirline().getEmployees()){
                         if(employee.getId() == id){
-                            service = Service (type, date, &employee);
+                            try {
+                                service = Service(type, date, &employee);
+                            }
+                            catch(InvalidEmployeeException&){
+                                cout << "That employee is not qualified for the job" << endl;
+                                return this;
+                            }
                             employeeExists = true;
                             break;
                         }
