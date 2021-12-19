@@ -400,19 +400,25 @@ Menu *FlightMenu::nextMenu() {
                 return this;
             }
             Date date(dt);
+            ViewAirports viewAir(app, ""); viewAir.display();
             cout << "Insert the id of the airport of origin of the flight" << endl;
             unsigned int id1 = readInt();
             cout << "Insert the id of the airport of destiny of the flight" << endl;
             unsigned int id2 = readInt();
+            cout << "Insert the departure schedule of the flight (HH:MM)" << endl;
+            string departure = readStr();
+            cout << "Insert the duration of the flight (HH:MM)" << endl;
+            string duration = readStr();
             auto origin = find_if(app.getAirports().begin(), app.getAirports().end(),
                                   [&id1](const Airport &air){return air.getId()==id1;});
             auto destiny = find_if(app.getAirports().begin(), app.getAirports().end(),
                                    [&id2](const Airport &air){return air.getId()==id2;});
             if (origin != app.getAirports().end() && destiny != app.getAirports().end()){
                 auto *f = new Flight(number, &date, origin.base(), destiny.base());
+                f->setDeparture(departure); f->setDuration(duration);
                 ViewPlanes vp(app);
                 vp.display();
-                cout << "Select a plane to realize this flight" << endl;
+                cout << "Insert the plate of the plane to realize this flight" << endl;
                 string plate = readStr();
                 auto plane = find_if(app.getAirline().getPlanes().begin(), app.getAirline().getPlanes().end(),[&plate](Plane &p){return p.getPlate()==plate;});
                 if(plane != app.getAirline().getPlanes().end()) {

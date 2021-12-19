@@ -19,42 +19,42 @@ public:
 
 class MainMenu: public Menu{
 public:
-    MainMenu(App &app);
+    explicit MainMenu(App &app);
     void display() override;
     Menu *nextMenu() override;
 };
 
 class AirportMenu: public Menu{
 public:
-    AirportMenu(App &app);
+    explicit AirportMenu(App &app);
     void display() override;
     Menu *nextMenu() override;
 };
 
 class PlaneMenu: public Menu{
 public:
-    PlaneMenu(App &app);
+    explicit PlaneMenu(App &app);
     void display() override;
     Menu *nextMenu() override;
 };
 
 class FlightMenu: public Menu{
 public:
-    FlightMenu(App &app);
+    explicit FlightMenu(App &app);
     void display() override;
     Menu *nextMenu() override;
 };
 
 class EmployeesMenu: public Menu{
 public:
-    EmployeesMenu(App &app);
+    explicit EmployeesMenu(App &app);
     void display() override;
     Menu *nextMenu() override;
 };
 
 class PassengerAndBaggageMenu: public Menu{
 public:
-    PassengerAndBaggageMenu(App &app);
+    explicit PassengerAndBaggageMenu(App &app);
     void display() override;
     Menu *nextMenu() override;
 };
@@ -62,7 +62,7 @@ public:
 
 class ViewAirports: public Menu{
 public:
-    ViewAirports(App &app, const std::string& sortedBy = "");
+    explicit ViewAirports(App &app, const std::string& sortedBy = "");
     void display() override;
     Menu *nextMenu() override;
 };
@@ -72,7 +72,7 @@ class ViewGroundLocals: public Menu{
     TransportationLocals locals;
     std::vector<GroundTransportation> locals_vector;
 public:
-    ViewGroundLocals(App &app, const std::string& sortedBy="");
+    explicit ViewGroundLocals(App &app, const std::string& sortedBy="");
     void display() override;
     Menu *nextMenu() override;
 };
@@ -80,7 +80,7 @@ public:
 class ViewServicesTODO: public Menu{
     std::string plate;
 public:
-    ViewServicesTODO(App &app);
+    explicit ViewServicesTODO(App &app);
     void display() override;
     Menu *nextMenu() override;
 };
@@ -88,7 +88,7 @@ public:
 class ViewServicesDONE: public Menu{
     std::string plate;
 public:
-    ViewServicesDONE(App &app, const std::string& sortedBy = "");
+    explicit ViewServicesDONE(App &app, const std::string& sortedBy = "");
     void display() override;
     Menu *nextMenu() override;
 };
@@ -96,7 +96,7 @@ public:
 class ViewPlanes: public Menu{
     int onDuty;
 public:
-    ViewPlanes(App &app, const std::string& choice="");
+    explicit ViewPlanes(App &app, const std::string& choice="");
     void display() override;
     Menu *nextMenu() override;
 };
@@ -106,14 +106,14 @@ private:
     std::string plate;
     std::vector<Flight> aux_vector;
 public:
-    ViewPlaneFlights(App &app, const std::string& sortedBy="");
+    explicit ViewPlaneFlights(App &app, const std::string& sortedBy="");
     void display() override;
     Menu *nextMenu() override;
 };
 
 class ViewFlights: public Menu{
 public:
-    ViewFlights(App &app, const std::string& sortedBy="");
+    explicit ViewFlights(App &app, const std::string& sortedBy="");
     void display() override;
     Menu *nextMenu() override;
 };
@@ -122,14 +122,14 @@ class ViewFlightPassengers: public Menu{
     unsigned int number;
     std::vector<Passenger> aux_vector;
 public:
-    ViewFlightPassengers(App &app, std::string sortedBy="");
+    explicit ViewFlightPassengers(App &app, std::string sortedBy="");
     void display() override;
     Menu *nextMenu() override;
 };
 
 class ViewEmployees: public Menu{
 public:
-    ViewEmployees(App &app, const std::string& sortedBy="");
+    explicit ViewEmployees(App &app, const std::string& sortedBy="");
     void display() override;
     Menu *nextMenu() override;
 };
@@ -137,7 +137,7 @@ public:
 class ViewSchedules: public Menu{
     GroundTransportation groundTransp;
 public:
-    ViewSchedules(App &app);
+    explicit ViewSchedules(App &app);
     void display() override;
     Menu *nextMenu() override;
 };
