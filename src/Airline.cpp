@@ -76,7 +76,6 @@ void Airline::addPassengerToFlight(Flight &flight, const Passenger &passenger) {
 }
 
 void Airline::checkInPassengers(Flight &flight) {
-    flight.openCheckIn();
     if(!flight.getCheckInStatus())
         throw ClosedCheckInException(flight.getNumber());
     for(Passenger &p : flight.getPassengers()){

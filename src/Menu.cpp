@@ -400,6 +400,7 @@ Menu *FlightMenu::nextMenu() {
                 return this;
             }
             Date date(dt);
+            cout << "Available airports" << endl;
             ViewAirports viewAir(app, ""); viewAir.display();
             cout << "Insert the id of the airport of origin of the flight" << endl;
             unsigned int id1 = readInt();
@@ -416,6 +417,7 @@ Menu *FlightMenu::nextMenu() {
             if (origin != app.getAirports().end() && destiny != app.getAirports().end()){
                 auto *f = new Flight(number, &date, origin.base(), destiny.base());
                 f->setDeparture(departure); f->setDuration(duration);
+                cout << "Available planes" << endl;
                 ViewPlanes vp(app);
                 vp.display();
                 cout << "Insert the plate of the plane to realize this flight" << endl;
@@ -494,7 +496,6 @@ Menu *FlightMenu::nextMenu() {
             for(Plane &plane : app.getAirline().getPlanes()) {
                 for (Flight &flight: plane.getFlightPlan()) {
                     if (flight.getNumber() == number && !flight.getCheckInStatus()) {
-                        //flight.openCheckIn();
                         plane.removeFlight(flight);
                         auto rm = find_if(app.getAirline().getFlights().begin(), app.getAirline().getFlights().end(),
                                           [&number](Flight &flight) { return number == flight.getNumber(); });
@@ -682,6 +683,7 @@ ViewAirports::ViewAirports(App &app, const std::string& sortedBy): Menu(app){
 }
 
 void ViewAirports::display() {
+    cout << "Id - Name - City" << endl;
     for(Airport &airport : app.getAirports())
         cout << airport;
     waitForKey();
@@ -712,8 +714,9 @@ ViewGroundLocals::ViewGroundLocals(App &app, const std::string& sortedBy): Menu(
 }
 
 void ViewGroundLocals::display() {
+    cout << "Id - Transport Type - Distance to Airport" << endl;
     if(sortedBy == "type")
-        for(GroundTransportation &groundTransportation : locals_vector){
+        for (GroundTransportation &groundTransportation: locals_vector) {
             cout << groundTransportation;
         }
     else if (sortedBy == "distance")
@@ -731,6 +734,7 @@ ViewServicesTODO::ViewServicesTODO(App &app) : Menu(app) {
 }
 
 void ViewServicesTODO::display() {
+    cout << "Service Type - Date - Employee's Id - Employee's Name" << endl;
     for(const Plane &plane : app.getAirline().getPlanes()){
         if(plane.getPlate() == plate){
             auto aux = plane.getServicesToDo();
@@ -762,6 +766,7 @@ ViewServicesDONE::ViewServicesDONE(App &app, const std::string& sortedBy) : Menu
 }
 
 void ViewServicesDONE::display() {
+    cout << "Service Type - Date - Employee's Id - Employee's Name" << endl;
     for (const Plane &plane: app.getAirline().getPlanes())
         if (plane.getPlate() == plate)
             for (Service &service: plane.getServicesDone())
@@ -802,6 +807,7 @@ ViewPlanes::ViewPlanes(App &app, const std::string& choice): Menu(app){
 }
 
 void ViewPlanes::display() {
+    cout << "Plate - Capacity - Is On Duty" << endl;
     if(onDuty==1)
         for(const Plane &plane : app.getAirline().getPlanes()){
             if(plane.getOnDuty())
@@ -853,6 +859,7 @@ ViewPlaneFlights::ViewPlaneFlights(App &app, const std::string& sortedBy): Menu(
 }
 
 void ViewPlaneFlights::display() {
+    cout << "Number - Date - Origin - Destiny - Departure Time - Arrival Time" << endl;
     for(const Flight &flight : aux_vector)
         cout << flight;
     waitForKey();
@@ -884,6 +891,7 @@ ViewFlights::ViewFlights(App &app, const std::string& sortedBy): Menu(app) {
 }
 
 void ViewFlights::display() {
+    cout << "Number - Date - Origin - Destiny - Departure Time - Arrival Time" << endl;
     for(Flight &flight : app.getAirline().getFlights())
         cout << flight;
     waitForKey();
@@ -923,9 +931,10 @@ ViewFlightPassengers::ViewFlightPassengers(App &app, std::string sortedBy): Menu
 }
 
 void ViewFlightPassengers::display() {
+    cout << "Name - Id - Baggage Weight (Optional) - Wants Automatic Check In (Optional)" << endl;
     for(const Passenger &passenger : aux_vector) {
         if (passenger.baggageWeight() == -1) {
-            cout << passenger.getName() << endl;
+            cout << passenger.getName() << passenger.getId() << endl;
         }
         else {
             cout << passenger;
@@ -960,6 +969,7 @@ ViewEmployees::ViewEmployees(App &app, const std::string& sortedBy): Menu(app) {
 }
 
 void ViewEmployees::display() {
+    cout << "Id - Name - Type of Service" << endl;
     for(const Employee &employee : app.getAirline().getEmployees())
         cout << employee;
     waitForKey();
@@ -991,6 +1001,7 @@ ViewSchedules::ViewSchedules(App &app): Menu(app) {
 }
 
 void ViewSchedules::display() {
+    cout << "Schedule" << endl;
     for(Schedule &sch : groundTransp.getSchedules()){
         cout << sch << endl;
     }
