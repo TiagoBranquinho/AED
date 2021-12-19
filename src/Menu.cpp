@@ -595,7 +595,7 @@ Menu *PassengerAndBaggageMenu::nextMenu() {
                 passenger = Passenger(name, nullptr,false);
             for(Flight &flight : app.getAirline().getFlights()){
                 if(flight.getNumber() == number) {
-                    if (!flight.getCheckInStatus()) {
+                    if (flight.getCheckInStatus()) {
                         try {
                             app.getAirline().addPassengerToFlight(flight, passenger);
                         }
@@ -619,7 +619,7 @@ Menu *PassengerAndBaggageMenu::nextMenu() {
             bool flightExists = false;
             for (Flight &flight: app.getAirline().getFlights()) {
                 if (flight.getNumber() == number) {
-                    if(!flight.getCheckInStatus()) {
+                    if(flight.getCheckInStatus()) {
                         flightExists = true;
                         for (auto it = flight.getPassengers().begin(); it != flight.getPassengers().end(); it++) {
                             if ((*it).getId() == id) {
