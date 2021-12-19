@@ -140,7 +140,7 @@ void App::writePlanesFile() {
 }
 
 void App::writeCartsFile() {
-    std::ofstream file(dataFolder + files.names.at(3), ofstream::trunc);
+    std::ofstream file(dataFolder + files.names.at(4), ofstream::trunc);
     if(file.is_open()){
         file << airline.getCarts().size();
         for (TransportCart &cart : airline.getCarts()){
@@ -285,7 +285,7 @@ void App::readPlanesFile() {
 }
 
 void App::readCartsFile() {
-    std::ifstream file(dataFolder + files.names.at(3));
+    std::ifstream file(dataFolder + files.names.at(4));
     int ncarts, numbgs, numcart, c, n, m, weight;
     if(file.is_open()){
         file >> ncarts;

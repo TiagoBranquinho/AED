@@ -262,12 +262,10 @@ Menu *PlaneMenu::nextMenu() {
                     cout << "Insert type of service" << endl;
                     std::string type = readStr();
                     if (type.empty()) return this;
-                    cout << "Insert date of service (day then month then year)" << endl;
-                    unsigned int day, month, year;
-                    day = readInt();
-                    month = readInt();
-                    year = readInt();
-                    Date date (day, month, year);
+                    cout << "Insert date of service (YYYY/MM/DD)" << endl;
+                    string dt = readStr();
+                    if (dt.empty()) return this;
+                    Date date(dt);
                     cout << "Insert the id of the employee responsible for the service" << endl;
                     unsigned int id = readInt();
                     Service service;
@@ -603,7 +601,7 @@ Menu *PassengerAndBaggageMenu::nextMenu() {
             string name = readStr();
             if (name.empty()) return this;
             cout << "Insert passenger's baggage weight (0 if there isn't any)" << endl;
-            double weight = readInt();
+            int weight = readInt();
             bool done = false;
             Passenger passenger;
             if(weight > 0){

@@ -1,11 +1,11 @@
 #include "../include/AppStarter.h"
 
 AppStarter::AppStarter() {
-    //app.loadData();
     menuStack.push(new MainMenu(app));
 }
 
 void AppStarter::start() {
+    app.loadData();
     while (!menuStack.empty()) {
         menuStack.top()->display();
         Menu *nextMenu = menuStack.top()->nextMenu();
@@ -19,5 +19,5 @@ void AppStarter::start() {
             menuStack.pop();
         }
     }
-    //app.saveData();
+    app.saveData();
 }
