@@ -23,10 +23,7 @@ public:
     unsigned int getId() const;
     std::string getName() const;
     std::string getCity() const;
-    void setName(std::string name);
-    void setCity(std::string city);
     void addGroundTransportation(const GroundTransportation &groundTransportation);
-    void printLocals();
     BSTItrIn<GroundTransportation> localsItrIn();
     iteratorBST<GroundTransportation> localsBeginItr();
     iteratorBST<GroundTransportation> localsEndItr();

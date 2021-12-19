@@ -20,8 +20,6 @@ public:
     Baggage(int weight);
     unsigned int getId() const;
     int getWeight() const;
-    void setWeight(double weight);
-    bool isOverweight() const;
     void checkWeight();
     bool operator==(const Baggage &baggage) const;
     friend std::ostream& operator<<(std::ostream& os, const Baggage &baggage);

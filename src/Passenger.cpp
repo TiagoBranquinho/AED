@@ -17,10 +17,6 @@ Passenger::Passenger(string name, Baggage *baggage, bool automaticCheckIn): Pers
     baggageWgh = baggage->getWeight();
 }
 
-void Passenger::setBaggage(Baggage *baggage) {
-    this->baggage = baggage;
-}
-
 Baggage* Passenger::getBaggage() const{
     return baggage;
 }

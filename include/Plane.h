@@ -29,8 +29,6 @@ public:
     std::queue<Service> getServicesToDo() const;
     list<Baggage> getTrunk() const;
     bool getOnDuty() const;
-    void setPlate(std::string plate);
-    void setCapacity(unsigned int capacity);
     void setOnDuty(bool duty);
     void addFlight(const Flight &flight);
     void removeFlight(const Flight &flight);

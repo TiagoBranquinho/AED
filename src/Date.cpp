@@ -5,7 +5,6 @@
 #include "../include/Date.h"
 #include <sstream>
 #include <iomanip>
-#include <utility>
 
 using namespace std;
 
@@ -16,18 +15,6 @@ Date::Date(std::string date) {
 }
 
 Date::Date(unsigned int day, unsigned int month, unsigned int year) {
-    setDate(day, month, year);
-}
-
-void Date::setDay(unsigned int day) {
-    setDate(day, month, year);
-}
-
-void Date::setMonth(unsigned int month) {
-    setDate(day, month, year);
-}
-
-void Date::setYear(unsigned int year) {
     setDate(day, month, year);
 }
 

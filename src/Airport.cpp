@@ -24,20 +24,8 @@ std::string Airport::getCity() const{
     return city;
 }
 
-void Airport::setName(std::string name) {
-    this->name = name;
-}
-
-void Airport::setCity(std::string city) {
-    this->city = city;
-}
-
 void Airport::addGroundTransportation(const GroundTransportation &groundTransportation) {
     locals.addGroundTransportation(groundTransportation);
-}
-
-void Airport::printLocals() {
-    locals.print();
 }
 
 BSTItrIn<GroundTransportation> Airport::localsItrIn() {

@@ -19,7 +19,6 @@ public:
     Passenger();
     Passenger(std::string name);
     Passenger(std::string name, Baggage *baggage, bool wantsAutomaticCheckIn);
-    void setBaggage(Baggage *baggage);
     Baggage* getBaggage() const;
     int baggageWeight() const;
     void checkIn();

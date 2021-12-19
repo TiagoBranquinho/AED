@@ -21,10 +21,6 @@ void GroundTransportation::setType(string type) {
     this->type = type;
 }
 
-void GroundTransportation::setDistance(unsigned int distance) {
-    this->distance = distance;
-}
-
 unsigned int GroundTransportation::getId() const{
     return id;
 }
@@ -35,11 +31,6 @@ string GroundTransportation::getType() const {
 
 unsigned int GroundTransportation::getDistance() const{
     return distance;
-}
-
-void GroundTransportation::setSchedules(vector<Schedule> &schedules) {
-    this->schedules = schedules;
-    sortSchedules();
 }
 
 std::vector<Schedule> &GroundTransportation::getSchedules() {

@@ -21,14 +21,6 @@ std::list<Flight> &Plane::getFlightPlan() {
     return flightPlan;
 }
 
-void Plane::setPlate(string plate) {
-    this->plate = plate;
-}
-
-void Plane::setCapacity(unsigned int capacity) {
-    this->capacity = capacity;
-}
-
 void Plane::setOnDuty(bool duty) {
     this->onDuty = duty;
 }

@@ -456,13 +456,21 @@ Menu *FlightMenu::nextMenu() {
             cout << "Insert flight's number" << endl;
             unsigned int number = readInt();
             bool done = false;
-            for(auto it = app.getAirline().getFlights().begin(); it != app.getAirline().getFlights().end(); it++) {
-                if ((*it).getNumber() == number) {
-                    app.getAirline().getFlights().erase(it);
-                    it--;
-                    cout << "Flight removed successfully." << endl;
-                    done = true;
-                    break;
+            for(auto it1 = app.getAirline().getPlanes().begin(); it1 != app.getAirline().getPlanes().end(); it1++) {
+                for(auto it2 = (*it1).getFlightPlan().begin(); it2 != (*it1).getFlightPlan().end(); it2++) {
+                    if ((*it2).getNumber() == number) {
+                        (*it1).getFlightPlan().erase(it2);
+                        it2--;
+                        for(auto it3 = app.getAirline().getFlights().begin(); it3 != app.getAirline().getFlights().end(); it3++){
+                            if((*it3).getNumber() == number){
+                                app.getAirline().getFlights().erase(it3);
+                                it3--;
+                            }
+                        }
+                        cout << "Flight removed successfully." << endl;
+                        done = true;
+                        break;
+                    }
                 }
             }
             if(!done){

@@ -29,7 +29,6 @@ public:
     std::vector<Plane> &getPlanes();
     void addPassengerToFlight(Flight &flight, const Passenger &passenger);
     void checkInPassengers(Flight &flight);
-    void checkInPassenger(Flight &flight, Passenger &passenger);
     void baggageTransportation(Flight &flight, const Baggage &baggage);
     void baggageToPlane(Flight &flight);
     void addToTreadmill(const Baggage &baggage, Flight &flight);
@@ -49,16 +48,6 @@ public:
     PlaneNotFoundException(const std::string &plate){this->plate = plate;}
     std::string getPlate(){return plate;}
 
-};
-
-class NoTicketException: public std::exception{
-private:
-    std::string name;
-    unsigned int number;
-public:
-    NoTicketException(const std::string &name, const unsigned int &number){this->name = name;this->number = number;}
-    std::string getName(){return name;}
-    unsigned int getNumber(){return number;}
 };
 
 class FullPlaneException: public std::exception{

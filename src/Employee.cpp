@@ -28,7 +28,7 @@ void Employee::setOffDuty() {
     onDuty = false;
 }
 
-bool Employee::isOnDuty() {
+bool Employee::isOnDuty() const{
     return onDuty;
 }
 

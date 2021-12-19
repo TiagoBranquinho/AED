@@ -20,7 +20,7 @@ public:
     std::string getType() const;
     void setOnDuty();
     void setOffDuty();
-    bool isOnDuty();
+    bool isOnDuty()const;
     friend std::ostream& operator<<(std::ostream& os, const Employee &employee);
 };
 

@@ -15,9 +15,6 @@ public:
     Date();
     Date(std::string date);
     Date(unsigned int day, unsigned int month, unsigned int year);
-    void setDay(unsigned int day);
-    void setMonth(unsigned int month);
-    void setYear(unsigned int year);
     void setDate(std::string date);
     void setDate(unsigned int day, unsigned int month, unsigned int year);
     unsigned int getDay() const;
@@ -35,8 +32,6 @@ private:
     unsigned int day,month,year;
 public:
     InvalidDateException(unsigned int day,unsigned int month, unsigned int year):day(day),month(month),year(year){};
-    unsigned int getDay() {return day;};
-    unsigned int getMonth() {return month;};
     const char * what () const noexcept override {
         return "Invalid date format!";
     }

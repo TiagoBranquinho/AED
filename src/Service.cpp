@@ -33,17 +33,6 @@ void Service::setType(string type) {
         throw InvalidEmployeeException(employee);
 }
 
-void Service::setDate(const Date &date) {
-    this->date = date;
-}
-
-void Service::setEmployee(Employee *employee) {
-    if (validType(type, employee))
-        this->employee = employee;
-    else
-        throw InvalidEmployeeException(employee);
-}
-
 bool Service::validType(string type, Employee *employee) {
     return employee->getType() == type;
 }

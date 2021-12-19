@@ -27,9 +27,9 @@ public:
     unsigned int getN() const;
     unsigned int getM() const;
     unsigned int getId() const;
-    unsigned int getNumber();
+    unsigned int getNumber()const;
     void setNumber(unsigned int num);
-    unsigned int getNumBaggs();
+    unsigned int getNumBaggs()const;
     std::list<std::list<std::stack<Baggage>>> getSlots();
     void addCarriage();
     void addStack();

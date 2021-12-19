@@ -36,6 +36,6 @@ iteratorBST<GroundTransportation> TransportationLocals::endItr() {
     return locals.end();
 }
 
-unsigned int TransportationLocals::size() {
+unsigned int TransportationLocals::size() const{
     return sz;
 }

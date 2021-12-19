@@ -20,12 +20,10 @@ private:
 public:
     Schedule();
     Schedule(const std::string& hm);
-    void displayTime();
     void setTime(const std::string& hm); // string format HH:MM
     void setTime(unsigned int hour, unsigned int min);
     std::string getTime() const;
     void setHour(unsigned int hour);
-    void setMin(unsigned int min);
     int getHour() const;
     int getMin() const;
     bool invalidSchedule(unsigned int hour, unsigned int min);

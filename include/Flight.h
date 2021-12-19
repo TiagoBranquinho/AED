@@ -26,9 +26,7 @@ private:
 public:
     Flight();
     Flight(unsigned int number, const Date *date, Airport* origin, Airport* destiny);
-    void setNumber(unsigned int number);
     unsigned int getNumber() const;
-    void setDate(const Date &date);
     Date getDate() const;
     void setDeparture(std::string departure);
     std::string getDeparture() const;
@@ -37,16 +35,13 @@ public:
     std::string getDuration();
     void setOrigin(Airport* origin);
     std::string getOrigin() const;
-    void setDestiny(Airport* destiny);
     std::string getDestiny() const;
     std::list<Passenger> &getPassengers();
     unsigned int getNumberPassengers() const;
     unsigned int getNumberBaggages() const;
     queue<Baggage> getTreadmill();
     void setTreadmill(queue<Baggage> &q);
-    vector<Baggage> getTreadmillVect();
     void addPassenger(const Passenger &passenger);
-    void removePassenger(const Passenger &passenger);
     void closeCheckIn();
     void openCheckIn();
     void setCheckIn(bool var);
@@ -62,7 +57,6 @@ private:
     unsigned int number;
 public:
     InvalidFlightException(unsigned int number){this->number = number;}
-    unsigned int getNumber(){return number;}
     const char * what () const noexcept override {
         return "Invalid flight!";
     }

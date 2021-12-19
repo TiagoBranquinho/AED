@@ -17,16 +17,8 @@ Flight::Flight(unsigned int number, const Date *date, Airport* origin, Airport* 
     openCheckIn();
 }
 
-void Flight::setNumber(unsigned int number) {
-    this->number = number;
-}
-
 unsigned int Flight::getNumber() const{
     return number;
-}
-
-void Flight::setDate(const Date &date) {
-    this->date = date;
 }
 
 Date Flight::getDate() const{
@@ -59,10 +51,6 @@ void Flight::setOrigin(Airport* origin) {
 
 string Flight::getOrigin() const{
     return origin->getCity();
-}
-
-void Flight::setDestiny(Airport* destiny) {
-    this->destiny = destiny;
 }
 
 string Flight::getDestiny() const{
@@ -112,27 +100,12 @@ std::ostream &operator<<(ostream &os, const Flight &flight) {
     return os;
 }
 
-void Flight::removePassenger(const Passenger &passenger) {
-    auto passengerItr = find(passengers.begin(), passengers.end(), passenger);
-    if (passengerItr != passengers.end()) passengers.erase(passengerItr);
-}
-
 Airport* Flight::getOriginAir() const {
     return origin;
 }
 
 Airport *Flight::getDestinyAir() const {
     return destiny;
-}
-
-vector<Baggage> Flight::getTreadmillVect() {
-    vector<Baggage> v;
-    queue<Baggage> q = getTreadmill();
-    while (!q.empty()) {
-        v.push_back(q.front());
-        q.pop();
-    }
-    return v;
 }
 
 void Flight::setCheckIn(bool var) {

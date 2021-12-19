@@ -80,11 +80,11 @@ unsigned int TransportCart::getId() const {
     return id;
 }
 
-unsigned int TransportCart::getNumber() {
+unsigned int TransportCart::getNumber() const{
     return number;
 }
 
-unsigned int TransportCart::getNumBaggs() {
+unsigned int TransportCart::getNumBaggs() const{
     return numBaggages;
 }
 

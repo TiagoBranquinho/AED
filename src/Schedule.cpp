@@ -14,10 +14,6 @@ Schedule::Schedule(const string& hm) {
     setTime(hm);
 }
 
-void Schedule::displayTime() {
-    cout << getTime();
-}
-
 void Schedule::setTime(const std::string& hm) {
     char c; int h, m;
     stringstream input(hm);
@@ -45,10 +41,6 @@ string Schedule::getTime() const{
 
 void Schedule::setHour(unsigned int hour) {
     setTime(hour, time.tm_min);
-}
-
-void Schedule::setMin(unsigned int min) {
-    setTime(time.tm_hour, min);
 }
 
 int Schedule::getHour() const {

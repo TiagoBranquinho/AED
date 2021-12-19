@@ -87,20 +87,6 @@ void Airline::checkInPassengers(Flight &flight) {
     flight.closeCheckIn();
 }
 
-void Airline::checkInPassenger(Flight &flight, Passenger &passenger) {
-    if(!flight.getCheckInStatus())
-        throw ClosedCheckInException(flight.getNumber());
-    for(Passenger &p : flight.getPassengers()){
-        if(p == passenger){
-            p.checkIn();
-            if(p.getBaggage() != nullptr && p.wantsAutomaticCheckIn())
-                baggageTransportation(flight, *p.getBaggage());
-            return;
-        }
-    }
-    throw(NoTicketException(passenger.getName(),flight.getNumber()));
-}
-
 void Airline::baggageTransportation(Flight &flight, const Baggage &baggage) {
     addToTreadmill(baggage,flight);
     if(flight.getTreadmill().size() == flight.getNumberBaggages() ) {

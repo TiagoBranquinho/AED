@@ -16,7 +16,6 @@ protected:
 public:
     Person();
     Person(std::string name);
-    void setName(std::string name);
 
     virtual std::string getName() const;
     virtual unsigned int getId() const;

@@ -24,16 +24,6 @@ int Baggage::getWeight() const{
     return weight;
 }
 
-void Baggage::setWeight(double weight) {
-    this->weight = weight;
-    checkWeight();
-
-}
-
-bool Baggage::isOverweight() const{
-    return overweight;
-}
-
 void Baggage::checkWeight() {
     if(weight <= MAX_WEIGHT)
         overweight = false;

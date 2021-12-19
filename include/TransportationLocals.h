@@ -11,7 +11,7 @@ private:
 public:
     TransportationLocals(): locals(GroundTransportation("", 0)){};
     void print();
-    unsigned int size();
+    unsigned int size()const;
     void addGroundTransportation(const GroundTransportation &groundTransportation);
     void removeGroundTransportation(const GroundTransportation &groundTransportation);
     vector<GroundTransportation> asVector();
