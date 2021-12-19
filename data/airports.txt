@@ -1,4 +1,4 @@
-3
+2
 air1
 porto
 1
@@ -6,12 +6,5 @@ train
 10
 0
 air2
-lisboa
+lisvoa
 0
-air3
-faro
-1
-bus
-2
-0
-11:00

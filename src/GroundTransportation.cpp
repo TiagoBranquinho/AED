@@ -42,7 +42,7 @@ void GroundTransportation::setSchedules(vector<Schedule> &schedules) {
     sortSchedules();
 }
 
-std::vector<Schedule> GroundTransportation::getSchedules() {
+std::vector<Schedule> &GroundTransportation::getSchedules() {
     return schedules;
 }
 

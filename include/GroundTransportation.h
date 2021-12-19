@@ -29,7 +29,7 @@ public:
     std::string getType() const;
     unsigned int getDistance() const;
     void setSchedules(std::vector<Schedule> &schedules);
-    std::vector<Schedule> getSchedules();
+    std::vector<Schedule> &getSchedules();
     void addSchedule(const Schedule &schedule);
     void removeSchedule(const Schedule &schedule);
     void sortSchedules();

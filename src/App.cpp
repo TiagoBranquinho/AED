@@ -106,6 +106,7 @@ void App::writePlanesFile() {
         for(Plane &plane : airline.getPlanes()){
             file << plane.getPlate() << endl;
             file << plane.getCapacity() << endl;
+            file << plane.getOnDuty() << endl;
             file << plane.getServicesToDo().size() << endl;
             queue<Service> qserv = plane.getServicesToDo();
             while (!qserv.empty()){
@@ -231,14 +232,15 @@ void App::readPlanesFile() {
     std::ifstream file(dataFolder + files.names.at(3));
     string plate, name, date, type;
     int capacity, numplanes, weight, size, fnum;
-    bool duty;
+    bool duty, planeduty;
     if(file.is_open()){
         file >> numplanes;
         for(int l = 0; l < numplanes; l++){
             file >> plate;
             file >> capacity;
+            file >> planeduty;
             file >> size;
-            Plane p(plate, capacity);
+            Plane p(plate, capacity); p.setOnDuty(planeduty);
             queue<Service> servicesToDo;
             for (int i = 0; i < size; i++){
                 file >> type;
@@ -305,7 +307,7 @@ void App::readCartsFile() {
 
 Flight App::readaFlight(ifstream &file) {
     int num, numPassg, qSize;
-    int number, weight;
+    int number, weight, passengerId;
     string name, date, departure, duration, origin, destiny;
     bool fcheckin, ischeckin, wantscheckin;
     file >> num;
@@ -323,10 +325,18 @@ Flight App::readaFlight(ifstream &file) {
     Flight f = Flight(num, new Date(date), ori.base(), des.base());
     f.setDeparture(departure); f.setDuration(duration); f.setCheckIn(fcheckin);
     for (int j = 0; j < numPassg; j++){
+        file >> passengerId;
         file >> name;
         file >> ischeckin >> wantscheckin;
         file >> weight;
-        f.addPassenger(Passenger(name, new Baggage(weight), wantscheckin));
+        for (Flight &fl : airline.getFlights()){
+            auto ps = find_if(fl.getPassengers().begin(), fl.getPassengers().end(),
+                    [&passengerId](Passenger &passg){return passg.getId() == passengerId;});
+            if (ps != fl.getPassengers().end()){
+                f.addPassenger((*ps));
+            }
+            else f.addPassenger(Passenger(name, new Baggage(weight), wantscheckin));
+        }
     }
     queue<Baggage> q;
     file >> qSize;
@@ -348,6 +358,7 @@ void App::writeaFlight(ofstream &file, Flight &flight) {
     file << flight.getCheckInStatus() << endl;
     file << flight.getNumberPassengers() << endl;
     for (auto &p : flight.getPassengers()){
+        file << p.getId() << endl;
         file << p.getName() << endl;
         file << p.isCheckedIn() << " " << p.wantsAutomaticCheckIn() << endl;
         Baggage bg = *p.getBaggage();

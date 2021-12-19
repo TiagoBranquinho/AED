@@ -185,7 +185,7 @@ Menu *AirportMenu::nextMenu() {
             return this;
         }
         case 11:{
-            cout << "Confirm Airport id " << endl;
+            cout << "Insert Airport id " << endl;
             int airId = readInt();
             cout << "Insert Ground Local id" << endl;
             int gdId = readInt();
