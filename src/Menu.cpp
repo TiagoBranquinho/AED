@@ -406,6 +406,10 @@ Menu *FlightMenu::nextMenu() {
             unsigned int id1 = readInt();
             cout << "Insert the id of the airport of destiny of the flight" << endl;
             unsigned int id2 = readInt();
+            if(id1 == id2){
+                cout << "The airport of origin can't be the same as the destiny one." << endl;
+                return this;
+            }
             cout << "Insert the departure schedule of the flight (HH:MM)" << endl;
             string departure = readStr();
             cout << "Insert the duration of the flight (HH:MM)" << endl;
@@ -579,7 +583,8 @@ PassengerAndBaggageMenu::PassengerAndBaggageMenu(App &app): Menu(app) {
 void PassengerAndBaggageMenu::display() {
     cout << "Passengers and Baggage menu:" << endl;
     cout << "1 - Add to Flight" << endl;
-    cout << "2 - Remove from Flight" << endl;
+    cout << "2 - Add group of Passengers to Flight" << endl;
+    cout << "3 - Remove from Flight" << endl;
     cout << "0 - Exit" << endl;
     cout << endl;
 }
@@ -623,6 +628,46 @@ Menu *PassengerAndBaggageMenu::nextMenu() {
             return this;
         }
         case 2: {
+            cout << "Insert flight's number" << endl;
+            unsigned int number = readInt();
+            cout << "Insert how many passengers you intend to add" << endl;
+            unsigned int quantity = readInt();
+            for(int i = 0; i < quantity; i++) {
+                cout << "Insert passenger's name" << endl;
+                string name = readStr();
+                if (name.empty()) return this;
+                cout << "Insert passenger's baggage weight (0 if there isn't any)" << endl;
+                double weight = readInt();
+                bool done = false;
+                Passenger passenger;
+                if (weight > 0) {
+                    Baggage baggage(weight);
+                    cout << "Does the passenger want automatic check in? Insert 1 for yes and 0 for no" << endl;
+                    bool wantsAutomaticCheckIn = readInt();
+                    passenger = Passenger(name, &baggage, wantsAutomaticCheckIn);
+                } else
+                    passenger = Passenger(name);
+                for (Flight &flight: app.getAirline().getFlights()) {
+                    if (flight.getNumber() == number) {
+                        if (flight.getCheckInStatus()) {
+                            try {
+                                app.getAirline().addPassengerToFlight(flight, passenger);
+                            }
+                            catch (InvalidFlightException &) {
+                                cout << "There's no such flight" << endl;
+                                return this;
+                            }
+                            cout << "Added passenger successfully" << endl;
+                            done = true;
+                        }
+                    }
+                }
+                if(!done)
+                    cout << "That flight took off already" << endl;
+            }
+            return this;
+        }
+        case 3: {
             cout << "Insert flight's number" << endl;
             unsigned int number = readInt();
             cout << "Insert passenger's id" << endl;
