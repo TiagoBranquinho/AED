@@ -45,7 +45,8 @@ TransportationLocals &Airport::getLocals() {
 }
 
 std::ostream &operator<<(ostream &os, const Airport &airport) {
-    os << airport.getId() << " - " << airport.getName() << " - " << airport.getCity() << endl;
+    os << airport.getId() << setw(3) << "-" << setw(20) << airport.getName() << setw(3) << "-" << setw(10) << airport.getCity() << endl;
     return os;
 }
+
 

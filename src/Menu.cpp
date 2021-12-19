@@ -739,7 +739,7 @@ ViewAirports::ViewAirports(App &app, const std::string& sortedBy): Menu(app){
 }
 
 void ViewAirports::display() {
-    cout << "Id - Name - City" << endl;
+    cout << "Id -         Name         -     City" << endl;
     for(Airport &airport : app.getAirports())
         cout << airport;
     waitForKey();
@@ -948,7 +948,7 @@ ViewFlights::ViewFlights(App &app, const std::string& sortedBy): Menu(app) {
 }
 
 void ViewFlights::display() {
-    cout << "Number - Date - Origin - Destiny - Departure Time - Arrival Time" << endl;
+    cout << "Number -     Date     -    Origin    -   Destiny    - Departure Time - Arrival Time" << endl;
     for(Flight &flight : app.getAirline().getFlights())
         cout << flight;
     waitForKey();

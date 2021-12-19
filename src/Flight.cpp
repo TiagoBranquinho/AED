@@ -96,9 +96,10 @@ queue<Baggage> Flight::getTreadmill() {
 }
 
 std::ostream &operator<<(ostream &os, const Flight &flight) {
-    os << flight.getNumber() << " - " << flight.getDate().getDate() << " - " << flight.getOrigin() << " - " << flight.getDestiny() << " - " << flight.getDeparture() << " - " << flight.getArrival() << '\n';
+    os << setw(5) << flight.getNumber() << setw(3) << "-" << setw(12) << flight.getDate().getDate() << setw(3) <<  "-" << setw(12) << flight.getOrigin() << setw(3) << "-"  << setw(12) << flight.getDestiny() << setw(3) << "-" << setw(10) <<  flight.getDeparture() << setw(7) << "-" << setw(10) <<  flight.getArrival() << '\n';
     return os;
 }
+
 
 Airport* Flight::getOriginAir() const {
     return origin;
