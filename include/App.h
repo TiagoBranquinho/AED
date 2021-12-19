@@ -27,7 +27,7 @@ public:
     ~App();
     Airline &getAirline();
     vector<Airport> &getAirports();
-    void addAirport(Airport airport);
+    void addAirport(const Airport& airport);
 
     void loadData();
     void saveData();
@@ -43,6 +43,8 @@ public:
     void readFlightsFile();
     void readPlanesFile();
     void readCartsFile();
+    Flight readaFlight(ifstream &file);
+    void writeaFlight(ofstream &file, Flight &flight);
 };
 
 

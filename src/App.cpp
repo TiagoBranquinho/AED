@@ -13,7 +13,7 @@ vector<Airport> &App::getAirports(){
     return airports;
 }
 
-void App::addAirport(Airport airport) {
+void App::addAirport(const Airport& airport) {
     airports.push_back(airport);
 }
 
@@ -93,26 +93,7 @@ void App::writeFlightsFile() {
     if(file.is_open()){
         file << airline.getFlights().size() << endl;
         for(auto &flight : airline.getFlights()){
-            file << flight.getNumber() << endl;
-            file << flight.getDate().getDate() << endl;
-            file << flight.getDeparture() << endl;
-            file << flight.getDuration() << endl;
-            file << flight.getOriginAir()->getName() << endl;
-            file << flight.getDestinyAir()->getName() << endl;
-            file << flight.getCheckInStatus() << endl;
-            file << flight.getNumberPassengers() << endl;
-            for (auto &p : flight.getPassengers()){
-                file << p.getName() << endl;
-                file << p.isCheckedIn() << " " << p.wantsAutomaticCheckIn() << endl;
-                Baggage bg = *p.getBaggage();
-                file << bg.getWeight() << endl;
-            }
-            queue<Baggage> q = flight.getTreadmill();
-            file << q.size() << endl;
-            while (!q.empty()) {
-                file << q.front().getWeight() << endl;
-                q.pop();
-            }
+            writeaFlight(file, flight);
         }
     }
     file.close();
@@ -122,7 +103,7 @@ void App::writePlanesFile() {
     std::ofstream file(dataFolder + files.names.at(3), ofstream::trunc);
     if(file.is_open()){
         file << airline.getPlanes().size() << endl;
-        for(const Plane &plane : airline.getPlanes()){
+        for(Plane &plane : airline.getPlanes()){
             file << plane.getPlate() << endl;
             file << plane.getCapacity() << endl;
             file << plane.getServicesToDo().size() << endl;
@@ -147,6 +128,10 @@ void App::writePlanesFile() {
             list<Baggage> bgs = plane.getTrunk();
             for ( Baggage &bg : bgs){
                 file << bg.getWeight() << endl;
+            }
+            file << plane.getFlightPlan().size() << endl;
+            for ( Flight &f : plane.getFlightPlan()){
+                writeaFlight(file, f);
             }
         }
     }
@@ -235,33 +220,7 @@ void App::readFlightsFile() {
     if(file.is_open()){
         file >> numflights;
         for (int i = 0; i < numflights; i++){
-            file >> num;
-            file >> date;
-            file >> departure;
-            file >> duration;
-            file >> origin;
-            file >> destiny;
-            file >> fcheckin;
-            file >> numPassg;
-            auto ori = find_if(airports.begin(), airports.end(),
-                    [&origin](const Airport &air){return air.getName() == origin;});
-            auto des = find_if(airports.begin(), airports.end(),
-                               [&destiny](const Airport &air){return air.getName() == destiny;});
-            Flight f = Flight(num, new Date(date), ori.base(), des.base());
-            f.setDeparture(departure); f.setDuration(duration); f.setCheckIn(fcheckin);
-            for (int j = 0; j < numPassg; j++){
-                file >> name;
-                file >> ischeckin >> wantscheckin;
-                file >> weight;
-                f.addPassenger(Passenger(name, new Baggage(weight), wantscheckin));
-            }
-            queue<Baggage> q;
-            file >> qSize;
-            for (int k=0; k<qSize; k++){
-                file >> weight;
-                q.push(Baggage(weight));
-            }
-            f.setTreadmill(q);
+            Flight f = readaFlight(file);
             airline.addFlight(&f);
         }
     }
@@ -271,7 +230,7 @@ void App::readFlightsFile() {
 void App::readPlanesFile() {
     std::ifstream file(dataFolder + files.names.at(3));
     string plate, name, date, type;
-    int capacity, numplanes, weight, size;
+    int capacity, numplanes, weight, size, fnum;
     bool duty;
     if(file.is_open()){
         file >> numplanes;
@@ -309,6 +268,11 @@ void App::readPlanesFile() {
                 file >> weight;
                 bgs.emplace_back(weight);
             }
+            file >> size;
+            for (int m = 0; m < size; m++){
+                Flight f = readaFlight(file);
+                p.addFlight(f);
+            }
             p.setPlaneTrunk(bgs);
             p.setServicesDone(servicesDone);
             p.setServicesToDo(servicesToDo);
@@ -337,4 +301,62 @@ void App::readCartsFile() {
         }
     }
     file.close();
+}
+
+Flight App::readaFlight(ifstream &file) {
+    int num, numPassg, qSize;
+    int number, weight;
+    string name, date, departure, duration, origin, destiny;
+    bool fcheckin, ischeckin, wantscheckin;
+    file >> num;
+    file >> date;
+    file >> departure;
+    file >> duration;
+    file >> origin;
+    file >> destiny;
+    file >> fcheckin;
+    file >> numPassg;
+    auto ori = find_if(airports.begin(), airports.end(),
+                       [&origin](const Airport &air){return air.getName() == origin;});
+    auto des = find_if(airports.begin(), airports.end(),
+                       [&destiny](const Airport &air){return air.getName() == destiny;});
+    Flight f = Flight(num, new Date(date), ori.base(), des.base());
+    f.setDeparture(departure); f.setDuration(duration); f.setCheckIn(fcheckin);
+    for (int j = 0; j < numPassg; j++){
+        file >> name;
+        file >> ischeckin >> wantscheckin;
+        file >> weight;
+        f.addPassenger(Passenger(name, new Baggage(weight), wantscheckin));
+    }
+    queue<Baggage> q;
+    file >> qSize;
+    for (int k=0; k<qSize; k++){
+        file >> weight;
+        q.push(Baggage(weight));
+    }
+    f.setTreadmill(q);
+    return f;
+}
+
+void App::writeaFlight(ofstream &file, Flight &flight) {
+    file << flight.getNumber() << endl;
+    file << flight.getDate().getDate() << endl;
+    file << flight.getDeparture() << endl;
+    file << flight.getDuration() << endl;
+    file << flight.getOriginAir()->getName() << endl;
+    file << flight.getDestinyAir()->getName() << endl;
+    file << flight.getCheckInStatus() << endl;
+    file << flight.getNumberPassengers() << endl;
+    for (auto &p : flight.getPassengers()){
+        file << p.getName() << endl;
+        file << p.isCheckedIn() << " " << p.wantsAutomaticCheckIn() << endl;
+        Baggage bg = *p.getBaggage();
+        file << bg.getWeight() << endl;
+    }
+    queue<Baggage> q = flight.getTreadmill();
+    file << q.size() << endl;
+    while (!q.empty()) {
+        file << q.front().getWeight() << endl;
+        q.pop();
+    }
 }
