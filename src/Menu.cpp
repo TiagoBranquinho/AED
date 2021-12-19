@@ -373,8 +373,8 @@ void FlightMenu::display() {
     cout << "5 - View Flight's Passengers by Name" << endl;
     cout << "6 - Add Flight" << endl;
     cout << "7 - Remove Flight" << endl;
-    cout << "8 - Start flight" << endl;
-    cout << "9 - End flight" << endl;
+    cout << "8 - Start Flight" << endl;
+    cout << "9 - End Flight" << endl;
     cout << "0 - Exit" << endl;
     cout << endl;
 }
@@ -720,7 +720,8 @@ void ViewGroundLocals::display() {
             cout << groundTransportation;
         }
     else if (sortedBy == "distance")
-        locals.print();
+        if(!locals.size() == 0)
+            locals.print();
     waitForKey();
 }
 
@@ -808,17 +809,17 @@ ViewPlanes::ViewPlanes(App &app, const std::string& choice): Menu(app){
 
 void ViewPlanes::display() {
     cout << "Plate - Capacity - Is On Duty" << endl;
-    if(onDuty==1)
+    if(onDuty == 1)
         for(const Plane &plane : app.getAirline().getPlanes()){
             if(plane.getOnDuty())
                 cout << plane;
         }
-    else if(onDuty==0)
+    else if(onDuty == 0)
         for(const Plane &plane : app.getAirline().getPlanes()){
             if(!plane.getOnDuty())
                 cout << plane;
         }
-    else if(onDuty==2){
+    else if(onDuty == 2){
         for (const Plane &plane: app.getAirline().getPlanes()){
             cout << plane;
         }
