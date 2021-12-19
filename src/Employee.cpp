@@ -17,7 +17,7 @@ void Employee::setType(string type) {
 }
 
 string Employee::getType() const {
-    return std::string();
+    return type;
 }
 
 void Employee::setOnDuty() {

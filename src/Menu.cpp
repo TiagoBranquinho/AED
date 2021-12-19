@@ -551,7 +551,6 @@ Menu *EmployeesMenu::nextMenu() {
             std::string type = readStr();
             if (type.empty()) return this;
             app.getAirline().addEmployee(Employee(name, type));
-            waitForKey();
             return this;
         }
         case 5: {
