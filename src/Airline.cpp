@@ -89,16 +89,12 @@ void Airline::checkInPassengers(Flight &flight) {
 
 void Airline::baggageTransportation(Flight &flight, const Baggage &baggage) {
     addToTreadmill(baggage,flight);
-    if(flight.getTreadmill().size() == flight.getNumberBaggages() ) {
+    if(flight.getTreadmill().size() == flight.getNumberBaggages()) {
         for (TransportCart &cart: carts) {
-            if (cart.getId() == flight.getNumber()) {
+            if (cart.getNumber() == flight.getNumber()) {
                 while (!flight.getTreadmill().empty()) {
-                    for (TransportCart &cart: carts) {
-                        if (cart.getId() == flight.getNumber()) {
-                            cart.addBaggage(flight.getTreadmill().front());
-                            flight.getTreadmill().pop();
-                        }
-                    }
+                    cart.addBaggage(flight.getTreadmill().front());
+                    flight.getTreadmill().pop();
                 }
                 break;
             }
@@ -110,7 +106,7 @@ void Airline::baggageToPlane(Flight &flight) {
     for(Plane &plane : planes) {
         if(find(plane.getFlightPlan().begin(), plane.getFlightPlan().end(), flight) != plane.getFlightPlan().end()) {
             for(TransportCart &cart : carts){
-                if(cart.getId() == flight.getNumber()){
+                if(cart.getNumber() == flight.getNumber()){
                     for(list<stack<Baggage>> &carriage : cart.getSlots()){
                         for(stack<Baggage> stack : carriage){
                             while(!stack.empty()){

@@ -13,20 +13,17 @@
 
 class TransportCart {
 private:
-    unsigned int id;
     unsigned int number;
     bool cartFull = false;
     unsigned int numBaggages = 0;
     unsigned int C_MAX = 0, N_MAX = 0, M_MAX = 0;// C_MAX -> numero de carruagens, N_MAX -> numero de pilhas por carruagem, M_MAX -> numero de malas por pilha
     std::list<std::list<std::stack<Baggage>>> slots;
-    static unsigned int ID;
 public:
     TransportCart();
     TransportCart(unsigned int c, unsigned int n,unsigned int m);
     unsigned int getC() const;
     unsigned int getN() const;
     unsigned int getM() const;
-    unsigned int getId() const;
     unsigned int getNumber()const;
     void setNumber(unsigned int num);
     unsigned int getNumBaggs()const;

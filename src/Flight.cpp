@@ -91,7 +91,7 @@ bool Flight::operator==(const Flight &flight) const {
     return this->getNumber() == flight.getNumber();
 }
 
-queue<Baggage> Flight::getTreadmill() {
+queue<Baggage> &Flight::getTreadmill() {
     return treadmill;
 }
 

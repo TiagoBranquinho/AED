@@ -39,7 +39,7 @@ public:
     std::list<Passenger> &getPassengers();
     unsigned int getNumberPassengers() const;
     unsigned int getNumberBaggages() const;
-    queue<Baggage> getTreadmill();
+    queue<Baggage> &getTreadmill();
     void setTreadmill(queue<Baggage> &q);
     void addPassenger(const Passenger &passenger);
     void closeCheckIn();
