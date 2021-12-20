@@ -47,6 +47,7 @@ void MainMenu::display(){
     cout << "3 - Flights management" << endl;
     cout << "4 - Employees management" << endl;
     cout << "5 - Passengers/Baggage management" << endl;
+    cout << "6 - Transport Cart management" << endl;
     cout << "0 - Exit" << endl;
     cout << endl;
 }
@@ -58,6 +59,7 @@ Menu *MainMenu::nextMenu() {
         case 3: return new FlightMenu(app);
         case 4: return new EmployeesMenu(app);
         case 5: return new PassengerAndBaggageMenu(app);
+        case 6: return new TransportCartMenu(app);
         case 0: return nullptr;
         default: return invalidInput();
     }
@@ -724,15 +726,17 @@ TransportCartMenu::TransportCartMenu(App &app): Menu(app) {
 
 void TransportCartMenu::display() {
     cout << "Transport Cart menu:" << endl;
-    cout << "1 - Add Transport Cart" << endl;
-    cout << "2 - Remove Transport Cart" << endl;
+    cout << "1 - View Transport Carts" << endl;
+    cout << "2 - Add Transport Cart" << endl;
+    cout << "3 - Remove Transport Cart" << endl;
     cout << "0 - Exit" << endl;
     cout << endl;
 }
 
 Menu *TransportCartMenu::nextMenu() {
     switch (readInt()) {
-        case 1: {
+        case 1: return new ViewTransportCarts(app);
+        case 2: {
             cout << "Insert the number of carriages" << endl;
             unsigned int c = readInt();
             cout << "Insert the number of stacks per carriage" << endl;
@@ -740,8 +744,9 @@ Menu *TransportCartMenu::nextMenu() {
             cout << "Insert the number of baggages that fit in each stack" << endl;
             unsigned int m = readInt();
             app.getAirline().addCart(TransportCart(c, n, m));
+            return this;
         }
-        case 2: {
+        case 3: {
             cout << "Insert cart's id" << endl;
             unsigned int id = readInt();
             for(auto it = app.getAirline().getCarts().begin(); it != app.getAirline().getCarts().end(); it++){
@@ -1107,5 +1112,25 @@ void ViewSchedules::display() {
 }
 
 Menu *ViewSchedules::nextMenu() {
+    return nullptr;
+}
+
+ViewTransportCarts::ViewTransportCarts(App &app) : Menu(app) {}
+
+
+void ViewTransportCarts::display() {
+    if (app.getAirline().getCarts().empty()){
+        cout << "There are no transportation carts." << endl;
+        waitForKey(); return;
+    }
+    cout << "Transport Carts:" << endl;
+    cout << "Id  -  Carriages  -  Stacks/Carriage  -  Stack size  -  Total Size" << endl;
+    for(TransportCart &cart : app.getAirline().getCarts()){
+        cout << cart;
+    }
+    waitForKey();
+}
+
+Menu *ViewTransportCarts::nextMenu() {
     return nullptr;
 }

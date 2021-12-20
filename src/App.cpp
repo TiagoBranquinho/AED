@@ -142,26 +142,11 @@ void App::writePlanesFile() {
 void App::writeCartsFile() {
     std::ofstream file(dataFolder + files.names.at(4), ofstream::trunc);
     if(file.is_open()){
-        file << airline.getCarts().size();
+        file << airline.getCarts().size() << endl;
         for (TransportCart &cart : airline.getCarts()){
-            file << cart.getNumBaggs() << endl;
             file << cart.getC() << endl;
             file << cart.getN() << endl;
             file << cart.getM() << endl;
-            stack<Baggage> aux;
-            auto slots = cart.getSlots();
-            for (auto carriage = slots.rbegin(); carriage != slots.rend(); carriage++){
-                for (auto stack = (*carriage).rbegin(); stack != (*carriage).rend(); stack++){
-                    while(!(*stack).empty()){
-                        aux.push((*stack).top());
-                        (*stack).pop();
-                    }
-                }
-            }
-            while (!aux.empty()){
-                file << aux.top().getWeight() << endl;
-                aux.pop();
-            }
         }
     }
     file.close();
@@ -287,20 +272,14 @@ void App::readPlanesFile() {
 
 void App::readCartsFile() {
     std::ifstream file(dataFolder + files.names.at(4));
-    int ncarts, numbgs, c, n, m, weight;
+    int ncarts, c, n, m;
     if(file.is_open()){
         getlineint(file, ncarts);
         for (int i = 0; i < ncarts; i++){
-            getlineint(file, numbgs);
             getlineint(file, c);
             getlineint(file, n);
             getlineint(file, m);
-            TransportCart cart(c, n, m);
-            for (int j = 0; j < numbgs; j++){
-                getlineint(file, weight);
-                cart.addBaggage(Baggage(weight));
-            }
-            airline.getCarts().push_back(cart);
+            airline.getCarts().emplace_back(c, n, m);
         }
     }
     file.close();

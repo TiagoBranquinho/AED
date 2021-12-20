@@ -3,6 +3,7 @@
 //
 
 #include "../include/TransportCart.h"
+#include <iomanip>
 
 using namespace std;
 
@@ -96,4 +97,9 @@ bool TransportCart::empty() const {
 
 void TransportCart::reset() {
     buildCartCarriages();
+}
+
+std::ostream &operator<<(ostream &os, const TransportCart &cart) {
+    os << cart.getId() << "  -  " << setw(10) << cart.getC() << "  -  " << setw(15) << cart.getN() << "  -  " << setw(10) << cart.getM() << "  -  " << setw(10) << cart.getSize() << '\n';
+    return os;
 }

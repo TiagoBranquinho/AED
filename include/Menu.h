@@ -149,4 +149,11 @@ public:
     Menu *nextMenu() override;
 };
 
+class ViewTransportCarts: public Menu{
+public:
+    explicit ViewTransportCarts(App &app);
+    void display() override;
+    Menu *nextMenu() override;
+};
+
 #endif //PROJETOAEROPORTO_MENU_H
