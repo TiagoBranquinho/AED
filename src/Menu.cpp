@@ -742,10 +742,10 @@ Menu *TransportCartMenu::nextMenu() {
             app.getAirline().addCart(TransportCart(c, n, m));
         }
         case 2: {
-            cout << "Insert cart's correspondent flight number" << endl;
-            unsigned int number = readInt();
+            cout << "Insert cart's id" << endl;
+            unsigned int id = readInt();
             for(auto it = app.getAirline().getCarts().begin(); it != app.getAirline().getCarts().end(); it++){
-                if((*it).getNumber() == number){
+                if((*it).getId() == id){
                     app.getAirline().getCarts().erase(it);
                     cout << "The cart was successfully removed" << endl;
                     return this;
