@@ -718,6 +718,47 @@ Menu *PassengerAndBaggageMenu::nextMenu() {
     }
 }
 
+TransportCartMenu::TransportCartMenu(App &app): Menu(app) {
+
+}
+
+void TransportCartMenu::display() {
+    cout << "Transport Cart menu:" << endl;
+    cout << "1 - Add Transport Cart" << endl;
+    cout << "2 - Remove Transport Cart" << endl;
+    cout << "0 - Exit" << endl;
+    cout << endl;
+}
+
+Menu *TransportCartMenu::nextMenu() {
+    switch (readInt()) {
+        case 1: {
+            cout << "Insert the number of carriages" << endl;
+            unsigned int c = readInt();
+            cout << "Insert the number of stacks per carriage" << endl;
+            unsigned int n = readInt();
+            cout << "Insert the number of baggages that fit in each stack" << endl;
+            unsigned int m = readInt();
+            app.getAirline().addCart(TransportCart(c, n, m));
+        }
+        case 2: {
+            cout << "Insert cart's correspondent flight number" << endl;
+            unsigned int number = readInt();
+            for(auto it = app.getAirline().getCarts().begin(); it != app.getAirline().getCarts().end(); it++){
+                if((*it).getNumber() == number){
+                    app.getAirline().getCarts().erase(it);
+                    cout << "The cart was successfully removed" << endl;
+                    return this;
+                }
+            }
+            cout << "There's no such cart" << endl;
+            return this;
+        }
+        case 0: return nullptr;
+        default: return invalidInput();
+    }
+}
+
 ViewAirports::ViewAirports(App &app, const std::string& sortedBy): Menu(app){
     if (sortedBy == "name") {
         if (app.getAirports().size() <= 1) {}

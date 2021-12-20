@@ -59,6 +59,13 @@ public:
     Menu *nextMenu() override;
 };
 
+class TransportCartMenu: public Menu{
+public:
+    explicit TransportCartMenu(App &app);
+    void display() override;
+    Menu *nextMenu() override;
+};
+
 
 class ViewAirports: public Menu{
 public:
