@@ -6,9 +6,12 @@
 
 using namespace std;
 
+unsigned int TransportCart::ID = 0;
+
 TransportCart::TransportCart() = default;
 
 TransportCart::TransportCart(unsigned int c, unsigned int n, unsigned int m): C_MAX(c), N_MAX(n), M_MAX(m) {
+    id = ID++;
     buildCartCarriages();
 }
 
@@ -62,6 +65,8 @@ void TransportCart::buildCartCarriages() {
         for (unsigned int j = 0; j < N_MAX; j++)
             addStack();
     }
+    cartFull = false;
+    numBaggages = 0;
 }
 
 void TransportCart::checkCartFull() {
@@ -70,17 +75,25 @@ void TransportCart::checkCartFull() {
 }
 
 bool TransportCart::operator==(const TransportCart &cart) const{
-    return this->getNumber() == cart.getNumber();
+    return this->getId() == cart.getId();
 }
 
-unsigned int TransportCart::getNumber() const{
-    return number;
+unsigned int TransportCart::getId() const {
+    return id;
 }
 
 unsigned int TransportCart::getNumBaggs() const{
     return numBaggages;
 }
 
-void TransportCart::setNumber(unsigned int num) {
-    number = num;
+unsigned int TransportCart::getSize() const{
+    return C_MAX*N_MAX*M_MAX;
+}
+
+bool TransportCart::empty() const {
+    return numBaggages;
+}
+
+void TransportCart::reset() {
+    buildCartCarriages();
 }

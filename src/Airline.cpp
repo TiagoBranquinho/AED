@@ -91,7 +91,7 @@ void Airline::baggageTransportation(Flight &flight, const Baggage &baggage) {
     addToTreadmill(baggage,flight);
     if(flight.getTreadmill().size() == flight.getNumberBaggages()) {
         for (TransportCart &cart: carts) {
-            if (cart.getNumber() == flight.getNumber()) {
+            if (cart.getSize() >= flight.getNumberBaggages()) {
                 while (!flight.getTreadmill().empty()) {
                     cart.addBaggage(flight.getTreadmill().front());
                     flight.getTreadmill().pop();
@@ -106,9 +106,9 @@ void Airline::baggageToPlane(Flight &flight) {
     for(Plane &plane : planes) {
         if(find(plane.getFlightPlan().begin(), plane.getFlightPlan().end(), flight) != plane.getFlightPlan().end()) {
             for(TransportCart &cart : carts){
-                if(cart.getNumber() == flight.getNumber()){
+                if(!cart.empty()){
                     for(list<stack<Baggage>> &carriage : cart.getSlots()){
-                        for(stack<Baggage> stack : carriage){
+                        for(stack<Baggage> &stack : carriage){
                             while(!stack.empty()){
                                 plane.addBaggage(stack.top());
                                 stack.pop();
@@ -116,7 +116,7 @@ void Airline::baggageToPlane(Flight &flight) {
                         }
                     }
                 }
-                break;
+                cart.reset(); break;
             }
             break;
         }

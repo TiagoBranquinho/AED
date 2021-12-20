@@ -145,7 +145,6 @@ void App::writeCartsFile() {
         file << airline.getCarts().size();
         for (TransportCart &cart : airline.getCarts()){
             file << cart.getNumBaggs() << endl;
-            file << cart.getNumber() << endl;
             file << cart.getC() << endl;
             file << cart.getN() << endl;
             file << cart.getM() << endl;
@@ -288,17 +287,15 @@ void App::readPlanesFile() {
 
 void App::readCartsFile() {
     std::ifstream file(dataFolder + files.names.at(4));
-    int ncarts, numbgs, numcart, c, n, m, weight;
+    int ncarts, numbgs, c, n, m, weight;
     if(file.is_open()){
         getlineint(file, ncarts);
         for (int i = 0; i < ncarts; i++){
             getlineint(file, numbgs);
-            getlineint(file, numcart);
             getlineint(file, c);
             getlineint(file, n);
             getlineint(file, m);
             TransportCart cart(c, n, m);
-            cart.setNumber(numcart);
             for (int j = 0; j < numbgs; j++){
                 getlineint(file, weight);
                 cart.addBaggage(Baggage(weight));
