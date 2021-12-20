@@ -948,7 +948,7 @@ ViewFlights::ViewFlights(App &app, const std::string& sortedBy): Menu(app) {
 }
 
 void ViewFlights::display() {
-    cout << "Number -     Date     -    Origin    -   Destiny    - Departure Time - Arrival Time" << endl;
+    cout << "Number -     Date     -   Origin   -  Destiny   - Departure Time - Arrival Time" << endl;
     for(Flight &flight : app.getAirline().getFlights())
         cout << flight;
     waitForKey();
@@ -988,10 +988,10 @@ ViewFlightPassengers::ViewFlightPassengers(App &app, std::string sortedBy): Menu
 }
 
 void ViewFlightPassengers::display() {
-    cout << "Name - Id - Baggage Weight (Optional) - Wants Automatic Check In (Optional)" << endl;
+    cout << "       Name       - Id - Baggage Weight (Optional) - Wants Automatic Check In (Optional)" << endl;
     for(const Passenger &passenger : aux_vector) {
         if (passenger.baggageWeight() == -1) {
-            cout << passenger.getName() << passenger.getId() << endl;
+            cout << setw(16) << passenger.getName() << setw(3) << "-" << setw(2) << passenger.getId() << endl;
         }
         else {
             cout << passenger;
@@ -1026,7 +1026,7 @@ ViewEmployees::ViewEmployees(App &app, const std::string& sortedBy): Menu(app) {
 }
 
 void ViewEmployees::display() {
-    cout << "Id - Name - Type of Service" << endl;
+    cout << "Id -         Name         - Type of Service" << endl;
     for(const Employee &employee : app.getAirline().getEmployees())
         cout << employee;
     waitForKey();

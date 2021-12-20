@@ -33,6 +33,6 @@ bool Employee::isOnDuty() const{
 }
 
 std::ostream &operator<<(ostream &os, const Employee &employee) {
-    os << employee.getId() << " - " << employee.getName() << " - " << employee.getType() << '\n';
+    os << employee.getId() << setw(3) << "-" << setw(20) << employee.getName() << setw(3) << "-"<< setw(12) <<  employee.getType() << '\n';
     return os;
 }

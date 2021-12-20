@@ -34,9 +34,10 @@ bool Passenger::wantsAutomaticCheckIn() const{
 }
 
 std::ostream &operator<<(ostream &os, const Passenger &passenger) {
-    os << passenger.getName() << " - " << passenger.getId() << " - " << passenger.baggageWeight() << " - " << passenger.wantsAutomaticCheckIn() << '\n';
+    os << setw(16) << passenger.getName() << setw(3) << "-" << setw(2) << passenger.getId() << setw(3) <<  "-" << setw(14) <<  passenger.baggageWeight() << setw(14) << "-" << setw(18) <<  passenger.wantsAutomaticCheckIn() << '\n';
     return os;
 }
+
 
 int Passenger::baggageWeight() const{
     return baggageWgh;
