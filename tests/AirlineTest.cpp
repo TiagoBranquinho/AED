@@ -43,7 +43,7 @@ TEST(test_1, addPassengerToFlight){
     airline.addPlane(plane);
     airline.addPassengerToFlight(f,passenger2);
 
-    EXPECT_EQ(airline.validPlane(plane), true); // if true, plane was added to AIRLINE PLANES
+    EXPECT_EQ(airline.duplicatedPlane(plane), true); // if true, plane was added to AIRLINE PLANES
 
 }
 

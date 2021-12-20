@@ -6,10 +6,6 @@
 
 Airline::Airline() = default;
 
-Airline::Airline(std::vector<Plane> planes) {
-    this->planes = planes;
-}
-
 void Airline::addPlane(const Plane &plane) {
     if(!duplicatedPlane(plane))
         planes.push_back(plane);
@@ -107,14 +103,7 @@ void Airline::baggageToPlane(Flight &flight) {
         if(find(plane.getFlightPlan().begin(), plane.getFlightPlan().end(), flight) != plane.getFlightPlan().end()) {
             for(TransportCart &cart : carts){
                 if(!cart.empty()){
-                    for(list<stack<Baggage>> &carriage : cart.getSlots()){
-                        for(stack<Baggage> &stack : carriage){
-                            while(!stack.empty()){
-                                plane.addBaggage(stack.top());
-                                stack.pop();
-                            }
-                        }
-                    }
+                    plane.addBaggage(cart.getaBaggage());
                 }
                 cart.reset(); break;
             }
@@ -125,14 +114,6 @@ void Airline::baggageToPlane(Flight &flight) {
 
 void Airline::addToTreadmill(const Baggage &baggage, Flight &flight) {
     flight.getTreadmill().push(baggage);
-}
-
-bool Airline::validPlane(const Plane &plane) {
-    for(const Plane& p : planes){
-        if (p == plane)
-            return true;
-    }
-    return false;
 }
 
 void Airline::addEmployee(const Employee &employee) {

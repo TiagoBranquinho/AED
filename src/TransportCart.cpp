@@ -103,3 +103,16 @@ std::ostream &operator<<(ostream &os, const TransportCart &cart) {
     os << cart.getId() << "  -  " << setw(10) << cart.getC() << "  -  " << setw(15) << cart.getN() << "  -  " << setw(10) << cart.getM() << "  -  " << setw(10) << cart.getSize() << '\n';
     return os;
 }
+
+Baggage TransportCart::getaBaggage() {
+    Baggage bg;
+    for(list<stack<Baggage>> &carriage : slots){
+        for(stack<Baggage> &stack : carriage){
+            while(!stack.empty()){
+                bg = stack.top();
+                stack.pop();
+            }
+        }
+    }
+    return bg;
+}

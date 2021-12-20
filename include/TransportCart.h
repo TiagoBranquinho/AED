@@ -33,6 +33,7 @@ public:
     void addCarriage();
     void addStack();
     bool addBaggage(const Baggage &baggage);
+    Baggage getaBaggage();
     void reset();
     bool operator==(const TransportCart &cart) const;
     friend std::ostream& operator<<(std::ostream& os, const TransportCart &transportCart);
