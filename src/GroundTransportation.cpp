@@ -33,7 +33,7 @@ unsigned int GroundTransportation::getDistance() const{
     return distance;
 }
 
-std::vector<Schedule> &GroundTransportation::getSchedules() {
+std::vector<Schedule> GroundTransportation::getSchedules() {
     return schedules;
 }
 

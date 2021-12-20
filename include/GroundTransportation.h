@@ -27,7 +27,7 @@ public:
     unsigned int getId() const;
     std::string getType() const;
     unsigned int getDistance() const;
-    std::vector<Schedule> &getSchedules();
+    std::vector<Schedule> getSchedules();
     void addSchedule(const Schedule &schedule);
     void removeSchedule(const Schedule &schedule);
     void sortSchedules();

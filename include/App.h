@@ -45,6 +45,7 @@ public:
     void readCartsFile();
     Flight readaFlight(ifstream &file);
     void writeaFlight(ofstream &file, Flight &flight);
+    void getlineint(ifstream &file, int &num);
 };
 
 
