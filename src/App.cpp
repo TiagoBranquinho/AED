@@ -18,13 +18,13 @@ void App::addAirport(const Airport& airport) {
 }
 
 void App::loadData() {
-    for (int file = 0; file < files.names.size(); file++){
+    for (int file = 0; file < filesname.size(); file++){
         readFile(file);
     }
 }
 
 void App::saveData() {
-    for (int file = 0; file < files.names.size(); file++){
+    for (int file = 0; file < filesname.size(); file++){
         writeFile(file);
     }
 }
@@ -52,7 +52,7 @@ void App::writeFile(int file) {
 }
 
 void App::writeAirportsFile() {
-    std::ofstream file(dataFolder + files.names.at(0), ofstream::trunc);
+    std::ofstream file(dataFolder + filesname.at(0), ofstream::trunc);
     if(file.is_open()){
         file << airports.size() << endl;
         for(Airport airport : airports){
@@ -76,7 +76,7 @@ void App::writeAirportsFile() {
 
 
 void App::writeEmployeesFile() {
-    std::ofstream file(dataFolder + files.names.at(1), ofstream::trunc);
+    std::ofstream file(dataFolder + filesname.at(1), ofstream::trunc);
     if(file.is_open()){
         file << airline.getEmployees().size() << endl;
         for(auto &employee : airline.getEmployees()){
@@ -89,7 +89,7 @@ void App::writeEmployeesFile() {
 }
 
 void App::writeFlightsFile() {
-    std::ofstream file(dataFolder + files.names.at(2), ofstream::trunc);
+    std::ofstream file(dataFolder + filesname.at(2), ofstream::trunc);
     if(file.is_open()){
         file << airline.getFlights().size() << endl;
         for(auto &flight : airline.getFlights()){
@@ -100,7 +100,7 @@ void App::writeFlightsFile() {
 }
 
 void App::writePlanesFile() {
-    std::ofstream file(dataFolder + files.names.at(3), ofstream::trunc);
+    std::ofstream file(dataFolder + filesname.at(3), ofstream::trunc);
     if(file.is_open()){
         file << airline.getPlanes().size() << endl;
         for(Plane &plane : airline.getPlanes()){
@@ -140,7 +140,7 @@ void App::writePlanesFile() {
 }
 
 void App::writeCartsFile() {
-    std::ofstream file(dataFolder + files.names.at(4), ofstream::trunc);
+    std::ofstream file(dataFolder + filesname.at(4), ofstream::trunc);
     if(file.is_open()){
         file << airline.getCarts().size() << endl;
         for (TransportCart &cart : airline.getCarts()){
@@ -153,7 +153,7 @@ void App::writeCartsFile() {
 }
 
 void App::readAirportsFile() {
-    std::ifstream file(dataFolder + files.names.at(0));
+    std::ifstream file(dataFolder + filesname.at(0));
     int airs, locals, distance, schs;
     string name, city, type, schedule;
     if(file.is_open()){
@@ -181,7 +181,7 @@ void App::readAirportsFile() {
 }
 
 void App::readEmployeesFile() {
-    std::ifstream file(dataFolder + files.names.at(1));
+    std::ifstream file(dataFolder + filesname.at(1));
     int sz, duty;
     string name, type;
     if(file.is_open()){
@@ -199,7 +199,7 @@ void App::readEmployeesFile() {
 }
 
 void App::readFlightsFile() {
-    std::ifstream file(dataFolder + files.names.at(2));
+    std::ifstream file(dataFolder + filesname.at(2));
     int numflights, num, numPassg, qSize;
     int number, weight;
     string name, date, departure, duration, origin, destiny;
@@ -215,7 +215,7 @@ void App::readFlightsFile() {
 }
 
 void App::readPlanesFile() {
-    std::ifstream file(dataFolder + files.names.at(3));
+    std::ifstream file(dataFolder + filesname.at(3));
     string plate, name, date, type;
     int capacity, numplanes, weight, size, fnum;
     int duty, planeduty;
@@ -271,7 +271,7 @@ void App::readPlanesFile() {
 }
 
 void App::readCartsFile() {
-    std::ifstream file(dataFolder + files.names.at(4));
+    std::ifstream file(dataFolder + filesname.at(4));
     int ncarts, c, n, m;
     if(file.is_open()){
         getlineint(file, ncarts);
