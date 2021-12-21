@@ -336,8 +336,8 @@ void App::writeaFlight(ofstream &file, Flight &flight) {
     file << flight.getDate().getDate() << endl;
     file << flight.getDeparture() << endl;
     file << flight.getDuration() << endl;
-    file << flight.getOriginAir()->getName() << endl;
-    file << flight.getDestinyAir()->getName() << endl;
+    file << flight.getOriginPointer()->getName() << endl;
+    file << flight.getDestinyPointer()->getName() << endl;
     file << flight.getCheckInStatus() << endl;
     file << flight.getNumberPassengers() << endl;
     for (auto &p : flight.getPassengers()){

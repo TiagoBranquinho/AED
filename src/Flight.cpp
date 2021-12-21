@@ -101,11 +101,11 @@ std::ostream &operator<<(ostream &os, const Flight &flight) {
 }
 
 
-Airport* Flight::getOriginAir() const {
+Airport* Flight::getOriginPointer() const {
     return origin;
 }
 
-Airport *Flight::getDestinyAir() const {
+Airport *Flight::getDestinyPointer() const {
     return destiny;
 }
 

@@ -7,16 +7,10 @@
 #include <ctime>
 #include <exception>
 
-//#if defined(_WIN32)
-//    #define so() "win"
-//#elif defined(unix) || defined(__unix__) || defined(__unix)
-//    #define so() "unix"
-//#endif
-
 class Schedule {
 private:
     struct std::tm time{0};
-    //const size_t MAX_SIZE = 6;
+
 public:
     Schedule();
     Schedule(const std::string& hm);

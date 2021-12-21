@@ -31,7 +31,7 @@ TEST(test_1, readFlights){
 
     for (auto &f : app.getAirline().getFlights()){
         cout << "Flight Number: " << f.getNumber() << " - from ";
-        cout << f.getOriginAir()->getCity() << " to " << f.getDestinyAir()->getCity() << endl;
+        cout << f.getOriginPointer()->getCity() << " to " << f.getDestinyPointer()->getCity() << endl;
         cout << "passangers:" << endl;
         for (auto &p : f.getPassengers()){
             cout << p.getName() << "  bag: " << p.getBaggage()->getWeight() << "kg"<< endl;
