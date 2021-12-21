@@ -3,10 +3,14 @@ A123
 100
 0
 0
-1
+2
 cleaner
 2020/07/07
 maria leal
+0
+cleaner
+2020/07/07
+jose
 0
 0
 1

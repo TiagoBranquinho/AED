@@ -18,7 +18,7 @@ string Service::getType() const{
     return type;
 }
 
-const Date Service::getDate() const{
+Date Service::getDate() const{
     return date;
 }
 

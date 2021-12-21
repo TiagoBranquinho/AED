@@ -859,9 +859,10 @@ ViewServicesDONE::ViewServicesDONE(App &app, const std::string& sortedBy) : Menu
     plate = readStr();
     for(const Plane &plane : app.getAirline().getPlanes()){
         if(plane.getPlate() == plate){
+            aux = plane.getServicesDone();
             if(plane.getServicesDone().size() <= 1){}
             else if(sortedBy == "date")
-                sort(plane.getServicesDone().begin(), plane.getServicesDone().end(), [](const Service &lhs, const Service &rhs) {
+                sort(aux.begin(), aux.end(), [](const Service &lhs, const Service &rhs) {
                     return lhs.getDate() < rhs.getDate();
                 });
         }
@@ -870,10 +871,8 @@ ViewServicesDONE::ViewServicesDONE(App &app, const std::string& sortedBy) : Menu
 
 void ViewServicesDONE::display() {
     cout << "Service Type -     Date     - Employee's Id -   Employee's Name  " << endl;
-    for (const Plane &plane: app.getAirline().getPlanes())
-        if (plane.getPlate() == plate)
-            for (Service &service: plane.getServicesDone())
-                cout << service;
+    for (Service &service: aux)
+        cout << service;
     waitForKey();
 }
 

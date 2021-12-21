@@ -16,7 +16,7 @@ public:
     Service();
     Service(std::string type, const Date &date, Employee *employee);
     std::string getType() const;
-    const Date getDate()const ;
+    Date getDate()const ;
     Employee *getEmployee()const ;
     void setType(std::string type);
     bool validType(std::string type, Employee *employee);

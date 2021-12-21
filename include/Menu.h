@@ -122,6 +122,7 @@ public:
 };
 
 class ViewServicesDONE: public Menu{
+    vector<Service> aux;
     std::string plate;
 public:
     explicit ViewServicesDONE(App &app, const std::string& sortedBy = "");
