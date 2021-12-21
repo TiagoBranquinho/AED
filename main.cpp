@@ -6,9 +6,7 @@
 
 int main() {
     AppStarter app;
-    //App app;
     app.start();
-   // app.writePlanesFile();
     return 0;
 }
 
