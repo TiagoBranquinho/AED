@@ -86,14 +86,7 @@ bool Date::validDate(string date) {
 }
 
 bool Date::operator<(const Date &d) const {
-    //return getDate() < d.getDate();
-    if(getYear() == d.getYear()){
-        if(getMonth() == d.getMonth()){
-            return getDay() < d.getDay();
-        }
-        return getMonth() < d.getMonth();
-    }
-    return getYear() < d.getYear();
+    return getDate() < d.getDate();
 }
 
 bool Date::leapYear(unsigned int year) {
