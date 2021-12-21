@@ -100,7 +100,7 @@ void TransportCart::reset() {
 }
 
 std::ostream &operator<<(ostream &os, const TransportCart &cart) {
-    os << cart.getId() << "  -  " << setw(10) << cart.getC() << "  -  " << setw(15) << cart.getN() << "  -  " << setw(10) << cart.getM() << "  -  " << setw(10) << cart.getSize() << '\n';
+    os << cart.getId() << setw(3) << "-" << setw(7) << cart.getC() << setw(7) << "-" << setw(10) << cart.getN() << setw(10) <<  "-" << setw(8) << cart.getM() << setw(7) << "-" << setw(8) << cart.getSize() << '\n';
     return os;
 }
 

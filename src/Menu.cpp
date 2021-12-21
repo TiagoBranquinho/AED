@@ -822,7 +822,7 @@ void ViewGroundLocals::display() {
             cout << groundTransportation;
         }
     else if (sortedBy == "distance")
-        if(!locals.size() == 0)
+        if(locals.size() != 0)
             locals.print();
     waitForKey();
 }
@@ -837,7 +837,7 @@ ViewServicesTODO::ViewServicesTODO(App &app) : Menu(app) {
 }
 
 void ViewServicesTODO::display() {
-    cout << "Service Type - Date - Employee's Id - Employee's Name" << endl;
+    cout << "Service Type -     Date     - Employee's Id -   Employee's Name  " << endl;
     for(const Plane &plane : app.getAirline().getPlanes()){
         if(plane.getPlate() == plate){
             auto aux = plane.getServicesToDo();
@@ -869,7 +869,7 @@ ViewServicesDONE::ViewServicesDONE(App &app, const std::string& sortedBy) : Menu
 }
 
 void ViewServicesDONE::display() {
-    cout << "Service Type - Date - Employee's Id - Employee's Name" << endl;
+    cout << "Service Type -     Date     - Employee's Id -   Employee's Name  " << endl;
     for (const Plane &plane: app.getAirline().getPlanes())
         if (plane.getPlate() == plate)
             for (Service &service: plane.getServicesDone())
@@ -962,7 +962,7 @@ ViewPlaneFlights::ViewPlaneFlights(App &app, const std::string& sortedBy): Menu(
 }
 
 void ViewPlaneFlights::display() {
-    cout << "Number - Date - Origin - Destiny - Departure Time - Arrival Time" << endl;
+    cout << "Number -     Date     -   Origin   -  Destiny   - Departure Time - Arrival Time" << endl;
     for(const Flight &flight : aux_vector)
         cout << flight;
     waitForKey();
@@ -1072,7 +1072,7 @@ ViewEmployees::ViewEmployees(App &app, const std::string& sortedBy): Menu(app) {
 }
 
 void ViewEmployees::display() {
-    cout << "Id -         Name         - Type of Service" << endl;
+    cout << "Id -       Name       - Type of Service" << endl;
     for(const Employee &employee : app.getAirline().getEmployees())
         cout << employee;
     waitForKey();
@@ -1124,7 +1124,7 @@ void ViewTransportCarts::display() {
         waitForKey(); return;
     }
     cout << "Transport Carts:" << endl;
-    cout << "Id  -  Carriages  -  Stacks/Carriage  -  Stack size  -  Total Size" << endl;
+    cout << "Id -  Carriages  -  Stacks/Carriage  -  Stack size  -  Total Size" << endl;
     for(TransportCart &cart : app.getAirline().getCarts()){
         cout << cart;
     }
