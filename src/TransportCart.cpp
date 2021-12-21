@@ -83,10 +83,6 @@ unsigned int TransportCart::getId() const {
     return id;
 }
 
-unsigned int TransportCart::getNumBaggs() const{
-    return numBaggages;
-}
-
 unsigned int TransportCart::getSize() const{
     return C_MAX*N_MAX*M_MAX;
 }
